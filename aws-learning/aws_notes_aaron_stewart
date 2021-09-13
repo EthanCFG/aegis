@@ -1,0 +1,17 @@
+AWS Databases:
+
+	AWS provides customers with pay as you go pricing on a variety of cloud database services.
+
+	These services can be accessed through a variety of means, including the AWS Command Line Interface, SDKs, and the AWS Management Console.
+
+	Of these options, the AWS Management Console is arguably the most straight-forward and easy to use.
+
+	For our purposes, it appears that the Amazon EC2 service may be most optimal.
+
+	Amazon EC2 - 
+
+		The Amazon Elastic Compute Cloud (EC2) service is notable for its resizability.
+		
+		It allows users to choose how much space and compute power they need for their database.
+
+		This makes for a compute cloud that is both powerful and cost-effective.
