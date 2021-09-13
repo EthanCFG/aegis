@@ -1,0 +1,19 @@
+C# - 
+
+	Whereas C is a low-level programming language, and C++ is a low-level language that adds object-oriented features to C,
+	C# is a high-level programming language.
+
+	As a part of the "C" family of programming languages, it inherets much of its structure from its lower-level counterparts.
+
+	One such inherited feature is its object-oriented nature. C# has objects and "classes," of which multiple "instances" can
+	be created. These classes can contain certain attributes, variables, and functions that belong to them.
+
+	For instance, the "Rectangle" class could have the variables "side_length_a", "side_length_b", "side_length_c", and "side_length_d",
+	and it could contain the method "sum_side_lengths(a, b, c, d)". 
+
+	Multiple "instances" of the Rectangle class could then be created, each with their own side lengths, generally using a constructor.
+	A constructor is a function that is called to create an instance of an object or class.
+
+	So, to create an instance of a rectangle, it might look something like this:
+	
+	rectangle_a = create_rectangle(12,12,6,6);
