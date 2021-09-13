@@ -1,0 +1,25 @@
+.NET - 
+
+	.NET is a developer platform used for backend construction of applications. Its implementation details very depending on the specific
+	distribution used:
+
+		1. .NET Framework - This is the original .NET implementation, and supports applications exclusively on the Windows OS.
+		2. .NET Core - This is an open-source, cross-platform implementation of .NET, supporting Windows, Linux, and MacOS.
+		3. Xamarin/Mono - This is the mobile implementation of .NET, supporting all major mobile Operating Systems including iOS and Android.
+
+	As of November 2020, a combined distribution of .NET has arisen, called .NET Standard. This distribution combines and streamlines that libraries
+	and APIs of the three aforementioned distribution and uses them on an as-needed basis depending on the hardware / OS that the application is being
+	run on.
+
+	At its core, .NET is a compilation of languages, runtimes, and libraries.
+	Since it contains the CLR (Common Language Runtime) runtime, a multitude of languages including C#, F#, and VB can be used with similar results,
+	as they are all translated to a CIL (Common Intermediate Language).
+	Likewise, thousands of libraries are included in .NET, providing users with a massive set of functions to suit their specific needs.
+
+	Important to our specific application implementation:
+
+		.NET comes with *tons* of templates, i.e. starter code. One such template exists for React.
+
+		By typing the command "dotnet new" in the console, we can see a list of these templates.
+
+		"dotnet new react" will create a project set up to work with React. This should be very helpful for us.
