@@ -1,0 +1,31 @@
+JavaScript Notes:
+
+Asynchronous Javascript -
+
+	Asynchronous functionality is one of the most unique and defining characteristiscs of JavaScript.
+
+	Three main methods of Asynchronous functionality:
+
+		1. Callbacks
+
+		2. Promises
+
+		3. Async / Await
+
+
+	1. Callbacks - Simply enough, a function that is passed to another function as a parameter.
+
+	2. Promises - Functions defined with parameters (resolve, reject). 
+		      A condition is then tested within the function, i.e. if (var == 2)) { resolve(); }
+		      An else statement follows for condition failure: else { reject(); }
+
+		      Promises are then called in the following format:
+		      myPromise.then(() => console.log('Success')).catch(() => console.error('Failed'));
+		      Where .then() is the path taken if the promise condition resolved
+		      And .catch() is the path taken if the promise condition rejected
+		      
+	3. Async / Await - Functions defined as async, i.e. async function doWork()
+			   Can can precede function calls within the function body with "await"
+			   For example: const response = await makeRequest('Google')
+			   In JavaScript, when an await is reached in a function, the function will not proceed until the awaited function has returned.
+			   While waiting for the awaited function to return, JS will leave the async function and continue running other parts of the program.
