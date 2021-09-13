@@ -1,0 +1,16 @@
+React -
+
+	React is a front-end JavaScript library for building user interfaces or UI components.
+
+	React can be installed using the following command:
+
+		npm install react react-dom webpack
+
+	However, installing via this approach requires significant configuration. An alternative and easier installation method can be evoked using this command:
+
+		npx create-react-app my-app
+
+	JSX - One of the key features of React, JSX is a JavaScript syntax extension that allows for HTML-style code to be used
+	      within .js files to update specific sections of the application's DOM (Document Object Model), thereby providing 
+	      users with a means of dynamically updating the appplication's UI that is both simpler and more resource-efficient
+	      than making HTML modifications that would require a full DOM reload.
