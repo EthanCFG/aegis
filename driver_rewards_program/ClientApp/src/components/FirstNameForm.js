@@ -7,7 +7,7 @@ function FirstNameForm () {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-          }}>
+        }}>
             <Form>
                 <Form.Group className="mb-3" controlId="formFirstName">
                 <Form.Label>First Name:</Form.Label>

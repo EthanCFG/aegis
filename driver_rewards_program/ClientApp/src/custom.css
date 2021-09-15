@@ -13,16 +13,35 @@ code {
   border-color: #1861ac;
 }
 
+/*#root {
+  height: 100%
+  background: linear-gradient(-45deg, 
+  #2c3e50, #3498db);
+}*/
+
 .container {
+  width: 700px;
   display: block;
   align-items: center;
   justify-content: center;
+  margin-top: 5%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.btn-user-type {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
 }
 
 .signup-header {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.state-city {
+  display: block;
+  align-items: baseline;
 }
