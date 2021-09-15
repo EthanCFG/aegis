@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import EmailForm from './components/EmailForm';
 import PasswordForm from './components/PasswordForm';
-import UserTypeSelect from './components/UserTypeSelect';
+import SelectDriver from './components/SelectDriver';
+import SelectSponsor from './components/SelectSponsor';
 import FirstNameForm from './components/FirstNameForm';
 import LastNameForm from './components/LastNameForm';
 import AddressForm from './components/AddressForm';
@@ -18,17 +19,28 @@ export default class App extends Component {
   render () {
     return (
       <div class="container">
-        <h1 class="signup-header">Account Creation</h1>
+        <h1 class="signup-header" style={{
+          marginBottom: 30
+        }}>Account Creation</h1>
         <EmailForm></EmailForm>
         <PasswordForm></PasswordForm>
-        <UserTypeSelect></UserTypeSelect>
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 20
+        }}>
+        <SelectDriver></SelectDriver>
+        <SelectSponsor></SelectSponsor>
+        </div>
         <FirstNameForm></FirstNameForm>
         <LastNameForm></LastNameForm>
         <AddressForm></AddressForm>
         <div style={{
           display: "flex",
-          alignItems: "center",
+          alignItems: "normal",
           justifyContent: "center",
+          gap: 20
         }}>
           <StateDropDown></StateDropDown>
           <CityForm></CityForm>

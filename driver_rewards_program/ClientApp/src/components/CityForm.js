@@ -3,14 +3,10 @@ import Form from 'react-bootstrap/Form'
 
 function CityForm () {
     return (
-        <div style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-        }}>
+        <div class="state-city">
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicCity">
-                <Form.Label>Address:</Form.Label>
+                <Form.Label>City:</Form.Label>
                 <Form.Control type="city" placeholder="Enter city..." />
                 </Form.Group> 
             </Form>
