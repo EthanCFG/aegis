@@ -8,6 +8,7 @@ import LastNameForm from './components/LastNameForm';
 import AddressForm from './components/AddressForm';
 import StateDropDown from './components/StateDropDown';
 import CityForm from './components/CityForm';
+import ZipForm from './components/ZipCodeForm';
 import PhoneNumberForm from './components/PhoneNumberForm';
 import SignupButton from './components/SignupButton';
 
@@ -44,6 +45,7 @@ export default class App extends Component {
         }}>
           <StateDropDown></StateDropDown>
           <CityForm></CityForm>
+          <ZipForm></ZipForm>
         </div>
         <PhoneNumberForm></PhoneNumberForm>
         <SignupButton></SignupButton>
