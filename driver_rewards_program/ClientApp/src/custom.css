@@ -24,7 +24,9 @@ code {
 
 #root {
   height: 100vh;
+  width: 100%;
   background: none;
+  overflow: auto;
 }
 
 .container {
@@ -33,7 +35,8 @@ code {
   display: block;
   align-items: center;
   justify-content: center;
-  margin-top: 25%;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
   margin-left: auto;
   margin-right: auto;
   background-color: white;
