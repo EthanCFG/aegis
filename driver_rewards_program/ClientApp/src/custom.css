@@ -13,20 +13,32 @@ code {
   border-color: #1861ac;
 }
 
-/*#root {
-  height: 100%
+.body-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   background: linear-gradient(-45deg, 
   #2c3e50, #3498db);
-}*/
+}
+
+#root {
+  height: 100vh;
+  background: none;
+}
 
 .container {
   width: 700px;
+  height: 785px;
   display: block;
   align-items: center;
   justify-content: center;
-  margin-top: 5%;
+  margin-top: 25%;
   margin-left: auto;
   margin-right: auto;
+  background-color: white;
+  border-radius: 25px;
+  border:3px solid silver;
 }
 
 .btn-user-type {
