@@ -7,7 +7,8 @@ function SignupButton () {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: 6
+            marginTop: 6,
+            marginBottom: 6,
         }}>
             <Button>Sign Up</Button>
         </div>
