@@ -44,6 +44,21 @@ code {
   border:3px solid silver;
 }
 
+.container_login {
+  width: 300px;
+  height: 350px;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  border-radius: 25px;
+  border:3px solid silver;
+}
+
 .btn-user-type {
   color: #fff;
   background-color: #1b6ec2;
@@ -51,6 +66,12 @@ code {
 }
 
 .signup-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-header {
   display: flex;
   align-items: center;
   justify-content: center;
