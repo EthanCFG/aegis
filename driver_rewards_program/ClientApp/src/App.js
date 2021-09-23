@@ -12,7 +12,8 @@ import CityForm from './components/CityForm';
 import ZipForm from './components/ZipCodeForm';
 import PhoneNumberForm from './components/PhoneNumberForm';
 import SignupButton from './components/SignupButton';
-import CreateAccountPage from './components/CreateAccountPage';
+import PageCreateAccount from './components/PageCreateAccount';
+import PageSignIn from './components/PageSignIn';
 
 import './custom.css'
 
@@ -21,9 +22,14 @@ export default class App extends Component {
 
   render () {
     return (
-      <Route path="/create_account">
-        <CreateAccountPage></CreateAccountPage>
-      </Route>
+      <div>
+        <Route path="/create_account">
+          <PageCreateAccount></PageCreateAccount>
+        </Route>
+        <Route path="/login">
+          <PageSignIn></PageSignIn>
+        </Route>
+    </div>
     )
   }
 }

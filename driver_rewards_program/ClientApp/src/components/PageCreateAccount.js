@@ -12,7 +12,7 @@ import ZipForm from './ZipCodeForm';
 import PhoneNumberForm from './PhoneNumberForm';
 import SignupButton from './SignupButton';
 
-function CreateAccountPage () {
+function PageCreateAccount () {
     return (
         <div class="container">
           <h1 class="signup-header" style={{
@@ -48,4 +48,4 @@ function CreateAccountPage () {
     )
 }
 
-export default CreateAccountPage;
+export default PageCreateAccount;
