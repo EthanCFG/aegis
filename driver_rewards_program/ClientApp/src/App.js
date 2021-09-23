@@ -14,6 +14,7 @@ import PhoneNumberForm from './components/PhoneNumberForm';
 import SignupButton from './components/SignupButton';
 import PageCreateAccount from './components/PageCreateAccount';
 import PageSignIn from './components/PageSignIn';
+import NavBar from './components/NavBar';
 
 import './custom.css'
 
@@ -27,6 +28,10 @@ export default class App extends Component {
           <PageCreateAccount></PageCreateAccount>
         </Route>
         <Route path="/login">
+          <PageSignIn></PageSignIn>
+        </Route>
+        <Route path="/home">
+          <NavBar></NavBar>
           <PageSignIn></PageSignIn>
         </Route>
     </div>

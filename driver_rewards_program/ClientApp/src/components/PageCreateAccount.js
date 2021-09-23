@@ -15,7 +15,7 @@ import SignupButton from './SignupButton';
 function PageCreateAccount () {
     return (
         <div class="container">
-          <h1 class="signup-header" style={{
+          <h1 class="signup-header py-2 is-size-3 has-text-weight-semibold" style={{
             marginBottom: 30
           }}>Account Creation</h1>
           <EmailForm></EmailForm>
