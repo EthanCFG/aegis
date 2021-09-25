@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import 'bulma/css/bulma.min.css';
+import { Link } from 'react-router-dom';
+
 const NavBar = () => {
       return (
         <div>
             <nav class="navbar" role="navigation" aria-label="main navigation">
               <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
-                  <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/>
+              <a id="header-logo" class="navbar-item" href="https://bulma.io">
                 </a>
             
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -18,10 +19,11 @@ const NavBar = () => {
             
               <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                  <a class="navbar-item">
-                    Home
-                  </a>
-            
+                  <Link to="/home" class="navbar-start">
+                    <a class="navbar-item">
+                      Home
+                    </a>
+                  </Link>
                   <a class="navbar-item">
                     Documentation
                   </a>
@@ -52,12 +54,16 @@ const NavBar = () => {
                 <div class="navbar-end">
                   <div class="navbar-item">
                     <div class="buttons">
-                      <a class="button is-primary">
-                        <strong>Sign up</strong>
-                      </a>
-                      <a class="button is-light">
-                        Log in
-                      </a>
+                      <Link to="/create_account">
+                        <a class="button is-primary">
+                          <strong>Sign up</strong>
+                        </a>
+                      </Link>
+                      <Link to="/login">
+                        <a class="button is-light">
+                          Log in
+                        </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

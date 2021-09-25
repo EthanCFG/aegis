@@ -12,7 +12,7 @@ function AddressForm () {
                 <Form.Group className="mb-3" controlId="formBasicAddress">
                 <Form.Label>Address:</Form.Label>
                 <Form.Control type="address" placeholder="Enter street address..." />
-                </Form.Group> 
+                </Form.Group>
             </Form>
         </div>
     )

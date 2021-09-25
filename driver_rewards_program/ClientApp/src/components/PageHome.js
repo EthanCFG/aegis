@@ -2,18 +2,22 @@ import React, { Component } from 'react';
 import EmailForm from './EmailForm';
 import PasswordForm from './PasswordForm';
 import LoginButton from './LoginButton';
+import ProfilePicture from './ProfilePicture';
 
-function PageSignIn () {
+function PageHome () {
     return (
-        <div class="container_login">
-          <h1 class="login-header py-2 is-size-3 has-text-weight-semibold" style={{
-            marginBottom: 30
-          }}>Sign In</h1>
-          <EmailForm></EmailForm>
-          <PasswordForm></PasswordForm>
-          <LoginButton></LoginButton>
+        <div class="container is-fluid">
+          <div class="colums is-centered">
+            <div class="columns is-half">
+              <div class="notification is-white py-6 my-6">
+                <div class="columns is-one-third">
+                 <ProfilePicture></ProfilePicture>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
     )
 }
 
-export default PageSignIn;
+export default PageHome;

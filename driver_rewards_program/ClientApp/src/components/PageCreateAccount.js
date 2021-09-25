@@ -15,35 +15,41 @@ import SignupButton from './SignupButton';
 function PageCreateAccount () {
     return (
         <div class="container">
-          <h1 class="signup-header py-2 is-size-3 has-text-weight-semibold" style={{
-            marginBottom: 30
-          }}>Account Creation</h1>
-          <EmailForm></EmailForm>
-          <PasswordForm></PasswordForm>
-          <div style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 20
-          }}>
-          <SelectDriver></SelectDriver>
-          <SelectSponsor></SelectSponsor>
+          <div class="columns is-centered">
+            <div class="columns is-half">
+              <div class="notification is-white py-3 my-6">
+                <h1 class="signup-header py-2 is-size-3 has-text-weight-semibold" style={{
+                  marginBottom: 30
+                }}>Account Creation</h1>
+                <EmailForm></EmailForm>
+                <PasswordForm></PasswordForm>
+                <div style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 20
+                }}>
+                <SelectDriver></SelectDriver>
+                <SelectSponsor></SelectSponsor>
+                </div>
+                <FirstNameForm></FirstNameForm>
+                <LastNameForm></LastNameForm>
+                <AddressForm></AddressForm>
+                <div style={{
+                  display: "flex",
+                  alignItems: "normal",
+                  justifyContent: "center",
+                  gap: 20
+                }}>
+                  <StateDropDown></StateDropDown>
+                  <CityForm></CityForm>
+                  <ZipForm></ZipForm>
+                </div>
+                <PhoneNumberForm></PhoneNumberForm>
+                <SignupButton></SignupButton>
+              </div>
+            </div>
           </div>
-          <FirstNameForm></FirstNameForm>
-          <LastNameForm></LastNameForm>
-          <AddressForm></AddressForm>
-          <div style={{
-            display: "flex",
-            alignItems: "normal",
-            justifyContent: "center",
-            gap: 20
-          }}>
-            <StateDropDown></StateDropDown>
-            <CityForm></CityForm>
-            <ZipForm></ZipForm>
-          </div>
-          <PhoneNumberForm></PhoneNumberForm>
-          <SignupButton></SignupButton>
         </div>
     )
 }

@@ -29,7 +29,7 @@ code {
   overflow: auto;
 }
 
-.container {
+.container-primary {
   width: 700px;
   height: 785px;
   display: block;
@@ -65,6 +65,10 @@ code {
   border-color: #1861ac;
 }
 
+.nav-link {
+  color: black;
+}
+
 .signup-header {
   display: flex;
   align-items: center;
@@ -80,4 +84,10 @@ code {
 .state-city {
   display: block;
   align-items: baseline;
+}
+
+#header-logo{
+  background: url("https://lh4.googleusercontent.com/GczCJa2FEwBqGvIIp0aD8rp30BHJwIwJiEWwfT9mncZigiM-35WR47VrfFuWtPs4l-oZItjqGoL0OXxWx2BlZRs=w1280") no-repeat center center;
+  background-size: cover;
+  width: 152px
 }

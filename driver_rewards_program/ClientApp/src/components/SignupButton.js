@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 function SignupButton () {
     return (
@@ -10,7 +11,9 @@ function SignupButton () {
             marginTop: 6,
             marginBottom: 6,
         }}>
-            <Button>Sign Up</Button>
+            <Link to="/home">
+                <Button>Sign Up</Button>
+            </Link>
         </div>
     )
 }
