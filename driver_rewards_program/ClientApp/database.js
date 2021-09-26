@@ -10,3 +10,9 @@ const pool = createPool({
 pool.query('select * from sys.Admin', (err, res)=>{
     return console.log(res)
 })
+pool.query('select * from sys.Sponsor', (err, res)=>{
+    return console.log(res)
+})
+pool.query('select * from sys.Driver', (err, res)=>{
+    return console.log(res)
+})
