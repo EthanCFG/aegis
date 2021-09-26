@@ -1,9 +1,9 @@
 const {createPool} = require("mysql")
 
 const pool = createPool({
-    host: "localhost",
-    user: "root",
-    password: "rootuser",
+    host: "database-4910.c6lyppadonj0.us-east-1.rds.amazonaws.com",
+    user: "admin",
+    password: "cpsc4910project",
     connectionLimit: 10
 })
 
