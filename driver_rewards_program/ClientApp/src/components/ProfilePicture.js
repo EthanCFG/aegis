@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 function ProfilePicture() {
     return (
-        <div>
+        <div class="profile-page-image-cropper">
             <figure class="image">
-                <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png"></img>
+                <img src="https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg"></img>
             </figure>
         </div>
     )

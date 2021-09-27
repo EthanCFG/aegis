@@ -65,6 +65,11 @@ code {
   border-color: #1861ac;
 }
 
+.pretty-buttons {
+  background: linear-gradient(-45deg, 
+  #2c3e50, #3498db);
+}
+
 .nav-link {
   color: black;
 }
@@ -87,7 +92,41 @@ code {
 }
 
 #header-logo{
-  background: url("https://lh4.googleusercontent.com/GczCJa2FEwBqGvIIp0aD8rp30BHJwIwJiEWwfT9mncZigiM-35WR47VrfFuWtPs4l-oZItjqGoL0OXxWx2BlZRs=w1280") no-repeat center center;
+  background: url("https://1.bp.blogspot.com/-T66fB2A7eaU/YVCf1yjn7dI/AAAAAAAAAAM/VMfp4LAlxbcyJ4dbfEjNgVSIaeIGcFjqACLcBGAsYHQ/s1280/Aegis%2BLogo%2BTemp.png") no-repeat center center;
   background-size: cover;
   width: 152px
+}
+
+#welcome-logo{
+  width: auto;
+  height: auto;
+  max-width: 400px;
+  max-height: 400px;
+  padding-top: 10px;
+  padding-bottom: 50px;
+}
+
+.welcome-vertical-alignment{
+  padding-top: 8%;
+}
+
+.profile-page-image-cropper{
+  height: 0;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 100%;
+  border-radius: 50%;
+}
+
+.has-rounded-corners{
+  border-radius: 25px;
+}
+
+.is-a-beautiful-sunset{
+  background: linear-gradient(to right, #30e8bf, #ff8235);
+}
+
+.is-kinda-gray{
+  background-color: #ECF0F3;
 }

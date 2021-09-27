@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import ProfilePicture from './ProfilePicture';
 import 'bulma/css/bulma.min.css';
 import { Link } from 'react-router-dom';
+import ProfilePictureSponsor from './ProfilePictureSponsor';
 
-const NavBar = () => {
+const NavBarSponsor = () => {
       return (
         <div>
             <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -20,7 +20,7 @@ const NavBar = () => {
             
               <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                  <Link to="/driver_home" class="navbar-start">
+                  <Link to="/sponsor_home" class="navbar-start">
                     <a class="navbar-item">
                       Home
                     </a>
@@ -55,10 +55,10 @@ const NavBar = () => {
                 <div class="navbar-end">
                   <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
-                      <ProfilePicture></ProfilePicture>
+                      <ProfilePictureSponsor></ProfilePictureSponsor>
                     </a>
                     <div class="navbar-dropdown" style={{ minWidth: 150, left: -41 }}>
-                      <Link to="/driver_profile">
+                      <Link to="/sponsor_profile">
                         <a class="navbar-item">
                           View Profile
                         </a>
@@ -78,4 +78,4 @@ const NavBar = () => {
       )
   }
   
-export default NavBar;
+export default NavBarSponsor;

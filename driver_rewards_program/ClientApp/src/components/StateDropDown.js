@@ -1,15 +1,5 @@
 import React, {Component} from "react";
-import Dropdown from 'react-bootstrap/Dropdown'
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import {
-    Combobox,
-    ComboboxInput,
-    ComboboxPopover,
-    ComboboxList,
-    ComboboxOption,
-    ComboboxOptionText,
-  } from "@reach/combobox";
-  import "@reach/combobox/styles.css";
+import "@reach/combobox/styles.css";
 
 function StateDropDown () {
     return (

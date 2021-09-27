@@ -11,7 +11,7 @@ function SignupButton () {
             marginTop: 6,
             marginBottom: 6,
         }}>
-            <Link to="/home">
+            <Link to="/driver_home">
                 <Button>Sign Up</Button>
             </Link>
         </div>

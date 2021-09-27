@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
+import PageWelcome from './components/PageWelcome';
 import PageCreateAccount from './components/PageCreateAccount';
-import PageSignIn from './components/PageSignIn';
 import NavBar from './components/NavBar';
-import PageProfile from './components/PageProfile';
-import PageHome from './components/PageHome';
+import PageDriverProfile from './components/PageDriverProfile';
+import PageDriverHome from './components/PageDriverHome';
+import PageSponsorProfile from './components/PageSponsorProfile';
+import PageSponsorHome from './components/PageSponsorHome';
 
 import './custom.css'
 
@@ -14,18 +16,27 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <Route path="/create_account">
+        <Route exact path="/">
+          <Redirect to="/welcome"></Redirect>
+        </Route>
+        <Route path="/welcome">
+          <PageWelcome></PageWelcome>
+        </Route>
+        <Route path="/signup">
           <PageCreateAccount></PageCreateAccount>
         </Route>
-        <Route path="/login">
-          <PageSignIn></PageSignIn>
-        </Route>
-        <Route path="/home">
+        <Route path="/driver_home">
           <NavBar></NavBar>
-          <PageHome></PageHome>
+          <PageDriverHome></PageDriverHome>
         </Route>
-        <Route path="/profile">
-          <PageProfile></PageProfile>
+        <Route path="/driver_profile">
+          <PageDriverProfile></PageDriverProfile>
+        </Route>
+        <Route path="/sponsor_home">
+          <PageSponsorHome></PageSponsorHome>
+        </Route>
+        <Route path="/sponsor_profile">
+          <PageSponsorProfile></PageSponsorProfile>
         </Route>
     </div>
     )

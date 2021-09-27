@@ -5,7 +5,7 @@ import LoginButton from './LoginButton';
 
 function PageSignIn () {
     return (
-        <div class="container">
+        <div class="container is-centered">
           <div class="columns is-centered">
             <div class="columns is-half">
               <div class="notification is-white py-3 my-6">
