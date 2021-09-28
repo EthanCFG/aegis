@@ -13,11 +13,12 @@ import PhoneNumberForm from './PhoneNumberForm';
 import SignupButton from './SignupButton';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 
 function PageCreateAccount (props) {
 
+    let history = useHistory();
 
     const [enteredEmail, setEnteredEmail] = useState('');
       
@@ -110,6 +111,7 @@ function PageCreateAccount (props) {
       }
     
       props.onCreateAccount(newUserData);
+      history.push("/welcome");
     }
 
     return (
