@@ -12,13 +12,13 @@ function PageWelcome () {
 											<img id="welcome-logo" src="https://1.bp.blogspot.com/-5uFQq0w64Hg/YVC6wgzpm0I/AAAAAAAAAAU/5q9okcQ4FJgFogvA0oQsauC85fo7mqDBwCLcBGAsYHQ/s841/Aegis%2BLogo%2BTemp%2BCopy.png"></img>
 											<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 											<div class="field">
-  											<label class="label">Username / Email:</label>
+  											<label class="username-sign-in">Username / Email:</label>
   											<div class="control">
 													<input class="input" type="text" placeholder="Enter username / email..."></input>
 												</div>
 											</div>
 											<div class="field">
-												<label class="label">Password:</label>
+												<label class="password-sign-in">Password:</label>
 												<p class="control">
 													<input class="input" type="password" placeholder="Enter password..."></input>
 												</p>

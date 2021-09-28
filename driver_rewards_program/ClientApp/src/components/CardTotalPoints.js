@@ -1,7 +1,6 @@
 import React, {Component} from "react";
-import ProfilePicture from "./ProfilePicture";
 
-function CardTotalPoints () {
+function CardTotalPoints (props) {
     return (
         <div class="card" style={{ marginTop: 20, marginBottom: 0 }}>
             <header class="card-header">
@@ -16,7 +15,7 @@ function CardTotalPoints () {
             </header>
             <div class="card-content">
                 <div class="content has-text-centered">
-                    <p class="title">2,500</p>
+                    <p class="title">{props.points}</p>
                 </div>
             </div>
             <footer class="card-footer">

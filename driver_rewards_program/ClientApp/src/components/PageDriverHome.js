@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CardCurrentSponsor from './CardCurrentSponsor';
 import CardTotalPoints from './CardTotalPoints';
 
-function PageDriverHome () {
+function PageDriverHome (props) {
     return (
         <div class="container">
           <div class="columns">
@@ -34,10 +34,15 @@ function PageDriverHome () {
                 </section>
                 <div class="columns">
                   <div class="column is-6" style={{ marginTop: 36 }}>
-                    <CardCurrentSponsor></CardCurrentSponsor>
+                    <CardCurrentSponsor
+                      sponsor={props.sponsor}
+                      sponsor_image_url={props.sponsor_image_url}>
+                    </CardCurrentSponsor>
                   </div>
                   <div class="column is-6" style={{ marginTop: 16 }}>
-                    <CardTotalPoints></CardTotalPoints>
+                    <CardTotalPoints
+                      points={props.points}>
+                    </CardTotalPoints>
                   </div>
                 </div>
               </div>
