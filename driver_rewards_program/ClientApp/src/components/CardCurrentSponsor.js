@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-function CardCurrentSponsor () {
+function CardCurrentSponsor (props) {
     return (
         <div class="card">
             <header class="card-header">
@@ -15,12 +15,12 @@ function CardCurrentSponsor () {
             </header>
             <div class="card-content">
                 <div class="content">
-                    <img src="https://thumbs.dreamstime.com/b/letter-v-orange-red-rectangles-business-logo-placeholder-name-company-name-geometric-vector-logo-design-elements-169170579.jpg"></img>
+                    <img src={props.sponsor_image_url}></img>
                     <br></br>
                 </div>
             </div>
             <div class="card-content has-text-centered">
-              <h1><strong>Nonexistent Logistics</strong></h1>
+              <h1><strong>{props.sponsor}</strong></h1>
             </div>
             <footer class="card-footer">
               <a href="#" class="card-footer-item">Change</a>

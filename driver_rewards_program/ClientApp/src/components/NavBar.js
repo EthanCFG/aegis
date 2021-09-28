@@ -3,7 +3,7 @@ import ProfilePicture from './ProfilePicture';
 import 'bulma/css/bulma.min.css';
 import { Link } from 'react-router-dom';
 
-const NavBar = () => {
+const NavBar = (props) => {
       return (
         <div>
             <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -55,7 +55,9 @@ const NavBar = () => {
                 <div class="navbar-end">
                   <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
-                      <ProfilePicture></ProfilePicture>
+                      <ProfilePicture
+                        pic={props.pic}>
+                      </ProfilePicture>
                     </a>
                     <div class="navbar-dropdown" style={{ minWidth: 150, left: -41 }}>
                       <Link to="/driver_profile">

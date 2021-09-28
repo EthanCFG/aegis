@@ -1,13 +1,23 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import "@reach/combobox/styles.css";
 
-function StateDropDown () {
+function StateDropDown (props) {
+
+    const [enteredState, setEnteredState] = useState('');
+
+    const stateChangeHandler = (event) => {
+        setEnteredState(event.target.value)
+
+        props.onSaveStateData(event.target.value)
+    }
+
+
     return (
         <div class="state-city">
             <label for="sel1" style={{
                 marginBottom: 8
             }}>State:</label>
-            <select class="form-control" id="sel1">
+            <select class="form-control" id="sel1" onChange={stateChangeHandler}>
                 <option>Alabama</option>
                 <option>Alaska</option>
                 <option>Arizona</option>

@@ -12,7 +12,7 @@ function SignupButton () {
             marginBottom: 6,
         }}>
             <Link to="/driver_home">
-                <Button>Sign Up</Button>
+                <Button type='submit'>Sign Up</Button>
             </Link>
         </div>
     )
