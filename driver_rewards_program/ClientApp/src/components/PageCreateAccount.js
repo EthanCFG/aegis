@@ -13,11 +13,13 @@ import PhoneNumberForm from './PhoneNumberForm';
 import SignupButton from './SignupButton';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 
 function PageCreateAccount (props) {
 
+    let history = useHistory();
 
     const [enteredEmail, setEnteredEmail] = useState('');
       
@@ -109,7 +111,23 @@ function PageCreateAccount (props) {
         phone: enteredPhone,
       }
     
+      axios.post("http://localhost:3001/signup", {
+        email: enteredEmail,
+        password: enteredPassword,
+        isDriver: true,
+        firstName: enteredFirstName,
+        lastName: enteredLastName,
+        address: enteredAddress,
+        state: currentState,
+        city: enteredCity,
+        zip: enteredZip,
+        phone: enteredPhone,
+      }).then((resp) => {
+        console.log(resp);
+      });
+
       props.onCreateAccount(newUserData);
+      history.push("/welcome");
     }
 
     return (
