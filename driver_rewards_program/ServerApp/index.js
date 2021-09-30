@@ -46,5 +46,5 @@ app.post("/signup", (req, res) => {
 });
 
 app.listen(3001, () => {
-  console.log("running server");
+  console.log("Listening for requests...");
 });
