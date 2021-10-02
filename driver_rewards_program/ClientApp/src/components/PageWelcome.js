@@ -30,7 +30,7 @@ function PageWelcome () {
 											</div>
 											<div class="block py-4">
 													<div class="columns is-centered">
-															Don't have an account?{' '}<Link to="/signup">Sign up!</Link>
+															Don't have an account?{' '}<Link to="/user_type">Sign up!</Link>
 													</div>
 											</div>
 								</div>

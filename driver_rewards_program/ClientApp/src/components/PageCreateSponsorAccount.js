@@ -17,7 +17,7 @@ import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 
-function PageCreateAccount (props) {
+function PageCreateSponsorAccount (props) {
 
     let history = useHistory();
 
@@ -48,43 +48,6 @@ function PageCreateAccount (props) {
       setEnteredLastName(event.target.value);
     }
 
-    
-    const [enteredAddress, setEnteredAddress] = useState('');
-
-    const addressChangeHandler = (event) => {
-      setEnteredAddress(event.target.value);
-    }
-
-
-    const [currentState, setCurrentState] = useState('');
-
-    const saveStateDataHandler = (enteredSelectedState) => {
-      const selectedState = {
-        enteredSelectedState
-      }
-      setCurrentState(Object.values(selectedState)[0]);
-    }
-
-
-    const [enteredCity, setEnteredCity] = useState('');
-
-    const cityChangeHandler = (tempCity) => {
-      const selectedCity = {
-        tempCity
-      }
-      setEnteredCity(Object.values(selectedCity)[0]);
-    }
-
-
-    const [enteredZip, setEnteredZip] = useState('');
-
-    const zipChangeHandler = (tempZip) => {
-      const selectedZip = {
-        tempZip
-      }
-      setEnteredZip(Object.values(selectedZip)[0]);
-    }
-
 
     const [enteredPhone, setEnteredPhone] = useState('');
 
@@ -99,34 +62,26 @@ function PageCreateAccount (props) {
     const submitHandler = (event) => {
       event.preventDefault();
     
-      const newUserData = {
+      const newSponsorData = {
         email: enteredEmail,
         password: enteredPassword,
         first: enteredFirstName,
         last: enteredLastName,
-        address: enteredAddress,
-        state: currentState,
-        city: enteredCity,
-        zip: enteredZip,
         phone: enteredPhone,
       }
     
       axios.post("http://localhost:3001/signup", {
         email: enteredEmail,
         password: enteredPassword,
-        isDriver: true,
+        isSponsor: true,
         firstName: enteredFirstName,
         lastName: enteredLastName,
-        address: enteredAddress,
-        state: currentState,
-        city: enteredCity,
-        zip: enteredZip,
         phone: enteredPhone,
       }).then((resp) => {
         console.log(resp);
       });
 
-      props.onCreateAccount(newUserData);
+      props.onCreateSponsorAccount(newSponsorData);
       history.push("/welcome");
     }
 
@@ -203,29 +158,6 @@ function PageCreateAccount (props) {
                     </Form>
                 </div>
 
-                <div style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="formBasicAddress">
-                        <Form.Label>Address:</Form.Label>
-                        <Form.Control type="address" placeholder="Enter street address..." onChange={addressChangeHandler} />
-                        </Form.Group>
-                    </Form>
-                </div>
-
-                <div style={{
-                  display: "flex",
-                  alignItems: "normal",
-                  justifyContent: "center",
-                  gap: 20
-                }}>
-                  <StateDropDown onSaveStateData={saveStateDataHandler} ></StateDropDown>
-                  <CityForm onCityEntered={cityChangeHandler}></CityForm>
-                  <ZipForm onZipEntered={zipChangeHandler}></ZipForm>
-                </div>
                 <PhoneNumberForm onPhoneEntered={phoneChangeHandler}></PhoneNumberForm>
                 <div style={{
                     display: "flex",
@@ -246,7 +178,7 @@ function PageCreateAccount (props) {
     )
 }
 
-export default PageCreateAccount;
+export default PageCreateSponsorAccount;
 
 //<Link to="/driver_home">
 //</Link>

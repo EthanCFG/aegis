@@ -2,11 +2,13 @@ import React, { Component, useEffect, useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PageWelcome from './components/PageWelcome';
 import PageCreateAccount from './components/PageCreateAccount';
+import PageCreateSponsorAccount from './components/PageCreateSponsorAccount';
 import NavBar from './components/NavBar';
 import PageDriverProfile from './components/PageDriverProfile';
 import PageDriverHome from './components/PageDriverHome';
 import PageSponsorProfile from './components/PageSponsorProfile';
 import PageSponsorHome from './components/PageSponsorHome';
+import PageUserType from './components/PageUserType';
 import './custom.css';
 import axios from 'axios';
 
@@ -17,8 +19,12 @@ export default class App extends Component {
 
   render () {
     
-    const createAccountHandler = (userData) => {
+    const createDriverAccountHandler = (userData) => {
       console.log(userData);
+    }
+
+    const createSponsorAccountHandler = (sponsorData) => {
+      console.log(sponsorData);
     }
 
     return (
@@ -29,8 +35,14 @@ export default class App extends Component {
         <Route path="/welcome">
           <PageWelcome></PageWelcome>
         </Route>
-        <Route path="/signup">
-          <PageCreateAccount onCreateAccount={createAccountHandler}></PageCreateAccount>
+        <Route path="/user_type">
+          <PageUserType></PageUserType>
+        </Route>
+        <Route path="/driver_signup">
+          <PageCreateAccount onCreateAccount={createDriverAccountHandler}></PageCreateAccount>
+        </Route>
+        <Route path="/sponsor_signup">
+          <PageCreateSponsorAccount onCreateSponsorAccount={createSponsorAccountHandler}></PageCreateSponsorAccount>
         </Route>
         <Route path="/driver_home">
           <NavBar pic={'https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg'}></NavBar>
