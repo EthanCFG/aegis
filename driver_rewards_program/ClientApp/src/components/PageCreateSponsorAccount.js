@@ -128,8 +128,6 @@ function PageCreateSponsorAccount (props) {
                   gap: 20
                 }}>
 
-                <SelectDriver></SelectDriver>
-                <SelectSponsor></SelectSponsor>
                 </div>
                 
                 <div style={{
