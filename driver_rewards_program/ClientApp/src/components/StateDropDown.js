@@ -23,7 +23,7 @@ function StateDropDown (props) {
                 <option>Arizona</option>
                 <option>Arkansas</option>
                 <option>California</option>
-                <option>Colorad</option>
+                <option>Colorado</option>
                 <option>Connecticut</option>
                 <option>Delaware</option>
                 <option>Florida</option>

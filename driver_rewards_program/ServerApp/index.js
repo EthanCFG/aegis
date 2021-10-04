@@ -28,7 +28,7 @@ app.post("/signup", (req, res) => {
 
   if (isDriver) {
     db.query(
-      "INSERT INTO Driver (Driver_First_Name, Driver_Last_Name, Driver_Email, Driver_Address, Driver_State, Driver_City, Driver_Zip, Driver_Phone_Number, Driver_Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO Driver (Driver_First_Name, Driver_Last_Name, Driver_Email, Driver_Address, Driver_State, Driver_City, Driver_Zip, Driver_Phone_Number, Driver_Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [firstName, lastName, email, address, state, city, zip, phone, password],
       (err, res) => {
         console.log(err);
@@ -37,7 +37,7 @@ app.post("/signup", (req, res) => {
   } else {
     db.query(
       "INSERT INTO Sponsor (Sponsor_First_Name, Sponsor_Last_Name, Sponsor_Email, Sponsor_Phone_Number, Sponsor_Password) VALUES (?, ?, ?, ?, ?)",
-      [firstName, lastName, email, address, phone, password],
+      [firstName, lastName, email, phone, password],
       (err, res) => {
         console.log(err);
       }

@@ -124,7 +124,8 @@ function PageCreateAccount (props) {
         phone: enteredPhone,
       }).then((resp) => {
         console.log(resp);
-      });
+      })
+      .catch(error => console.error(error));
 
       props.onCreateAccount(newUserData);
       history.push("/welcome");
