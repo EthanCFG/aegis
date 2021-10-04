@@ -45,6 +45,39 @@ app.post("/signup", (req, res) => {
   }
 });
 
+app.post("/", (req, res) => 
+{
+  const addressUpdate = req.body.address;
+  const emailUpdate = req.body.email;
+  const isDriver = req.body.isDriver;
+  const driverID = req.body.driverID;
+  const sponsorID = req.body.sponsorID;
+
+  if(isDriver)
+  {
+    db.query(
+      `UPDATE Driver 
+      SET Driver_Address = ?
+      WHERE = ?`, [addressUpdate, driverID],
+      (err, res) => 
+      {
+        console.log(err);
+      }
+    );
+  } else
+  {
+    db.query(
+      `UPDATE Sponsor
+      SET Sponsor_Email = ?
+      WHERE = ?`, [emailUpdate, sponsorID],
+      (err, res) =>
+      {
+        console.log(err);
+      }
+    );
+  }
+});
+
 app.listen(3001, () => {
   console.log("running server");
 });
