@@ -69,6 +69,38 @@ app.post("/update_driver_address", (req, res) => {
 });
 
 /*
+  Updates a driver's point balance
+  Requires: pointChange, driverID, organizationID, date, reason
+*/
+app.post("/update_driver_point_balance", (req, res) => {
+  const pointChange = req.body.pointChange;
+  const driverID = req.body.driverID;
+  const organizationID = req.body.organizationID;
+  const date = req.body.date;
+  const reason = req.body.reason;
+
+  db.query(
+    `UPDATE Driver 
+      SET Driver_Point_Balance = Driver_Point_Balance + ?
+      WHERE Driver_ID = ?`,
+    [pointChange, driverID],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+
+  db.query(
+    `INSERT INTO Point_Change_History (Driver_ID, Organization_ID, Point_Change_Date, Point_Change_Value, Point_Change_Reason)
+      VALUES (?, ?, ?, ?, ?)`[
+      (driverID, organizationID, date, pointChange, reason)
+    ],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+});
+
+/*
   Updates a driver/sponsor's email
   Requires: newEmail, isDriver, ID
 */
