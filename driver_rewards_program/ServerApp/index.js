@@ -14,6 +14,10 @@ const db = mysql.createConnection({
   database: "sys",
 });
 
+/*
+  Creates a new driver or sponsor
+  Requires: email, password, isDriver, firstName, lastName, address, state, city, zip, phone
+*/
 app.post("/signup", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -45,37 +49,167 @@ app.post("/signup", (req, res) => {
   }
 });
 
-app.post("/", (req, res) => 
-{
-  const addressUpdate = req.body.address;
-  const emailUpdate = req.body.email;
-  const isDriver = req.body.isDriver;
+/*
+  Updates a driver address
+  Requires: newAddress, driverID
+*/
+app.post("/update_driver_address", (req, res) => {
+  const newAddress = req.body.newAddress;
   const driverID = req.body.driverID;
-  const sponsorID = req.body.sponsorID;
 
-  if(isDriver)
-  {
-    db.query(
-      `UPDATE Driver 
+  db.query(
+    `UPDATE Driver 
       SET Driver_Address = ?
-      WHERE = ?`, [addressUpdate, driverID],
-      (err, res) => 
-      {
+      WHERE Driver_ID = ?`,
+    [newAddress, driverID],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+});
+
+/*
+  Updates a driver/sponsor's email
+  Requires: newEmail, isDriver, ID
+*/
+app.post("/update_profile_email", (req, res) => {
+  const newEmail = req.body.newEmail;
+  const isDriver = req.body.isDriver;
+  const ID = req.body.ID;
+
+  if (isDriver) {
+    db.query(
+      `UPDATE Driver
+      SET Driver_Email = ?
+      WHERE Driver_ID = ?`,
+      [newEmail, ID],
+      (err, res) => {
         console.log(err);
       }
     );
-  } else
-  {
+  } else {
     db.query(
       `UPDATE Sponsor
       SET Sponsor_Email = ?
-      WHERE = ?`, [emailUpdate, sponsorID],
-      (err, res) =>
-      {
+      WHERE Sponsor_ID = ?`,
+      [newEmail, ID],
+      (err, res) => {
         console.log(err);
       }
     );
   }
+});
+
+/*
+  Updates a driver/sponsor's first name
+  Requires: newFirstName, isDriver, ID
+*/
+app.post("/update_profile_first_name", (req, res) => {
+  const newFirstName = req.body.newFirstName;
+  const isDriver = req.body.isDriver;
+  const ID = req.body.ID;
+
+  if (isDriver) {
+    db.query(
+      `UPDATE Driver
+      SET Driver_First_Name = ?
+      WHERE Driver_ID = ?`,
+      [newFirstName, ID],
+      (err, res) => {
+        console.log(err);
+      }
+    );
+  } else {
+    db.query(
+      `UPDATE Sponsor
+      SET Sponsor_First_Name = ?
+      WHERE Sponsor_ID = ?`,
+      [newFirstName, ID],
+      (err, res) => {
+        console.log(err);
+      }
+    );
+  }
+});
+
+/*
+  Updates a driver/sponsor's last name
+  Requires: newLastName, isDriver, ID
+*/
+app.post("/update_profile_last_name", (req, res) => {
+  const newLastName = req.body.newLastName;
+  const isDriver = req.body.isDriver;
+  const ID = req.body.ID;
+
+  if (isDriver) {
+    db.query(
+      `UPDATE Driver
+      SET Driver_Last_Name = ?
+      WHERE Driver_ID = ?`,
+      [newLastName, ID],
+      (err, res) => {
+        console.log(err);
+      }
+    );
+  } else {
+    db.query(
+      `UPDATE Sponsor
+      SET Sponsor_Last_Name = ?
+      WHERE Sponsor_ID = ?`,
+      [newLastName, ID],
+      (err, res) => {
+        console.log(err);
+      }
+    );
+  }
+});
+
+/*
+  Removes a driver/sponsor from the db
+  Requires: isDriver, ID
+*/
+app.post("/remove_profile", (req, res) => {
+  const isDriver = req.body.isDriver;
+  const ID = req.body.ID;
+
+  if (isDriver) {
+    db.query(
+      `DELETE FROM Driver
+      WHERE Driver_ID = ?`,
+      [ID],
+      (err, res) => {
+        console.log(err);
+      }
+    );
+  } else {
+    db.query(
+      `DELETE FROM Sponsor
+      WHERE Sponsor_ID = ?`,
+      [newLastName, ID],
+      (err, res) => {
+        console.log(err);
+      }
+    );
+  }
+});
+
+/*
+  Returns all drivers with given organizationID
+  Requires: organizationID
+  How to receive data: fetch("/get_time").then(r => r.json()).then(data => { ... });
+*/
+app.get("/get_drivers", (req, res) => {
+  const ID = req.body.organizationID;
+
+  db.query(
+    `SELECT * FROM Driver
+      WHERE Organization_ID = ?`,
+    [organizationID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
 });
 
 app.listen(3001, () => {
