@@ -1,4 +1,0 @@
-cd .\driver_rewards_program\
-cd .\ClientApp\
-npm install 
-npm start
