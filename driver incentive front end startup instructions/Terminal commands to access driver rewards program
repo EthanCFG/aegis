@@ -1,3 +1,4 @@
+//use these terminal commands in VS code in order to access the front end's driver rewards program code
 cd .\driver_rewards_program\
 cd .\ClientApp\
 npm install
