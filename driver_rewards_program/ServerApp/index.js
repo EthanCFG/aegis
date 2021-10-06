@@ -88,7 +88,7 @@ app.post("/update_driver_point_balance", (req, res) => {
       console.log(err);
     }
   );
-
+    /* We will eventually need to add an Oranization value, or have a sponsor alue in Org so we can connect the two */
   db.query(
     `INSERT INTO Point_Change_History (Driver_ID, Organization_ID, Point_Change_Date, Point_Change_Value, Point_Change_Reason)
       VALUES (?, ?, ?, ?, ?)`[
