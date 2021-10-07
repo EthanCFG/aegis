@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PageWelcome from './components/PageWelcome';
 import PageCreateAccount from './components/PageCreateAccount';
@@ -14,11 +14,8 @@ import axios from 'axios';
 
 //Axios will be used to post user data to backend.
 
-export default class App extends Component {
-  static displayName = App.name;
+function App() {
 
-  render () {
-    
     const createDriverAccountHandler = (userData) => {
       console.log(userData);
     }
@@ -27,44 +24,55 @@ export default class App extends Component {
       console.log(sponsorData);
     }
 
-    return (
-      <div>
-        <Route exact path="/">
-          <Redirect to="/welcome"></Redirect>
-        </Route>
-        <Route path="/welcome">
-          <PageWelcome></PageWelcome>
-        </Route>
-        <Route path="/user_type">
-          <PageUserType></PageUserType>
-        </Route>
-        <Route path="/driver_signup">
-          <PageCreateAccount onCreateAccount={createDriverAccountHandler}></PageCreateAccount>
-        </Route>
-        <Route path="/sponsor_signup">
-          <PageCreateSponsorAccount onCreateSponsorAccount={createSponsorAccountHandler}></PageCreateSponsorAccount>
-        </Route>
-        <Route path="/driver_home">
-          <NavBar pic={'https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg'}></NavBar>
-          <PageDriverHome 
-            points={2500}
-            sponsor={'Nonexistent Logistics'}
-            sponsor_image_url={'https://thumbs.dreamstime.com/b/letter-v-orange-red-rectangles-business-logo-placeholder-name-company-name-geometric-vector-logo-design-elements-169170579.jpg'}>
-          </PageDriverHome>
-        </Route>
-        <Route path="/driver_profile">
-          <PageDriverProfile
-            pic={'https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg'}
-            points={2500}>
-          </PageDriverProfile>
-        </Route>
-        <Route path="/sponsor_home">
-          <PageSponsorHome></PageSponsorHome>
-        </Route>
-        <Route path="/sponsor_profile">
-          <PageSponsorProfile></PageSponsorProfile>
-        </Route>
-    </div>
-    )
-  }
-}
+    const [token, setToken] = useState();
+
+    if (!token) {
+      return ( 
+        <PageWelcome setToken={setToken}></PageWelcome>
+      )
+    }
+
+    
+      return (
+        <div>
+          <Route exact path="/">
+            <Redirect to="/welcome"></Redirect>
+          </Route>
+          <Route path="/welcome">
+            <PageWelcome setToken={setToken}></PageWelcome>
+          </Route>
+          <Route path="/user_type">
+            <PageUserType></PageUserType>
+          </Route>
+          <Route path="/driver_signup">
+            <PageCreateAccount onCreateAccount={createDriverAccountHandler}></PageCreateAccount>
+          </Route>
+          <Route path="/sponsor_signup">
+            <PageCreateSponsorAccount onCreateSponsorAccount={createSponsorAccountHandler}></PageCreateSponsorAccount>
+          </Route>
+          <Route path="/driver_home">
+            <NavBar pic={'https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg'}></NavBar>
+            <PageDriverHome 
+              points={2500}
+              sponsor={'Nonexistent Logistics'}
+              sponsor_image_url={'https://thumbs.dreamstime.com/b/letter-v-orange-red-rectangles-business-logo-placeholder-name-company-name-geometric-vector-logo-design-elements-169170579.jpg'}>
+            </PageDriverHome>
+          </Route>
+          <Route path="/driver_profile">
+            <PageDriverProfile
+              pic={'https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg'}
+              points={2500}>
+            </PageDriverProfile>
+          </Route>
+          <Route path="/sponsor_home">
+            <PageSponsorHome></PageSponsorHome>
+          </Route>
+          <Route path="/sponsor_profile">
+            <PageSponsorProfile></PageSponsorProfile>
+          </Route>
+      </div>
+      )
+    }
+  
+
+  export default App;

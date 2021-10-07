@@ -1,19 +1,11 @@
 import React, { Component, useState } from 'react';
-import EmailForm from './EmailForm';
-import PasswordForm from './PasswordForm';
-import SelectDriver from './SelectDriver';
-import SelectSponsor from './SelectSponsor';
-import FirstNameForm from './FirstNameForm';
-import LastNameForm from './LastNameForm';
-import AddressForm from './AddressForm';
 import StateDropDown from './StateDropDown';
 import CityForm from './CityForm';
 import ZipForm from './ZipCodeForm';
 import PhoneNumberForm from './PhoneNumberForm';
-import SignupButton from './SignupButton';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 
