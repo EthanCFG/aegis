@@ -28,27 +28,30 @@ function PageWelcome ({ setToken }) {
 	const handleSubmit = async e => {
 		e.preventDefault();
 
-		var token = false;/*await loginUser({
-			enteredUsername,
-			enteredPassword
-		});*/
+		var token = false;
 
-		console.log('we did submit...');
-
-		const response = await axios.post("http://localhost:3001/login_driver", {
+		const driver_response = await axios.post("http://localhost:3001/login_driver", {
 			email: enteredEmail,
-			password: enteredPassword,
+			password: enteredPassword
 		})
-		//console.log(response);
-		//console.log(token);
 
-		if (response.data[0] != null) {
-			console.log('entered response');
+		const sponsor_response = await axios.post("http://localhost:3001/login_sponsor", {
+			email: enteredEmail,
+			password: enteredPassword
+		})
+
+		if (driver_response.data[0] != null) {
+			console.log('entered driver response');
 			setToken(token);
 			history.push('/driver_home');
 		}
 
-		
+		else if (sponsor_response.data[0] != null) {
+			console.log('entered sponsor response');
+			setToken(token);
+			history.push('/sponsor_home');
+		}
+
 	}
 
     return (

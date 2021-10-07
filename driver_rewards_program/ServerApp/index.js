@@ -270,6 +270,26 @@ app.post("/login_driver", (req, res) => {
   );
 });
 
+app.post("/login_sponsor", (req, res) => {
+  const Email = req.body.email;
+  const Password = req.body.password;
+
+  db.query(
+    `SELECT * FROM Sponsor
+      WHERE Sponsor_Email = ?
+      AND Sponsor_Password = ?`,
+    [Email, Password],
+    (err, rows, fields) => {
+      if (err) { res.send({err: err}) }
+      else if (rows) {
+        res.send(rows)
+      } else {
+        res.send({message: "Incorrect email / password combination."})
+      }
+    }
+  );
+});
+
 app.listen(3001, () => {
   console.log("Listening for requests...");
 });
