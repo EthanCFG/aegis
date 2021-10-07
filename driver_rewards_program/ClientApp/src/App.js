@@ -26,11 +26,11 @@ function App() {
 
     const [token, setToken] = useState();
 
-    if (!token) {
+    /*if (!token) {
       return ( 
         <PageWelcome setToken={setToken}></PageWelcome>
       )
-    }
+    }*/
 
     
       return (

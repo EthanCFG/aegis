@@ -6,7 +6,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types'
 import { Route, Redirect } from 'react-router-dom';
 
-async function loginUser(credentials) {
+/*async function loginUser(credentials) {
 	return fetch('http://localhost:3001/welcome', {
 		method: 'POST',
 		headers: {
@@ -16,34 +16,39 @@ async function loginUser(credentials) {
 	})
 	.then(data => data.json())
 	.catch(error => console.log(error))
-}
+}*/
 
 function PageWelcome ({ setToken }) {
 
 	let history = useHistory();
 
-	const [enteredUsername, setUserName] = useState();
+	const [enteredEmail, setEmail] = useState();
 	const [enteredPassword, setPassword] = useState();
 
 	const handleSubmit = async e => {
 		e.preventDefault();
 
-		var token = await loginUser({
+		var token = false;/*await loginUser({
 			enteredUsername,
 			enteredPassword
-		});
+		});*/
 
-		axios.get("http://localhost:3001/login_driver", {
-			username: enteredUsername,
-			password: enteredPassword
-		}).then(setToken(token))
-		.catch(token = false)
+		console.log('we did submit...');
 
-		if(token) {
-			history.push('/driver_home')
+		const response = await axios.post("http://localhost:3001/login_driver", {
+			email: enteredEmail,
+			password: enteredPassword,
+		})
+		//console.log(response);
+		//console.log(token);
+
+		if (response.data[0] != null) {
+			console.log('entered response');
+			setToken(token);
+			history.push('/driver_home');
 		}
 
-		console.log(token);
+		
 	}
 
     return (
@@ -58,7 +63,7 @@ function PageWelcome ({ setToken }) {
 									<div class="field">
 									<label class="username-sign-in">Email:</label>
 									<div class="control">
-											<input class="input" type="text" placeholder="Enter email..." onChange={e => setUserName(e.target.value)}></input>
+											<input class="input" type="text" placeholder="Enter email..." onChange={e => setEmail(e.target.value)}></input>
 										</div>
 									</div>
 									<div class="field">

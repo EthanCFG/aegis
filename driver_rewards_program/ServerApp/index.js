@@ -250,7 +250,7 @@ app.get("/get_drivers", (req, res) => {
   );
 });
 
-app.get("/login_driver", (req, res) => {
+app.post("/login_driver", (req, res) => {
   const Email = req.body.email;
   const Password = req.body.password;
 
@@ -260,8 +260,12 @@ app.get("/login_driver", (req, res) => {
       AND Driver_Password = ?`,
     [Email, Password],
     (err, rows, fields) => {
-      console.log(err);
-      res.json(rows);
+      if (err) { res.send({err: err}) }
+      else if (rows) {
+        res.send(rows)
+      } else {
+        res.send({message: "Incorrect email / password combination."})
+      }
     }
   );
 });
