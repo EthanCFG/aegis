@@ -40,14 +40,31 @@ function PageWelcome ({ setToken }) {
 			password: enteredPassword
 		})
 
+		console.log(driver_response.data[0]);
+
 		if (driver_response.data[0] != null) {
 			console.log('entered driver response');
+			localStorage.setItem('id', driver_response.data[0].Driver_ID);
+			localStorage.setItem('email', driver_response.data[0].Driver_Email);
+			localStorage.setItem('first', driver_response.data[0].Driver_First_Name);
+			localStorage.setItem('last', driver_response.data[0].Driver_Last_Name);
+			localStorage.setItem('address', driver_response.data[0].Driver_Address);
+			localStorage.setItem('city', driver_response.data[0].Driver_City);
+			localStorage.setItem('state', driver_response.data[0].Driver_State);
+			localStorage.setItem('zip', driver_response.data[0].Driver_Zip);
+			localStorage.setItem('points', driver_response.data[0].Driver_Point_Balance);
+			//var tempShit = localStorage.getItem('state');
+			//console.log(tempShit);
 			setToken(token);
 			history.push('/driver_home');
 		}
 
 		else if (sponsor_response.data[0] != null) {
 			console.log('entered sponsor response');
+			localStorage.setItem('id', sponsor_response.data[0].Sponsor_ID);
+			localStorage.setItem('email', sponsor_response.data[0].Sponsor_Email);
+			localStorage.setItem('first', sponsor_response.data[0].Sponsor_First_Name);
+			localStorage.setItem('last', sponsor_response.data[0].Sponsor_Last_Name);
 			setToken(token);
 			history.push('/sponsor_home');
 		}

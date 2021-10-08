@@ -290,6 +290,30 @@ app.post("/login_sponsor", (req, res) => {
   );
 });
 
+app.post("/update_driver", (req, res) => {
+  const Email = req.body.email;
+  const FirstName = req.body.first;
+  const LastName = req.body.last;
+  const ID = req.body.id;
+
+  db.query(
+    `UPDATE * FROM Driver
+      SET Driver_Email = ?
+      AND Driver_First_Name = ?
+      AND Driver_Last_Name = ?
+      WHERE Driver_ID = ?`,
+    [Email, FirstName, LastName, ID],
+    (err, rows, fields) => {
+      if (err) { res.send({err: err}) }
+      else if (rows) {
+        res.send(rows)
+      } else {
+        res.send({message: "meh."})
+      }
+    }
+  );
+});
+
 app.listen(3001, () => {
   console.log("Listening for requests...");
 });
