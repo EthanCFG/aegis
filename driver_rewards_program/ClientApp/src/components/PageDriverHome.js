@@ -24,7 +24,7 @@ function PageDriverHome (props) {
                   <div class="hero-body">
                     <div class="container">
                       <h1 class="title">
-                        Hello, Driver.
+                        Hello, {localStorage.getItem('first')}.
                       </h1>
                       <h2 class="subtitle">
                         I hope you are having a great day!
@@ -41,7 +41,7 @@ function PageDriverHome (props) {
                   </div>
                   <div class="column is-6" style={{ marginTop: 16 }}>
                     <CardTotalPoints
-                      points={props.points}>
+                      points={localStorage.getItem('points')}>
                     </CardTotalPoints>
                   </div>
                 </div>

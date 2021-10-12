@@ -7,6 +7,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.use('/welcome', (req, res) => {
+  res.send({
+    token: 'test123'
+  });
+});
+
 const db = mysql.createConnection({
   user: "admin",
   host: "database-4910.c6lyppadonj0.us-east-1.rds.amazonaws.com",
@@ -240,6 +246,70 @@ app.get("/get_drivers", (req, res) => {
     (err, rows, fields) => {
       console.log(err);
       res.json(rows);
+    }
+  );
+});
+
+app.post("/login_driver", (req, res) => {
+  const Email = req.body.email;
+  const Password = req.body.password;
+
+  db.query(
+    `SELECT * FROM Driver
+      WHERE Driver_Email = ?
+      AND Driver_Password = ?`,
+    [Email, Password],
+    (err, rows, fields) => {
+      if (err) { res.send({err: err}) }
+      else if (rows) {
+        res.send(rows)
+      } else {
+        res.send({message: "Incorrect email / password combination."})
+      }
+    }
+  );
+});
+
+app.post("/login_sponsor", (req, res) => {
+  const Email = req.body.email;
+  const Password = req.body.password;
+
+  db.query(
+    `SELECT * FROM Sponsor
+      WHERE Sponsor_Email = ?
+      AND Sponsor_Password = ?`,
+    [Email, Password],
+    (err, rows, fields) => {
+      if (err) { res.send({err: err}) }
+      else if (rows) {
+        res.send(rows)
+      } else {
+        res.send({message: "Incorrect email / password combination."})
+      }
+    }
+  );
+});
+
+app.post("/update_driver", (req, res) => {
+  const Email = req.body.email;
+  const FirstName = req.body.first;
+  const LastName = req.body.last;
+  const ID = req.body.id;
+
+  db.query(
+    `UPDATE Driver
+      SET Driver_Email = ?,
+      Driver_First_Name = ?,
+      Driver_Last_Name = ?
+      WHERE Driver_ID = ?`,
+    [Email, FirstName, LastName, ID],
+    (err, rows, fields) => {
+      if (err) { res.send({err: err}) }
+      else if (rows) {
+        res.send(rows)
+      } else {
+        res.send({message: "meh."})
+      }
     }
   );
 });
