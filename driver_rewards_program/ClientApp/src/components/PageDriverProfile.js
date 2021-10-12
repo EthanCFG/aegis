@@ -22,6 +22,10 @@ function PageDriverProfile(props) {
       setEditData(true);
     }
 
+    const submitButtonHandler = () => {
+      setEditData(false);
+    }
+
     return (
       <div>
         <NavBar pic={props.pic}></NavBar>
@@ -36,7 +40,7 @@ function PageDriverProfile(props) {
             <div class="column is-three-quarters">
               <div class="notification is-white py-6 my-6">
                 <h1>Account Information:</h1>
-                {editData ? <FormChangeUserData></FormChangeUserData> : <FormDisplayUserData onEditPressed={editButtonHandler}></FormDisplayUserData>}
+                {editData ? <FormChangeUserData onSubmitPressed={submitButtonHandler}></FormChangeUserData> : <FormDisplayUserData onEditPressed={editButtonHandler}></FormDisplayUserData>}
               </div>
             </div>
           </div>

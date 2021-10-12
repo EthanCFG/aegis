@@ -297,10 +297,10 @@ app.post("/update_driver", (req, res) => {
   const ID = req.body.id;
 
   db.query(
-    `UPDATE * FROM Driver
-      SET Driver_Email = ?
-      AND Driver_First_Name = ?
-      AND Driver_Last_Name = ?
+    `UPDATE Driver
+      SET Driver_Email = ?,
+      Driver_First_Name = ?,
+      Driver_Last_Name = ?
       WHERE Driver_ID = ?`,
     [Email, FirstName, LastName, ID],
     (err, rows, fields) => {

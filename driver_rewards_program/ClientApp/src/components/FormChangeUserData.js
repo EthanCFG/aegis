@@ -3,11 +3,11 @@ import { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
-function FormChangeUserData() {
+function FormChangeUserData(props) {
 
-  const [enteredEmail, setEmail] = useState();
-  const [enteredFirstName, setFirstName] = useState();
-  const [enteredLastName, setLastName] = useState();
+  const [enteredEmail, setEmail] = useState(localStorage.getItem('email'));
+  const [enteredFirstName, setFirstName] = useState(localStorage.getItem('first'));
+  const [enteredLastName, setLastName] = useState(localStorage.getItem('last'));
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -19,9 +19,11 @@ function FormChangeUserData() {
       id: localStorage.getItem('id')
     })
 
-    localStorage.setItem('email', response.data[0].Driver_Email);
-    localStorage.setItem('first', response.data[0].Driver_First_Name);
-		localStorage.setItem('last', response.data[0].Driver_Last_Name);
+    localStorage.setItem('email', enteredEmail);
+    localStorage.setItem('first', enteredFirstName);
+    localStorage.setItem('last', enteredLastName);
+
+    props.onSubmitPressed();
   };
 
   return (
@@ -32,7 +34,7 @@ function FormChangeUserData() {
           <Form.Group>
               <Form.Label>Email Address:</Form.Label>
               <Form.Control
-                value={localStorage.getItem('email')}
+                defaultValue={localStorage.getItem('email')}
                 name="email"
                 type="text"
                 placeholder="Enter e-mail address..."
@@ -44,7 +46,7 @@ function FormChangeUserData() {
               <Form.Label>First Name:</Form.Label>
               <Form.Control
                 name="firstname"
-                value={localStorage.getItem('first')}
+                defaultValue={localStorage.getItem('first')}
                 type="text"
                 placeholder="Enter first name..."
                 onChange={e => setFirstName(e.target.value)}
@@ -54,7 +56,7 @@ function FormChangeUserData() {
               <Form.Label>Last Name:</Form.Label>
               <Form.Control
                 name="secondname"
-                value={localStorage.getItem('last')}
+                defaultValue={localStorage.getItem('last')}
                 type="text"
                 placeholder="Enter last name..."
                 onChange={e => setLastName(e.target.value)}
