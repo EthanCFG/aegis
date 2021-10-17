@@ -300,7 +300,11 @@ app.post("/update_driver", (req, res) => {
     `UPDATE Driver
       SET Driver_Email = ?,
       Driver_First_Name = ?,
-      Driver_Last_Name = ?
+      Driver_Last_Name = ?,
+      Driver_City = ?,
+      Driver_Address = ?,
+      Driver_State = ?,
+      Driver_Zip = ?,
       WHERE Driver_ID = ?`,
     [Email, FirstName, LastName, ID],
     (err, rows, fields) => {

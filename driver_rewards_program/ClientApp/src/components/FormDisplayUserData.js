@@ -17,6 +17,10 @@ function FormDisplayUserData(props) {
                 <p>Email Address: {localStorage.getItem('email')}</p>
                 <p>First Name: {localStorage.getItem('first')}</p>
                 <p>Last Name: {localStorage.getItem('last')}</p>
+                <p>First Name: {localStorage.getItem('city')}</p>
+                <p>First Name: {localStorage.getItem('address')}</p>
+                <p>First Name: {localStorage.getItem('state')}</p>
+                <p>First Name: {localStorage.getItem('zip')}</p>
                 <Button type='submit'>Edit</Button>
             </form>
         </div>
