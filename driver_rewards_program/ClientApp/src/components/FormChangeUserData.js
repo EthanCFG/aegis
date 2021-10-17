@@ -76,7 +76,7 @@ function FormChangeUserData(props) {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Last Name:</Form.Label>
+              <Form.Label>City:</Form.Label>
               <Form.Control
                 name="secondname"
                 defaultValue={localStorage.getItem('city')}
@@ -86,7 +86,7 @@ function FormChangeUserData(props) {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Last Name:</Form.Label>
+              <Form.Label>Address:</Form.Label>
               <Form.Control
                 name="secondname"
                 defaultValue={localStorage.getItem('address')}
@@ -96,7 +96,7 @@ function FormChangeUserData(props) {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Last Name:</Form.Label>
+              <Form.Label>State:</Form.Label>
               <Form.Control
                 name="secondname"
                 defaultValue={localStorage.getItem('state')}
@@ -106,7 +106,7 @@ function FormChangeUserData(props) {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Last Name:</Form.Label>
+              <Form.Label>Zip Code:</Form.Label>
               <Form.Control
                 name="secondname"
                 defaultValue={localStorage.getItem('zip')}
