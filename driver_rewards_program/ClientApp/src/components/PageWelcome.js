@@ -24,6 +24,7 @@ function PageWelcome ({ setToken }) {
 
 	const [enteredEmail, setEmail] = useState();
 	const [enteredPassword, setPassword] = useState();
+	const [displayError, setDisplayError] = useState(false);
 
 	const handleSubmit = async e => {
 		e.preventDefault();
@@ -69,6 +70,9 @@ function PageWelcome ({ setToken }) {
 			history.push('/sponsor_home');
 		}
 
+		else {
+			setDisplayError(true);
+		}
 	}
 
     return (
@@ -91,6 +95,7 @@ function PageWelcome ({ setToken }) {
 										<p class="control">
 											<input class="input" type="password" placeholder="Enter password..." onChange={e => setPassword(e.target.value)}></input>
 										</p>
+										{displayError ? <p style={{color:"red"}}>Incorrect email / password combination.</p> : null}
 									</div>
 									<div class="columns is-centered">
 										<form onSubmit={handleSubmit}>
