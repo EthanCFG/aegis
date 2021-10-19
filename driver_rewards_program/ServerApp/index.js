@@ -318,6 +318,52 @@ app.post("/update_driver", (req, res) => {
   );
 });
 
+app.post("/create_application", (req, res) => {
+  const D_ID = req.body.driver_id;
+  const O_ID = req.body.org_id;
+  const date = req.body.date;
+  const status = req.body.status;
+  const reason = req.body.reason;
+
+  db.query(
+    `INSERT INTO Application (Driver_ID, Organization_ID, Application_Date, 
+      Application_Status, Application_Reason),
+      VALUES (?, ?, ?, ?, ?)`,
+      [D_ID,O_ID,date,status,reason],
+      (err, res) => {
+        console.log(err);
+      }
+  );
+});
+
+app.get("/application/driver_id", (req,res) => {
+  const ID = req.body.id;
+
+  db.query(
+    `SELECT * FROM Application
+    WHERE Driver_ID = ?`, 
+    [ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+app.get("/point_history", (req,res) => {
+  const ID = req.body.id;
+  
+  db.query(
+    `SELECT * FROM Point_Change_History
+    WHERE Driver_ID = ?`, 
+    [ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+})
+
 app.listen(3001, () => {
   console.log("Listening for requests...");
 });
