@@ -1,13 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import ProfilePicture from './ProfilePicture';
 import NavBar from './NavBar';
 import CardProfilePic from './CardProfilePic';
 import CardTotalPoints from './CardTotalPoints';
 import 'bulma/css/bulma.min.css';
 import ProfilePictureSponsor from './ProfilePictureSponsor';
+import FormDisplaySponsorData from './FormDisplaySponsorData';
+import FormChangeSponsorData from './FormChangeSponsorData';
 import NavBarSponsor from './NavBarSponsor';
 
 function PageSponsorProfile() {
+
+    const [editData, setEditData] = useState(false)
+
+    const editButtonHandler = () => {
+      setEditData(true);
+    }
+
+    const submitButtonHandler = () => {
+      setEditData(false);
+    }
+
     return (
       <div>
         <NavBarSponsor></NavBarSponsor>
@@ -21,7 +34,8 @@ function PageSponsorProfile() {
             </div>
             <div class="column is-three-quarters">
               <div class="notification is-white py-6 my-6">
-                
+                <h1>Account Information:</h1>
+                {editData ? <FormChangeSponsorData onSubmitPressed={submitButtonHandler}></FormChangeSponsorData> : <FormDisplaySponsorData onEditPressed={editButtonHandler}></FormDisplaySponsorData>}
               </div>
             </div>
           </div>

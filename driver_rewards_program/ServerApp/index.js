@@ -294,6 +294,10 @@ app.post("/update_driver", (req, res) => {
   const Email = req.body.email;
   const FirstName = req.body.first;
   const LastName = req.body.last;
+  const City = req.body.city;
+  const Address = req.body.address;
+  const State = req.body.state;
+  const Zip = req.body.zip;
   const ID = req.body.id;
 
   db.query(
@@ -304,8 +308,32 @@ app.post("/update_driver", (req, res) => {
       Driver_City = ?,
       Driver_Address = ?,
       Driver_State = ?,
-      Driver_Zip = ?,
+      Driver_Zip = ?
       WHERE Driver_ID = ?`,
+    [Email, FirstName, LastName, City, Address, State, Zip, ID],
+    (err, rows, fields) => {
+      if (err) { res.send({err: err}) }
+      else if (rows) {
+        res.send(rows)
+      } else {
+        res.send({message: "meh."})
+      }
+    }
+  );
+});
+
+app.post("/update_sponsor", (req, res) => {
+  const Email = req.body.email;
+  const FirstName = req.body.first;
+  const LastName = req.body.last;
+  const ID = req.body.id;
+
+  db.query(
+    `UPDATE Sponsor
+      SET Sponsor_Email = ?,
+      Sponsor_First_Name = ?,
+      Sponsor_Last_Name = ?
+      WHERE Sponsor_ID = ?`,
     [Email, FirstName, LastName, ID],
     (err, rows, fields) => {
       if (err) { res.send({err: err}) }

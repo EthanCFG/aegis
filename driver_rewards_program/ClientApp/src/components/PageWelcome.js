@@ -54,8 +54,6 @@ function PageWelcome ({ setToken }) {
 			localStorage.setItem('state', driver_response.data[0].Driver_State);
 			localStorage.setItem('zip', driver_response.data[0].Driver_Zip);
 			localStorage.setItem('points', driver_response.data[0].Driver_Point_Balance);
-			//var tempShit = localStorage.getItem('state');
-			//console.log(tempShit);
 			setToken(token);
 			history.push('/driver_home');
 		}

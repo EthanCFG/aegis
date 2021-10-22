@@ -25,10 +25,11 @@ const NavBarSponsor = () => {
                       Home
                     </a>
                   </Link>
-                  <a class="navbar-item">
-                    Documentation
-                  </a>
-            
+                  <Link to="/sponsor_catalog" class="navbar-start">
+                    <a class="navbar-item">
+                      Sponsor Catalog
+                    </a>
+                  </Link>
                   <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
                       More
