@@ -25,10 +25,11 @@ const NavBar = (props) => {
                       Home
                     </a>
                   </Link>
-                  <a class="navbar-item">
-                    Documentation
-                  </a>
-            
+                  <Link to="/driver_catalog" class="navbar-start">
+                    <a class="navbar-item">
+                      Sponsor Catalog
+                    </a>
+                  </Link>
                   <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
                       More
