@@ -383,6 +383,38 @@ app.post("/remove_catalog_item", (req, res) => {
   );
 });
 
+app.post("/add_catalog_item", (req, res) => {
+  const catalogItemName = req.body.catalogItemName;
+  const catalogItemPrice = req.body.catalogItemPrice;
+  const catalogItemInventory = req.body.catalogItemInventory;
+  const organizationID = req.body.organizationID;
+
+  db.query(
+    `INSERT INTO Catalog_Item (Organization_ID, Catalog_Item_Name, Catalog_Item_Price, Catalog_Item_Inventory),
+      VALUES (?, ?, ?, ?)`,
+      [organizationID, catalogItemName, catalogItemPrice, catalogItemInventory],
+      (err, rows, fields) => {
+        console.log(err);
+        res.json(rows);
+      }
+  );
+});
+
+app.post("/change_item_price", (req, res) => {
+  const catalogItemPrice = req.body.catalogItemPrice;
+  const catalogItemID = req.body.catalogItemID;
+
+  db.query(
+    `UPDATE Catalog_Item
+    SET Catalog_Item_Price = ?,
+    WHERE Catalog_Item_ID = ?`,
+    [catalogItemPrice, catalogItemID],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+});
+
 app.listen(3001, () => {
   console.log("Listening for requests...");
 });
