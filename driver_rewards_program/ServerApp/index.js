@@ -387,16 +387,17 @@ app.post("/remove_catalog_item", (req, res) => {
   Returns all Catalog_Item's with a given Organization_ID
   Requires: organizationID
 */
-app.get("/get_catalog", (req, res) => {
-  const organizationID = req.body.organizationID;
+// app.get("/get_catalog", (req, res) => {
+//   const organizationID = req.body.organizationID;
 
-  db.query(
-    `SELECT * FROM Catalog_Item
-      WHERE Organization_ID = ?`,
-    [organizationID],
-    (err, rows, fields) => {
-      console.log(err);
-      res.json(rows);
+//   db.query(
+//     `SELECT * FROM Catalog_Item
+//       WHERE Organization_ID = ?`,
+//     [organizationID],
+//     (err, rows, fields) => {
+//       console.log(err);
+//       res.json(rows);
+
 app.post("/add_catalog_item", (req, res) => {
   const catalogItemName = req.body.catalogItemName;
   const catalogItemPrice = req.body.catalogItemPrice;
@@ -406,11 +407,11 @@ app.post("/add_catalog_item", (req, res) => {
   db.query(
     `INSERT INTO Catalog_Item (Organization_ID, Catalog_Item_Name, Catalog_Item_Price, Catalog_Item_Inventory),
       VALUES (?, ?, ?, ?)`,
-      [organizationID, catalogItemName, catalogItemPrice, catalogItemInventory],
-      (err, rows, fields) => {
-        console.log(err);
-        res.json(rows);
-      }
+    [organizationID, catalogItemName, catalogItemPrice, catalogItemInventory],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
   );
 });
 
