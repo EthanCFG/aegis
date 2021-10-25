@@ -237,13 +237,9 @@ app.post("/remove_profile", (req, res) => {
   How to receive data: fetch("/get_time").then(r => r.json()).then(data => { ... });
 */
 app.get("/get_drivers", (req, res) => {
-<<<<<<< HEAD
   const ID1 = req.body.organizationID1;
   const ID2 = req.body.organizationID2;
   const ID3 = req.body.organizationID3;
-=======
-  const organizationID = req.body.organizationID;
->>>>>>> main
 
   db.query(
     `SELECT * FROM Driver
