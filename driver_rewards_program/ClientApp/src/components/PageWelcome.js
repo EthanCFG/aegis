@@ -41,22 +41,6 @@ function PageWelcome ({ setToken }) {
 			password: enteredPassword
 		})
 
-		localStorage.setItem('orgid1', driver_response.data[0].Organization_ID1);
-		localStorage.setItem('orgid2', driver_response.data[0].Organization_ID2);
-		localStorage.setItem('orgid3', driver_response.data[0].Organization_ID3);
-
-		const org1_response = await axios.post("http://localhost:3001/get_org1", {
-			org1: localStorage.getItem('orgid1')
-		})
-
-		const org2_response = await axios.post("http://localhost:3001/get_org2", {
-			org2: localStorage.getItem('orgid2')
-		})
-
-		const org3_response = await axios.post("http://localhost:3001/get_org3", {
-				org3: localStorage.getItem('orgid3')
-		})
-
 		const org_list_response = await axios.get("http://localhost:3001/list_of_orgs");
 
 		console.log(org_list_response.data[0].Organization_Name);
@@ -74,6 +58,22 @@ function PageWelcome ({ setToken }) {
 			localStorage.setItem('city', driver_response.data[0].Driver_City);
 			localStorage.setItem('state', driver_response.data[0].Driver_State);
 			localStorage.setItem('zip', driver_response.data[0].Driver_Zip);
+			localStorage.setItem('orgid1', driver_response.data[0].Organization_ID1);
+			localStorage.setItem('orgid2', driver_response.data[0].Organization_ID2);
+			localStorage.setItem('orgid3', driver_response.data[0].Organization_ID3);
+
+			const org1_response = await axios.post("http://localhost:3001/get_org1", {
+			org1: localStorage.getItem('orgid1')
+			})
+
+			const org2_response = await axios.post("http://localhost:3001/get_org2", {
+				org2: localStorage.getItem('orgid2')
+			})
+
+			const org3_response = await axios.post("http://localhost:3001/get_org3", {
+					org3: localStorage.getItem('orgid3')
+			})
+
 			if (org1_response.data[0] != null) {
 				localStorage.setItem('orgname1', org1_response.data[0].Organization_Name);
 				localStorage.setItem('orgactive', org1_response.data[0].Organization_Name);
