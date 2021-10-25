@@ -237,12 +237,16 @@ app.post("/remove_profile", (req, res) => {
   How to receive data: fetch("/get_time").then(r => r.json()).then(data => { ... });
 */
 app.get("/get_drivers", (req, res) => {
-  const ID = req.body.organizationID;
+  const ID1 = req.body.organizationID1;
+  const ID2 = req.body.organizationID2;
+  const ID3 = req.body.organizationID3;
 
   db.query(
     `SELECT * FROM Driver
-      WHERE Organization_ID = ?`,
-    [organizationID],
+      WHERE Organization_ID1 = ?
+      OR Organization_ID2 = ?
+      OR Organization_ID3 = ?`,
+    [ID1, ID2, ID3],
     (err, rows, fields) => {
       console.log(err);
       res.json(rows);
