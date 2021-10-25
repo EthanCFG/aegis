@@ -1,6 +1,5 @@
 import React, { Component, useState } from 'react';
 import Form from 'react-bootstrap/Form'
-import FormSponsorSearch from './FormSponsorSearch';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
