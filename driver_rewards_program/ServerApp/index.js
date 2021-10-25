@@ -383,7 +383,6 @@ app.post("/remove_catalog_item", (req, res) => {
   );
 });
 
-<<<<<<< HEAD
 /*
   Returns all Catalog_Item's with a given Organization_ID
   Requires: organizationID
@@ -398,7 +397,6 @@ app.get("/get_catalog", (req, res) => {
     (err, rows, fields) => {
       console.log(err);
       res.json(rows);
-=======
 app.post("/add_catalog_item", (req, res) => {
   const catalogItemName = req.body.catalogItemName;
   const catalogItemPrice = req.body.catalogItemPrice;
@@ -427,7 +425,6 @@ app.post("/change_item_price", (req, res) => {
     [catalogItemPrice, catalogItemID],
     (err, res) => {
       console.log(err);
->>>>>>> e2a5c3710d090d80e407e6810b11851acc5db24b
     }
   );
 });
