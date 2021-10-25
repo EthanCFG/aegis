@@ -7,9 +7,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use('/welcome', (req, res) => {
+app.use("/welcome", (req, res) => {
   res.send({
-    token: 'test123'
+    token: "test123",
   });
 });
 
@@ -94,7 +94,7 @@ app.post("/update_driver_point_balance", (req, res) => {
       console.log(err);
     }
   );
-    /* We will eventually need to add an Oranization value, or have a sponsor alue in Org so we can connect the two */
+  /* We will eventually need to add an Oranization value, or have a sponsor alue in Org so we can connect the two */
   db.query(
     `INSERT INTO Point_Change_History (Driver_ID, Organization_ID, Point_Change_Date, Point_Change_Value, Point_Change_Reason)
       VALUES (?, ?, ?, ?, ?)`[
@@ -237,9 +237,13 @@ app.post("/remove_profile", (req, res) => {
   How to receive data: fetch("/get_time").then(r => r.json()).then(data => { ... });
 */
 app.get("/get_drivers", (req, res) => {
+<<<<<<< HEAD
   const ID1 = req.body.organizationID1;
   const ID2 = req.body.organizationID2;
   const ID3 = req.body.organizationID3;
+=======
+  const organizationID = req.body.organizationID;
+>>>>>>> main
 
   db.query(
     `SELECT * FROM Driver
@@ -264,11 +268,12 @@ app.post("/login_driver", (req, res) => {
       AND Driver_Password = ?`,
     [Email, Password],
     (err, rows, fields) => {
-      if (err) { res.send({err: err}) }
-      else if (rows) {
-        res.send(rows)
+      if (err) {
+        res.send({ err: err });
+      } else if (rows) {
+        res.send(rows);
       } else {
-        res.send({message: "Incorrect email / password combination."})
+        res.send({ message: "Incorrect email / password combination." });
       }
     }
   );
@@ -284,11 +289,12 @@ app.post("/login_sponsor", (req, res) => {
       AND Sponsor_Password = ?`,
     [Email, Password],
     (err, rows, fields) => {
-      if (err) { res.send({err: err}) }
-      else if (rows) {
-        res.send(rows)
+      if (err) {
+        res.send({ err: err });
+      } else if (rows) {
+        res.send(rows);
       } else {
-        res.send({message: "Incorrect email / password combination."})
+        res.send({ message: "Incorrect email / password combination." });
       }
     }
   );
@@ -298,10 +304,6 @@ app.post("/update_driver", (req, res) => {
   const Email = req.body.email;
   const FirstName = req.body.first;
   const LastName = req.body.last;
-  const City = req.body.city;
-  const Address = req.body.address;
-  const State = req.body.state;
-  const Zip = req.body.zip;
   const ID = req.body.id;
 
   db.query(
@@ -312,39 +314,16 @@ app.post("/update_driver", (req, res) => {
       Driver_City = ?,
       Driver_Address = ?,
       Driver_State = ?,
-      Driver_Zip = ?
+      Driver_Zip = ?,
       WHERE Driver_ID = ?`,
-    [Email, FirstName, LastName, City, Address, State, Zip, ID],
-    (err, rows, fields) => {
-      if (err) { res.send({err: err}) }
-      else if (rows) {
-        res.send(rows)
-      } else {
-        res.send({message: "meh."})
-      }
-    }
-  );
-});
-
-app.post("/update_sponsor", (req, res) => {
-  const Email = req.body.email;
-  const FirstName = req.body.first;
-  const LastName = req.body.last;
-  const ID = req.body.id;
-
-  db.query(
-    `UPDATE Sponsor
-      SET Sponsor_Email = ?,
-      Sponsor_First_Name = ?,
-      Sponsor_Last_Name = ?
-      WHERE Sponsor_ID = ?`,
     [Email, FirstName, LastName, ID],
     (err, rows, fields) => {
-      if (err) { res.send({err: err}) }
-      else if (rows) {
-        res.send(rows)
+      if (err) {
+        res.send({ err: err });
+      } else if (rows) {
+        res.send(rows);
       } else {
-        res.send({message: "meh."})
+        res.send({ message: "meh." });
       }
     }
   );
@@ -361,19 +340,26 @@ app.post("/create_application", (req, res) => {
     `INSERT INTO Application (Driver_ID, Organization_Name, Application_Date, 
       Application_Status, Application_Reason)
       VALUES (?, ?, ?, ?, ?)`,
+<<<<<<< HEAD
       [D_ID,Organization_Name,date,status,reason],
       (err, res) => {
         console.log(err);
       }
+=======
+    [D_ID, O_ID, date, status, reason],
+    (err, res) => {
+      console.log(err);
+    }
+>>>>>>> main
   );
 });
 
-app.get("/application/driver_id", (req,res) => {
+app.get("/application/driver_id", (req, res) => {
   const ID = req.body.id;
 
   db.query(
     `SELECT * FROM Application
-    WHERE Driver_ID = ?`, 
+    WHERE Driver_ID = ?`,
     [ID],
     (err, rows, fields) => {
       console.log(err);
@@ -382,6 +368,7 @@ app.get("/application/driver_id", (req,res) => {
   );
 });
 
+<<<<<<< HEAD
 app.get("/list_of_orgs", (req,res) => {
 
   db.query(
@@ -394,18 +381,84 @@ app.get("/list_of_orgs", (req,res) => {
 });
 
 app.get("/point_history", (req,res) => {
+=======
+app.get("/point_history", (req, res) => {
+>>>>>>> main
   const ID = req.body.id;
-  
+
   db.query(
     `SELECT * FROM Point_Change_History
-    WHERE Driver_ID = ?`, 
+    WHERE Driver_ID = ?`,
     [ID],
     (err, rows, fields) => {
       console.log(err);
       res.json(rows);
     }
   );
-})
+});
+
+/*
+  Removes an Catalog_Item from a catalog
+  Requires: catalogItemID
+*/
+app.post("/remove_catalog_item", (req, res) => {
+  const catalogItemID = req.body.catalogItemID;
+  db.query(
+    `DELETE FROM Catalog_Item
+      WHERE Catalog_Item_ID = ?`,
+    [catalogItemID],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+});
+
+/*
+  Returns all Catalog_Item's with a given Organization_ID
+  Requires: organizationID
+*/
+// app.get("/get_catalog", (req, res) => {
+//   const organizationID = req.body.organizationID;
+
+//   db.query(
+//     `SELECT * FROM Catalog_Item
+//       WHERE Organization_ID = ?`,
+//     [organizationID],
+//     (err, rows, fields) => {
+//       console.log(err);
+//       res.json(rows);
+
+app.post("/add_catalog_item", (req, res) => {
+  const catalogItemName = req.body.catalogItemName;
+  const catalogItemPrice = req.body.catalogItemPrice;
+  const catalogItemInventory = req.body.catalogItemInventory;
+  const organizationID = req.body.organizationID;
+
+  db.query(
+    `INSERT INTO Catalog_Item (Organization_ID, Catalog_Item_Name, Catalog_Item_Price, Catalog_Item_Inventory),
+      VALUES (?, ?, ?, ?)`,
+    [organizationID, catalogItemName, catalogItemPrice, catalogItemInventory],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+app.post("/change_item_price", (req, res) => {
+  const catalogItemPrice = req.body.catalogItemPrice;
+  const catalogItemID = req.body.catalogItemID;
+
+  db.query(
+    `UPDATE Catalog_Item
+    SET Catalog_Item_Price = ?,
+    WHERE Catalog_Item_ID = ?`,
+    [catalogItemPrice, catalogItemID],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+});
 
 app.post("/get_org1", (req,res) => {
   const org_ID = req.body.org1;
