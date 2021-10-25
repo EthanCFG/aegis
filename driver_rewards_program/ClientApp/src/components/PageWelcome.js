@@ -41,17 +41,21 @@ function PageWelcome ({ setToken }) {
 			password: enteredPassword
 		})
 
+		localStorage.setItem('orgid1', driver_response.data[0].Organization_ID1);
+		localStorage.setItem('orgid2', driver_response.data[0].Organization_ID2);
+		localStorage.setItem('orgid3', driver_response.data[0].Organization_ID3);
+
 		const org1_response = await axios.post("http://localhost:3001/get_org1", {
 			org1: localStorage.getItem('orgid1')
 		})
 
 		const org2_response = await axios.post("http://localhost:3001/get_org2", {
 			org2: localStorage.getItem('orgid2')
-			})
+		})
 
 		const org3_response = await axios.post("http://localhost:3001/get_org3", {
 				org3: localStorage.getItem('orgid3')
-			})
+		})
 
 		const org_list_response = await axios.get("http://localhost:3001/list_of_orgs");
 
@@ -91,9 +95,6 @@ function PageWelcome ({ setToken }) {
 				localStorage.setItem('orgname3', null);
 			}
 			localStorage.setItem('orglist', JSON.stringify(organization_list));
-			localStorage.setItem('orgid1', driver_response.data[0].Organization_ID1);
-			localStorage.setItem('orgid2', driver_response.data[0].Organization_ID2);
-			localStorage.setItem('orgid3', driver_response.data[0].Organization_ID3);
 			localStorage.setItem('points1', driver_response.data[0].Driver_Points1);
 			localStorage.setItem('points2', driver_response.data[0].Driver_Points2);
 			localStorage.setItem('points3', driver_response.data[0].Driver_Points3);

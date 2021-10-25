@@ -20,7 +20,6 @@ import PageApplyToSponsor from './components/PageApplyToSponsor';
 function App() {
 
     const [orgactive, setOrgActive] = useState(localStorage.getItem('orgactive'));
-
     const [pointsactive, setPointsActive] = useState(localStorage.getItem('activepoints'));
 
     const createDriverAccountHandler = (userData) => {
