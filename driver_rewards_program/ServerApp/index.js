@@ -340,17 +340,10 @@ app.post("/create_application", (req, res) => {
     `INSERT INTO Application (Driver_ID, Organization_Name, Application_Date, 
       Application_Status, Application_Reason)
       VALUES (?, ?, ?, ?, ?)`,
-<<<<<<< HEAD
       [D_ID,Organization_Name,date,status,reason],
       (err, res) => {
         console.log(err);
       }
-=======
-    [D_ID, O_ID, date, status, reason],
-    (err, res) => {
-      console.log(err);
-    }
->>>>>>> main
   );
 });
 
@@ -368,7 +361,6 @@ app.get("/application/driver_id", (req, res) => {
   );
 });
 
-<<<<<<< HEAD
 app.get("/list_of_orgs", (req,res) => {
 
   db.query(
@@ -381,9 +373,6 @@ app.get("/list_of_orgs", (req,res) => {
 });
 
 app.get("/point_history", (req,res) => {
-=======
-app.get("/point_history", (req, res) => {
->>>>>>> main
   const ID = req.body.id;
 
   db.query(
