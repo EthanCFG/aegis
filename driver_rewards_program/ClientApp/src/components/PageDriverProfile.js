@@ -28,13 +28,12 @@ function PageDriverProfile(props) {
 
     return (
       <div>
-        <NavBar pic={props.pic}></NavBar>
         <div class="container">
           <div class="columns">
             <div class="column is-3">
               <div class="notification is-white py-6 my-6">
                 <ProfilePicture pic={props.pic}></ProfilePicture>
-                <CardTotalPoints points={localStorage.getItem('points')}></CardTotalPoints>
+                <CardTotalPoints points={props.points}></CardTotalPoints>
               </div>
             </div>
             <div class="column is-three-quarters">

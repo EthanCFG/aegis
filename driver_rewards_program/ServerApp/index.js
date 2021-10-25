@@ -392,6 +392,48 @@ app.get("/point_history", (req,res) => {
   );
 })
 
+app.post("/get_org1", (req,res) => {
+  const org_ID = req.body.org1;
+  
+  db.query(
+    `SELECT * FROM Organization
+    WHERE Organization_ID = ?`, 
+    [org_ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+})
+
+app.post("/get_org2", (req,res) => {
+  const org_ID = req.body.org2;
+  
+  db.query(
+    `SELECT * FROM Organization
+    WHERE Organization_ID = ?`, 
+    [org_ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+})
+
+app.post("/get_org3", (req,res) => {
+  const org_ID = req.body.org3;
+  
+  db.query(
+    `SELECT * FROM Organization
+    WHERE Organization_ID = ?`, 
+    [org_ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+})
+
 app.listen(3001, () => {
   console.log("Listening for requests...");
 });

@@ -1,8 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import CardCurrentSponsor from './CardCurrentSponsor';
 import CardTotalPoints from './CardTotalPoints';
 
 function PageDriverHome (props) {
+
+  const [activeSponsor, setActiveSponsor] = React.useState('')
+
+  React.useEffect(() => {
+    
+    window.addEventListener('storage', () => {
+      // When local storage changes, dump the list to
+      // the console.
+       setActiveSponsor(localStorage.getItem('orgactive'))   
+    });
+    
+       
+    }, [])
+
     return (
         <div class="container">
           <div class="columns">
@@ -35,13 +49,13 @@ function PageDriverHome (props) {
                 <div class="columns">
                   <div class="column is-6" style={{ marginTop: 36 }}>
                     <CardCurrentSponsor
-                      sponsor={props.sponsor}
+                      sponsor={props.active_org}
                       sponsor_image_url={props.sponsor_image_url}>
                     </CardCurrentSponsor>
                   </div>
                   <div class="column is-6" style={{ marginTop: 16 }}>
                     <CardTotalPoints
-                      points={localStorage.getItem('points')}>
+                      points={props.points}>
                     </CardTotalPoints>
                   </div>
                 </div>

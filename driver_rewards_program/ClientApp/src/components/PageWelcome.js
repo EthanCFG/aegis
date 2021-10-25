@@ -41,10 +41,25 @@ function PageWelcome ({ setToken }) {
 			password: enteredPassword
 		})
 
+		const org1_response = await axios.post("http://localhost:3001/get_org1", {
+			org1: localStorage.getItem('orgid1')
+		})
+
+		console.log(org1_response.data[0].Organization_Name);
+
+		const org2_response = await axios.post("http://localhost:3001/get_org2", {
+			org2: localStorage.getItem('orgid2')
+			})
+
+		console.log(org2_response.data[0]);
+
+		const org3_response = await axios.post("http://localhost:3001/get_org3", {
+				org3: localStorage.getItem('orgid3')
+			})
+
 		console.log(driver_response.data[0]);
 
 		if (driver_response.data[0] != null) {
-			console.log('entered driver response');
 			localStorage.setItem('id', driver_response.data[0].Driver_ID);
 			localStorage.setItem('email', driver_response.data[0].Driver_Email);
 			localStorage.setItem('first', driver_response.data[0].Driver_First_Name);
@@ -53,7 +68,34 @@ function PageWelcome ({ setToken }) {
 			localStorage.setItem('city', driver_response.data[0].Driver_City);
 			localStorage.setItem('state', driver_response.data[0].Driver_State);
 			localStorage.setItem('zip', driver_response.data[0].Driver_Zip);
-			localStorage.setItem('points', driver_response.data[0].Driver_Point_Balance);
+			if (org1_response.data[0] != null) {
+				localStorage.setItem('orgname1', org1_response.data[0].Organization_Name);
+				localStorage.setItem('orgactive', org1_response.data[0].Organization_Name);
+				console.log(localStorage.getItem('orgactive'));
+			}
+			else {
+				localStorage.setItem('orgname1', null);
+				localStorage.setItem('orgactive', null);
+			}
+			if (org2_response.data[0] != null) {
+				localStorage.setItem('orgname2', org2_response.data[0].Organization_Name);
+			}
+			else {
+				localStorage.setItem('orgname2', null);
+			}
+			if (org3_response.data[0] != null) {
+				localStorage.setItem('orgname3', org3_response.data[0].Organization_Name);
+			}
+			else {
+				localStorage.setItem('orgname3', null);
+			}
+			localStorage.setItem('orgid1', driver_response.data[0].Organization_ID1);
+			localStorage.setItem('orgid2', driver_response.data[0].Organization_ID2);
+			localStorage.setItem('orgid3', driver_response.data[0].Organization_ID3);
+			localStorage.setItem('points1', driver_response.data[0].Driver_Points1);
+			localStorage.setItem('points2', driver_response.data[0].Driver_Points2);
+			localStorage.setItem('points3', driver_response.data[0].Driver_Points3);
+			localStorage.setItem('activepoints', driver_response.data[0].Driver_Points1);
 			setToken(token);
 			history.push('/driver_home');
 		}

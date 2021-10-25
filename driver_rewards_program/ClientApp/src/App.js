@@ -18,6 +18,10 @@ import axios from 'axios';
 
 function App() {
 
+    const [orgactive, setOrgActive] = useState(localStorage.getItem('orgactive'));
+
+    const [pointsactive, setPointsActive] = useState(localStorage.getItem('activepoints'));
+
     const createDriverAccountHandler = (userData) => {
       console.log(userData);
     }
@@ -53,17 +57,18 @@ function App() {
             <PageCreateSponsorAccount onCreateSponsorAccount={createSponsorAccountHandler}></PageCreateSponsorAccount>
           </Route>
           <Route path="/driver_home">
-            <NavBar pic={'https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg'}></NavBar>
-            <PageDriverHome 
-              points={2500}
-              sponsor={'Nonexistent Logistics'}
+            <NavBar pic={'https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg'} setActiveOrg={setOrgActive} setActivePoints={setPointsActive}></NavBar>
+            <PageDriverHome
+              active_org={orgactive}
+              points={pointsactive}
               sponsor_image_url={'https://thumbs.dreamstime.com/b/letter-v-orange-red-rectangles-business-logo-placeholder-name-company-name-geometric-vector-logo-design-elements-169170579.jpg'}>
             </PageDriverHome>
           </Route>
           <Route path="/driver_profile">
+            <NavBar pic={'https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg'} setActiveOrg={setOrgActive} setActivePoints={setPointsActive}></NavBar>
             <PageDriverProfile
               pic={'https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg'}
-              points={2500}>
+              points={pointsactive}>
             </PageDriverProfile>
           </Route>
           <Route path="/sponsor_home">
@@ -73,7 +78,7 @@ function App() {
             <PageSponsorProfile></PageSponsorProfile>
           </Route>
           <Route path="/driver_catalog">
-          <NavBar pic={'https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg'}></NavBar>
+            <NavBar pic={'https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg'} setActiveOrg={setOrgActive} setActivePoints={setPointsActive}></NavBar>
             <PageDriverCatalog></PageDriverCatalog>
           </Route>
           <Route path="/sponsor_catalog">
