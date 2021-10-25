@@ -45,19 +45,21 @@ function PageWelcome ({ setToken }) {
 			org1: localStorage.getItem('orgid1')
 		})
 
-		console.log(org1_response.data[0].Organization_Name);
-
 		const org2_response = await axios.post("http://localhost:3001/get_org2", {
 			org2: localStorage.getItem('orgid2')
 			})
-
-		console.log(org2_response.data[0]);
 
 		const org3_response = await axios.post("http://localhost:3001/get_org3", {
 				org3: localStorage.getItem('orgid3')
 			})
 
-		console.log(driver_response.data[0]);
+		const org_list_response = await axios.get("http://localhost:3001/list_of_orgs");
+
+		console.log(org_list_response.data[0].Organization_Name);
+		let organization_list = [];
+		for (let i = 0; i < org_list_response.data.length; i++) {
+			organization_list.push(org_list_response.data[i].Organization_Name);
+		}
 
 		if (driver_response.data[0] != null) {
 			localStorage.setItem('id', driver_response.data[0].Driver_ID);
@@ -71,7 +73,6 @@ function PageWelcome ({ setToken }) {
 			if (org1_response.data[0] != null) {
 				localStorage.setItem('orgname1', org1_response.data[0].Organization_Name);
 				localStorage.setItem('orgactive', org1_response.data[0].Organization_Name);
-				console.log(localStorage.getItem('orgactive'));
 			}
 			else {
 				localStorage.setItem('orgname1', null);
@@ -89,6 +90,7 @@ function PageWelcome ({ setToken }) {
 			else {
 				localStorage.setItem('orgname3', null);
 			}
+			localStorage.setItem('orglist', JSON.stringify(organization_list));
 			localStorage.setItem('orgid1', driver_response.data[0].Organization_ID1);
 			localStorage.setItem('orgid2', driver_response.data[0].Organization_ID2);
 			localStorage.setItem('orgid3', driver_response.data[0].Organization_ID3);

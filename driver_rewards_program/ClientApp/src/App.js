@@ -13,6 +13,7 @@ import PageDriverCatalog from './components/PageDriverCatalog';
 import PageSponsorCatalog from './components/PageSponsorCatalog';
 import './custom.css';
 import axios from 'axios';
+import PageApplyToSponsor from './components/PageApplyToSponsor';
 
 //Axios will be used to post user data to backend.
 
@@ -83,6 +84,10 @@ function App() {
           </Route>
           <Route path="/sponsor_catalog">
             <PageSponsorCatalog></PageSponsorCatalog>
+          </Route>
+          <Route path="/sponsor_application">
+            <NavBar pic={'https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg'} setActiveOrg={setOrgActive} setActivePoints={setPointsActive}></NavBar>
+            <PageApplyToSponsor></PageApplyToSponsor>
           </Route>
       </div>
       )
