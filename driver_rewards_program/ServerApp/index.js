@@ -392,6 +392,25 @@ app.get("/point_history", (req,res) => {
   );
 })
 
+app.post("/application_decision", (req, res) => {
+  const ID = req.body.id;
+  const status = req.body.status;
+  const reason = req.body.reason;
+
+  db.query(
+    `UPDATE Application
+    SET Application_Status = ?,
+    Application_Reason = ?
+    WHERE Driver_ID = ?`,
+    [status, reason, id],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    } 
+
+  )
+})
+
 app.listen(3001, () => {
   console.log("Listening for requests...");
 });
