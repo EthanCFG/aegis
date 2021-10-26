@@ -1,11 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import ProfilePicture from './ProfilePicture';
 import DriverHomeSideBar from './DriverHomeSideBar';
 import CardCurrentSponsor from './CardCurrentSponsor';
 import TableSponsorDrivers from './TableSponsorDrivers';
 import NavBarSponsor from './NavBarSponsor';
+import axios from 'axios';
 
 function PageSponsorHome () {
+
+  const [driver_ids] = useState(JSON.parse(localStorage.getItem('driversid')));
+  const [driver_firsts] = useState(JSON.parse(localStorage.getItem('driversfirst')));
+  const [driver_lasts] = useState(JSON.parse(localStorage.getItem('driverslast')));
+  const [driver_emails] = useState(JSON.parse(localStorage.getItem('driversemail')));
+  const [driver_points] = useState(JSON.parse(localStorage.getItem('driverspoints')));
+
     return (
       <div>
         <NavBarSponsor></NavBarSponsor>
@@ -39,7 +47,13 @@ function PageSponsorHome () {
                 </section>
                 <div class="columns">
                   <div class="column is-6 py-6">
-                    <TableSponsorDrivers></TableSponsorDrivers>
+                    <TableSponsorDrivers 
+                    id={driver_ids}
+                    first={driver_firsts}
+                    last={driver_lasts}
+                    email={driver_emails}
+                    points={driver_points}>
+                    </TableSponsorDrivers>
                   </div>
                 </div>
               </div>

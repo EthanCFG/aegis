@@ -68,7 +68,7 @@ function PageApplyToSponsor (props) {
 										<Form.Group className="mb-3" controlId="FormSponsor">
 										<Form.Label>Reason for Application:</Form.Label>
 										<Form.Control type="email" placeholder="Provide brief justification..." onChange={reasonChangeHandler}/>
-										</Form.Group> 
+										</Form.Group>
 									</Form>
 								</div>
 								<div style={{

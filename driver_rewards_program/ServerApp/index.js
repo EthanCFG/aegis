@@ -236,7 +236,7 @@ app.post("/remove_profile", (req, res) => {
   Requires: organizationID
   How to receive data: fetch("/get_time").then(r => r.json()).then(data => { ... });
 */
-app.get("/get_drivers", (req, res) => {
+app.post("/get_drivers", (req, res) => {
   const ID1 = req.body.organizationID1;
   const ID2 = req.body.organizationID2;
   const ID3 = req.body.organizationID3;
