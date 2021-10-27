@@ -377,7 +377,7 @@ app.get("/get_catalog", (req, res) => {
   db.query(
     `SELECT * FROM Catalog_Item
     WHERE Oganization_ID = ?`,
-    [ID],
+    [organizationID],
     (err, rows, fields) => {
       console.log(err);
       res.json(rows);
