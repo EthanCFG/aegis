@@ -78,7 +78,7 @@ app.post("/update_driver_address", (req, res) => {
   Updates a driver's point balance
   Requires: pointChange, driverID, organizationID, date, reason
 */
-app.post("/update_driver_point_balance", (req, res) => {
+app.post("/update_driver_points1", (req, res) => {
   const pointChange = req.body.pointChange;
   const driverID = req.body.driverID;
   const organizationID = req.body.organizationID;
@@ -87,7 +87,7 @@ app.post("/update_driver_point_balance", (req, res) => {
 
   db.query(
     `UPDATE Driver 
-      SET Driver_Point_Balance = Driver_Point_Balance + ?
+      SET Driver_Points1 = Driver_Points1 + ?
       WHERE Driver_ID = ?`,
     [pointChange, driverID],
     (err, res) => {
