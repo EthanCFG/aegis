@@ -11,10 +11,13 @@ class PageDriverCatalog extends Component {
   }
 
   async fetchCatalogItems() {
+    console.log(localStorage.getItem("activeorg"));
     const catalog_response = await axios.post(
       "http://localhost:3001/get_catalog",
       {
-        organizationID: 1,
+        organizationID: localStorage.getItem("activeorg")
+          ? localStorage.getItem("activeorg")
+          : 1,
       }
     );
     this.setState({ items: catalog_response.data, loading: false });
@@ -26,7 +29,9 @@ class PageDriverCatalog extends Component {
         <div class="container">
           <div class="columns">
             <div class="column is-centered">
-              <div class="notification is-white py-6 my-6"></div>
+              <div class="notification is-white py-6 my-6">
+                <h1>Loading...</h1>
+              </div>
             </div>
           </div>
         </div>
