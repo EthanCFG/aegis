@@ -376,7 +376,7 @@ app.get("/get_catalog", (req, res) => {
 
   db.query(
     `SELECT * FROM Catalog_Item
-    WHERE Oganization_ID = ?`,
+    WHERE Organization_ID = ?`,
     [organizationID],
     (err, rows, fields) => {
       console.log(err);
@@ -394,7 +394,7 @@ app.post("/remove_catalog_item", (req, res) => {
   db.query(
     `DELETE FROM Driver
       WHERE Driver_ID = ?`,
-    [ID],
+    [catalogItemID],
     (err, res) => {
       console.log(err);
     }
