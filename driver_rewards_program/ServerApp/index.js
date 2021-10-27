@@ -368,6 +368,24 @@ app.get("/point_history", (req, res) => {
 });
 
 /*
+  Returns a list of all Catalog_Item with given Organization_ID
+  Requires: organizationID
+*/
+app.get("/get_catalog", (req, res) => {
+  const organizationID = req.body.organizationID;
+
+  db.query(
+    `SELECT * FROM Catalog_Item
+    WHERE Oganization_ID = ?`,
+    [ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+/*
   Removes an Catalog_Item from a catalog
   Requires: catalogItemID
 */
@@ -392,11 +410,11 @@ app.post("/add_catalog_item", (req, res) => {
   db.query(
     `INSERT INTO Catalog_Item (Organization_ID, Catalog_Item_Name, Catalog_Item_Price, Catalog_Item_Inventory),
       VALUES (?, ?, ?, ?)`,
-      [organizationID, catalogItemName, catalogItemPrice, catalogItemInventory],
-      (err, rows, fields) => {
-        console.log(err);
-        res.json(rows);
-      }
+    [organizationID, catalogItemName, catalogItemPrice, catalogItemInventory],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
   );
 });
 
