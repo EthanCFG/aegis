@@ -383,14 +383,32 @@ app.get("/point_history", (req,res) => {
 });
 
 /*
+  Returns a list of all Catalog_Item with given Organization_ID
+  Requires: organizationID
+*/
+app.post("/get_catalog", (req, res) => {
+  const organizationID = req.body.organizationID;
+
+  db.query(
+    `SELECT * FROM Catalog_Item
+    WHERE Organization_ID = ?`,
+    [organizationID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+/*
   Removes an Catalog_Item from a catalog
   Requires: catalogItemID
 */
 app.post("/remove_catalog_item", (req, res) => {
   const catalogItemID = req.body.catalogItemID;
   db.query(
-    `DELETE FROM Catalog_Item
-      WHERE Catalog_Item_ID = ?`,
+    `DELETE FROM Driver
+      WHERE Driver_ID = ?`,
     [catalogItemID],
     (err, res) => {
       console.log(err);
