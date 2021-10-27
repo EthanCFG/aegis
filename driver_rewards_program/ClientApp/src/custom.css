@@ -4,7 +4,7 @@ a {
 }
 
 code {
-  color: #E01A76;
+  color: #e01a76;
 }
 
 .btn-primary {
@@ -18,8 +18,7 @@ code {
   align-items: center;
   justify-content: center;
   height: 100%;
-  background: linear-gradient(-45deg, 
-  #2c3e50, #3498db);
+  background: linear-gradient(-45deg, #2c3e50, #3498db);
 }
 
 #root {
@@ -41,7 +40,7 @@ code {
   margin-right: auto;
   background-color: white;
   border-radius: 25px;
-  border:3px solid silver;
+  border: 3px solid silver;
 }
 
 .container_login {
@@ -56,7 +55,7 @@ code {
   margin-right: auto;
   background-color: white;
   border-radius: 25px;
-  border:3px solid silver;
+  border: 3px solid silver;
 }
 
 .btn-user-type {
@@ -66,8 +65,7 @@ code {
 }
 
 .pretty-buttons {
-  background: linear-gradient(-45deg, 
-  #2c3e50, #3498db);
+  background: linear-gradient(-45deg, #2c3e50, #3498db);
 }
 
 .nav-link {
@@ -91,13 +89,14 @@ code {
   align-items: baseline;
 }
 
-#header-logo{
-  background: url("https://1.bp.blogspot.com/-T66fB2A7eaU/YVCf1yjn7dI/AAAAAAAAAAM/VMfp4LAlxbcyJ4dbfEjNgVSIaeIGcFjqACLcBGAsYHQ/s1280/Aegis%2BLogo%2BTemp.png") no-repeat center center;
+#header-logo {
+  background: url("https://1.bp.blogspot.com/-T66fB2A7eaU/YVCf1yjn7dI/AAAAAAAAAAM/VMfp4LAlxbcyJ4dbfEjNgVSIaeIGcFjqACLcBGAsYHQ/s1280/Aegis%2BLogo%2BTemp.png")
+    no-repeat center center;
   background-size: cover;
-  width: 152px
+  width: 152px;
 }
 
-#welcome-logo{
+#welcome-logo {
   width: auto;
   height: auto;
   max-width: 400px;
@@ -106,11 +105,11 @@ code {
   padding-bottom: 50px;
 }
 
-.welcome-vertical-alignment{
+.welcome-vertical-alignment {
   padding-top: 8%;
 }
 
-.profile-page-image-cropper{
+.profile-page-image-cropper {
   height: 0;
   width: 100%;
   position: relative;
@@ -119,14 +118,20 @@ code {
   border-radius: 50%;
 }
 
-.has-rounded-corners{
+.has-rounded-corners {
   border-radius: 25px;
 }
 
-.is-a-beautiful-sunset{
+.is-a-beautiful-sunset {
   background: linear-gradient(to right, #30e8bf, #ff8235);
 }
 
-.is-kinda-gray{
-  background-color: #ECF0F3;
+.is-kinda-gray {
+  background-color: #ecf0f3;
+}
+
+.catalog-item {
+  margin-bottom: 3%;
+  margin-left: 3%;
+  border: 1px solid grey;
 }

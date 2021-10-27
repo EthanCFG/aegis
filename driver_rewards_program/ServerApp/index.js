@@ -371,7 +371,7 @@ app.get("/point_history", (req, res) => {
   Returns a list of all Catalog_Item with given Organization_ID
   Requires: organizationID
 */
-app.get("/get_catalog", (req, res) => {
+app.post("/get_catalog", (req, res) => {
   const organizationID = req.body.organizationID;
 
   db.query(
