@@ -1,6 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
 import 'bulma/css/bulma.min.css';
-import { Link } from 'react-router-dom'; 
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
@@ -17,46 +16,10 @@ import axios from 'axios';
 
 const [driverPoints, setDriverPoints] = useState(props.points)*/
 
-var getCompleted = false;
-
-
-const fetch_drivers = async () => {
-    const drivers_list_response = await axios.post("http://localhost:3001/get_drivers", {
-        organizationID1: localStorage.getItem('sponsorid'),
-        organizationID2: localStorage.getItem('sponsorid'),
-        organizationID3: localStorage.getItem('sponsorid')
-    })
-
-    getCompleted = true;
-    console.log(drivers_list_response);
-    return drivers_list_response;
-}
-
 
 function TableData(props) {
 
     const [driversData, setDriversData] = useState([])
-
-    const render_data_table = () => {
-        /*console.log('entered render_data_table');
-        console.log(driversData);*/
-        if (getCompleted == false) { return null }
-        
-        else {
-            return driversData.map((driver, index) => {
-                const { id, first, last, email, points } = driver
-                return (
-                    <tr key={id}>
-                        <td>{id}</td>
-                        <td>{first}</td>
-                        <td>{last}</td>
-                        <td>{email}</td>
-                        <td>{points}</td>
-                    </tr>
-                )
-            })
-        }
-    }
 
     useEffect(() => {
         async function fetchDrivers() {
@@ -72,16 +35,25 @@ function TableData(props) {
     }, []);
 
     //console.log(driversData);
-    return (<tbody>{driversData.map((driver, index) => {
-        const { Driver_ID, Driver_First_Name, Driver_Last_Name, Driver_Email, Driver_Points1 } = driver
-        console.log(Driver_ID);
+    return (<tbody>{driversData.map((driver) => {
+        const id = driver.Driver_ID;
+        const first = driver.Driver_First_Name;
+        const last = driver.Driver_Last_Name;
+        const email = driver.Driver_Email
+        let points = 0;
+        let org = 0;
+        if (driver.Organization_ID1 == localStorage.getItem('sponsorid')) { org = 1; points = driver.Driver_Points1; }
+        else if (driver.Organization_ID2 == localStorage.getItem('sponsorid')) { org = 2; points = driver.Driver_Points2; }
+        else if (driver.Organization_ID3 == localStorage.getItem('sponsorid')) { org = 3; points = driver.Driver_Points3; }
+        //const { Driver_ID, Driver_First_Name, Driver_Last_Name, Driver_Email, Driver_Points1 } = driver
+        //console.log(id);
         return (
-            <tr key={Driver_ID}>
-                <td>{Driver_ID}</td>
-                <td>{Driver_First_Name} {Driver_Last_Name}</td>
-                <td>{Driver_Email}</td>
-                <td>{Driver_Points1}</td>
-                <td><Button onClick={() => console.log(Driver_ID)}>+</Button> <Button>-</Button></td>
+            <tr key={id}>
+                <td>{id}</td>
+                <td>{first} {last}</td>
+                <td>{email}</td>
+                <td>{points}</td>
+                <td><Button onClick={() => { props.setAddModal(true); props.setDriver(id); props.setOrg(org) }}>+</Button> <Button onClick={() => { props.setSubModal(true); props.setDriver(id); props.setOrg(org) }}>-</Button></td>
             </tr>
         )
     })}</tbody>)

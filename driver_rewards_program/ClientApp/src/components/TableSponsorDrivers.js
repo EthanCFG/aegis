@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import 'bulma/css/bulma.min.css';
 import { Link } from 'react-router-dom'; 
 import TableData from './TableData';
 import axios from 'axios';
+import { Modal, Button } from 'react-bootstrap';
 
 
 const fetch_drivers = async () => {
@@ -17,22 +18,72 @@ const fetch_drivers = async () => {
 }
 
 function TableSponsorDrivers (props) {
-	/*const displayRows = () => {
-		for (let i = 0; i < props.data.length; i++) {
-			return (<tbody>
-				<tr>
-					<th>{props.data[i].Driver_ID}</th>
-					<td>{props.data[i].Driver_First_Name} {props.data[i].Driver_Last_Name}</td>
-					<td>{props.data[i].Driver_Email}</td>
-					<td>{props.data[i].Driver_Points1}</td>
-					<td></td>
-				</tr>
-			</tbody>)
+
+	const [showAddModal, setShowAddModal] = useState(false)
+
+	const [showSubModal, setShowSubModal] = useState(false)
+
+	const [activeDriverID, setActiveDriverID] = useState()
+
+	const [pointsToAdd, setPointsToAdd] = useState()
+
+	const [Organization, setOrganization] = useState()
+
+	const handleCloseAdd = () => setShowAddModal(false);
+
+	const addPoints = () => {
+		console.log(Organization);
+		if(Organization == 1) {
+			axios.post("http://localhost:3001/update_driver_points1", {
+				pointChange: pointsToAdd,
+				driverID: activeDriverID,
+				organizationID: localStorage.getItem('sponsorid'),
+				date: 'tuesday',
+				reason: 'some reason'
+			})
 		}
-	}*/
+		else if (Organization == 2) {
+			axios.post("http://localhost:3001/update_driver_points2", {
+				pointChange: pointsToAdd,
+				driverID: activeDriverID,
+				organizationID: localStorage.getItem('sponsorid'),
+				date: 'tuesday',
+				reason: 'some reason'
+			})
+		}
+		else if (Organization == 3) {
+			axios.post("http://localhost:3001/update_driver_points3", {
+				pointChange: pointsToAdd,
+				driverID: activeDriverID,
+				organizationID: localStorage.getItem('sponsorid'),
+				date: 'tuesday',
+				reason: 'some reason'
+			})
+		}
+	}
 
     return (
         <table class="table">
+					<div>
+						<Modal show={showAddModal} onHide={handleCloseAdd}>
+							<Modal.Header closeButton>
+								<Modal.Title>Add Points to Driver #{activeDriverID}</Modal.Title>
+							</Modal.Header>
+						<Modal.Body>
+							<div class="control">
+								<input class="input" type="text" placeholder="Enter how many points to add..." onChange={e => setPointsToAdd(e.target.value)}></input>
+							</div>
+						</Modal.Body>
+							<Modal.Footer>
+								<Button variant="secondary" onClick={handleCloseAdd}>
+									Close
+								</Button>
+								<Button variant="primary" onClick={() => {addPoints(); handleCloseAdd()}}>
+									Add Points
+								</Button>
+							</Modal.Footer>
+						</Modal>
+					</div>
 					<thead>
 							<tr>
 							<th>Driver No.</th>
@@ -42,7 +93,7 @@ function TableSponsorDrivers (props) {
 							<th>Add/Remove Points</th>
 							</tr>
 					</thead>
-					<TableData id={props.id} first={props.first} last={props.last} email={props.email} points={props.points}></TableData>
+					<TableData setAddModal={setShowAddModal} setSubModal={setShowSubModal} setDriver={setActiveDriverID} setOrg={setOrganization}></TableData>
 				</table>
     )
 }

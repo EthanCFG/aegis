@@ -106,6 +106,62 @@ app.post("/update_driver_points1", (req, res) => {
   );
 });
 
+app.post("/update_driver_points2", (req, res) => {
+  const pointChange = req.body.pointChange;
+  const driverID = req.body.driverID;
+  const organizationID = req.body.organizationID;
+  const date = req.body.date;
+  const reason = req.body.reason;
+
+  db.query(
+    `UPDATE Driver 
+      SET Driver_Points2 = Driver_Points2 + ?
+      WHERE Driver_ID = ?`,
+    [pointChange, driverID],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+  /* We will eventually need to add an Oranization value, or have a sponsor alue in Org so we can connect the two */
+  db.query(
+    `INSERT INTO Point_Change_History (Driver_ID, Organization_ID, Point_Change_Date, Point_Change_Value, Point_Change_Reason)
+      VALUES (?, ?, ?, ?, ?)`[
+    (driverID, organizationID, date, pointChange, reason)
+    ],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+});
+
+app.post("/update_driver_points3", (req, res) => {
+  const pointChange = req.body.pointChange;
+  const driverID = req.body.driverID;
+  const organizationID = req.body.organizationID;
+  const date = req.body.date;
+  const reason = req.body.reason;
+
+  db.query(
+    `UPDATE Driver 
+      SET Driver_Points3 = Driver_Points3 + ?
+      WHERE Driver_ID = ?`,
+    [pointChange, driverID],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+  /* We will eventually need to add an Oranization value, or have a sponsor alue in Org so we can connect the two */
+  db.query(
+    `INSERT INTO Point_Change_History (Driver_ID, Organization_ID, Point_Change_Date, Point_Change_Value, Point_Change_Reason)
+      VALUES (?, ?, ?, ?, ?)`[
+    (driverID, organizationID, date, pointChange, reason)
+    ],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+});
+
 /*
   Updates a driver/sponsor's email
   Requires: newEmail, isDriver, ID

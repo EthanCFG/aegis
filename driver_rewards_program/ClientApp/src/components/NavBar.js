@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import ProfilePicture from './ProfilePicture';
 import 'bulma/css/bulma.min.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const NavBar = (props) => {
+
+  let history = useHistory();
 
   const setActiveSponsor1 = () => {
     localStorage.setItem('orgactive', localStorage.getItem('orgname1')); 
@@ -56,15 +58,31 @@ const NavBar = (props) => {
                     </a>
             
                     <div class="navbar-dropdown">
-                      <a class="navbar-item">
-                        {(localStorage.getItem('orgname1') == 'null') ? <Link to="/sponsor_application" class="navbar-start">Apply to a Sponsor!</Link> : <p onClick={() => {setActiveSponsor1()}}>{localStorage.getItem('orgname1')}</p>}
-                      </a>
-                      <a class="navbar-item">
-                        {(localStorage.getItem('orgname2') == 'null') ? <Link to="/sponsor_application" class="navbar-start">Apply to a Sponsor!</Link> : <p onClick={() => {setActiveSponsor2()}}>{localStorage.getItem('orgname2')}</p>}
-                      </a>
-                      <a class="navbar-item">
-                        {(localStorage.getItem('orgname3') == 'null') ? <Link to="/sponsor_application" class="navbar-start">Apply to a Sponsor!</Link> : <p onClick={() => {setActiveSponsor3()}}>{localStorage.getItem('orgname3')}</p>}
-                      </a>
+
+                      {(localStorage.getItem('orgname1') == 'null') ? 
+                      <Link to="/sponsor_application">
+                        <a class="navbar-item">
+                          <p>Apply to a Sponsor!</p>
+                        </a>
+                      </Link> : 
+                      <a class="navbar-item" onClick={() => { setActiveSponsor1() }}>{localStorage.getItem('orgname1')}</a>}
+
+                      {(localStorage.getItem('orgname2') == 'null') ?
+                      <Link to="/sponsor_application">
+                        <a class="navbar-item">
+                          <p>Apply to a Sponsor!</p>
+                        </a>
+                      </Link> :
+                      <a class="navbar-item" onClick={() => { setActiveSponsor2() }}>{localStorage.getItem('orgname2')}</a>}
+                  
+                      {(localStorage.getItem('orgname3') == 'null') ?
+                      <Link to="/sponsor_application">
+                        <a class="navbar-item">
+                          <p>Apply to a Sponsor!</p>
+                        </a>
+                      </Link> :
+                      <a class="navbar-item" onClick={() => { setActiveSponsor3() }}>{localStorage.getItem('orgname3')}</a>}
+
                       <hr class="navbar-divider"/>
                       <a class="navbar-item">
                         Report an issue
