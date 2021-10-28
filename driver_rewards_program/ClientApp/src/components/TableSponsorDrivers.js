@@ -34,7 +34,7 @@ function TableSponsorDrivers (props) {
 	const addPoints = () => {
 		console.log(Organization);
 		if(Organization == 1) {
-			axios.post("http://localhost:3001/update_driver_points1", {
+			axios.post("http://localhost:3001/add_driver_points1", {
 				pointChange: pointsToAdd,
 				driverID: activeDriverID,
 				organizationID: localStorage.getItem('sponsorid'),
@@ -43,7 +43,7 @@ function TableSponsorDrivers (props) {
 			})
 		}
 		else if (Organization == 2) {
-			axios.post("http://localhost:3001/update_driver_points2", {
+			axios.post("http://localhost:3001/add_driver_points2", {
 				pointChange: pointsToAdd,
 				driverID: activeDriverID,
 				organizationID: localStorage.getItem('sponsorid'),
@@ -52,7 +52,7 @@ function TableSponsorDrivers (props) {
 			})
 		}
 		else if (Organization == 3) {
-			axios.post("http://localhost:3001/update_driver_points3", {
+			axios.post("http://localhost:3001/add_driver_points3", {
 				pointChange: pointsToAdd,
 				driverID: activeDriverID,
 				organizationID: localStorage.getItem('sponsorid'),

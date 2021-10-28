@@ -78,7 +78,7 @@ app.post("/update_driver_address", (req, res) => {
   Updates a driver's point balance
   Requires: pointChange, driverID, organizationID, date, reason
 */
-app.post("/update_driver_points1", (req, res) => {
+app.post("/add_driver_points1", (req, res) => {
   const pointChange = req.body.pointChange;
   const driverID = req.body.driverID;
   const organizationID = req.body.organizationID;
@@ -106,7 +106,7 @@ app.post("/update_driver_points1", (req, res) => {
   );
 });
 
-app.post("/update_driver_points2", (req, res) => {
+app.post("/add_driver_points2", (req, res) => {
   const pointChange = req.body.pointChange;
   const driverID = req.body.driverID;
   const organizationID = req.body.organizationID;
@@ -134,7 +134,7 @@ app.post("/update_driver_points2", (req, res) => {
   );
 });
 
-app.post("/update_driver_points3", (req, res) => {
+app.post("/add_driver_points3", (req, res) => {
   const pointChange = req.body.pointChange;
   const driverID = req.body.driverID;
   const organizationID = req.body.organizationID;
