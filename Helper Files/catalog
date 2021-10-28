@@ -1,0 +1,37 @@
+async function getEtsyListings()
+{
+    //Value obtained from html in separate file
+    const containerDiv = document.getElementById('etsy-listings');
+
+    //file to get
+    const response = fetch('https://happycoding.io/api/stay-listings.json');
+    //wait for the listings to be pulled in
+    const listings = await response.json();
+
+    //Pick three random values from the list
+    const indexes = [];
+    while(indexes.length < 3)
+    {
+        const index = Math.floor(Math.random() * listings.length);
+        //If same index is picked again
+        if(!indexes.includes(index))
+        {
+            indexes.push(index);
+        }
+    }
+
+    for(const index of indexes)
+    {
+        const listing = listings[index];
+        //containerDiv.appendChild(buildEtsyThumbnail(listing));
+        
+    }
+}
+//html formatting stuff
+// function buildEtsyThumbnail(listing)
+// {
+//     const div = document.createElement('div');
+//     div.classList.add('etsy-thumbnail');
+//     div.innerHTML
+//     return
+// }
