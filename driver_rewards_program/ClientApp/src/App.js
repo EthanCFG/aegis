@@ -11,9 +11,10 @@ import PageSponsorHome from './components/PageSponsorHome';
 import PageUserType from './components/PageUserType';
 import PageDriverCatalog from './components/PageDriverCatalog';
 import PageSponsorCatalog from './components/PageSponsorCatalog';
+import PageApplyToSponsor from './components/PageApplyToSponsor';
+import PageDriverApplications from './components/PageDriverApplications';
 import './custom.css';
 import axios from 'axios';
-import PageApplyToSponsor from './components/PageApplyToSponsor';
 
 //Axios will be used to post user data to backend.
 
@@ -86,6 +87,9 @@ function App() {
           <Route path="/sponsor_application">
             <NavBar pic={'https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg'} setActiveOrg={setOrgActive} setActivePoints={setPointsActive}></NavBar>
             <PageApplyToSponsor></PageApplyToSponsor>
+          </Route>
+          <Route path="/view_driver_applications">
+            <PageDriverApplications></PageDriverApplications>
           </Route>
       </div>
       )
