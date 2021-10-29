@@ -18,7 +18,7 @@ function PageSponsorCatalog (props) {
       <button class="button">Delete Item</button>
     </div>
     <div class="buttons">
-      <button class="button">Refresh Items</button>
+      <a href="sponsor_catalog"><button class="button">Refresh Items</button></a>
     </div>
   </div>
 </div>
