@@ -5,7 +5,10 @@
 //Not sure if this is how this is done, in the tutorial, the two functions werent wrapped in headers
 //Reference: newbedev.com/write-add-data-in-json-file-using-node-js
 
-
+function startAPI()
+{
+    //GET https://openapi.etsy.com/v2/listings/active?api_key=4rskcd32mgmwvkcmibb5aqfy
+}
 
 function addProduct()
 {
