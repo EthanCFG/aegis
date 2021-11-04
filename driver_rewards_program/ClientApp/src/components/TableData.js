@@ -35,6 +35,7 @@ const fetch_drivers = async () => {
 
 function TableData(props) {
 
+    //Similar to this (set drivers data intially)
     const [driversData, setDriversData] = useState([])
 
     const render_data_table = () => {
@@ -57,7 +58,7 @@ function TableData(props) {
             })
         }
     }
-
+//[] Called when component is loaded
     useEffect(() => {
         async function fetchDrivers() {
             const drivers_response = await axios.post("http://localhost:3001/get_drivers", {
