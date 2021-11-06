@@ -428,7 +428,7 @@ app.post("/delete_driver", (req,res) => {
 
   db.query(
     `DELETE Driver
-    WHERE idDriver = ?`,
+    WHERE Driver_ID = ?`,
     [id],
     (err, rows, fields) => {
       console.log(err);
