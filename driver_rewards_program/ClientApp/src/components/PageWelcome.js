@@ -99,6 +99,12 @@ function PageWelcome ({ setToken }) {
 			localStorage.setItem('id', sponsor_response.data[0].Sponsor_ID);
 			localStorage.setItem('sponsorid', sponsor_response.data[0].Organization_ID);
 
+			for (let i = 0; i < org_list_response.data.length; i++) {
+				if (org_list_response.data[i].Organization_ID == sponsor_response.data[0].Organization_ID) { 
+					localStorage.setItem('sponsorname', org_list_response.data[i].Organization_Name);
+				}
+			}
+
 			const drivers_list_response = await axios.post("http://localhost:3001/get_drivers", {
 				organizationID1: localStorage.getItem('sponsorid'),
 				organizationID2: localStorage.getItem('sponsorid'),
@@ -123,11 +129,11 @@ function PageWelcome ({ setToken }) {
 			localStorage.setItem('driverslast', JSON.stringify(drivers_last));
 			localStorage.setItem('driversemail', JSON.stringify(drivers_email));
 			localStorage.setItem('driverspoints', JSON.stringify(drivers_points));
-			console.log(localStorage.getItem('driversid')[2]);
+			/*console.log(localStorage.getItem('driversid')[2]);
 			console.log(localStorage.getItem('driversfirst')[2]);
 			console.log(localStorage.getItem('driverslast')[2]);
 			console.log(localStorage.getItem('driversemail')[2]);
-			console.log(localStorage.getItem('driverspoints')[2]);
+			console.log(localStorage.getItem('driverspoints')[2]);*/
 
 			localStorage.setItem('email', sponsor_response.data[0].Sponsor_Email);
 			localStorage.setItem('first', sponsor_response.data[0].Sponsor_First_Name);

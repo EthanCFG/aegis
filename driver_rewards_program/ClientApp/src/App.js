@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PageWelcome from './components/PageWelcome';
 import PageCreateAccount from './components/PageCreateAccount';
