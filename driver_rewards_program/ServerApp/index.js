@@ -409,6 +409,34 @@ app.post("/application_decision", (req, res) => {
   )
 })
 
+app.post("/delete_sponsor", (req,res) => {
+  const id = req.body.id;
+
+  db.query(
+    `DELETE Sponsor
+    WHERE idSponsor = ?`,
+    [id],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    } 
+  )
+})
+
+app.post("/delete_driver", (req,res) => {
+  const id = req.body.id;
+
+  db.query(
+    `DELETE Driver
+    WHERE idDriver = ?`,
+    [id],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    } 
+  )
+})
+
 app.listen(3001, () => {
   console.log("Listening for requests...");
 });
