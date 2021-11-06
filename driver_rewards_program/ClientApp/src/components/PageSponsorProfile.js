@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import ProfilePicture from './ProfilePicture';
 import NavBar from './NavBar';
 import CardProfilePic from './CardProfilePic';
@@ -8,6 +8,7 @@ import ProfilePictureSponsor from './ProfilePictureSponsor';
 import FormDisplaySponsorData from './FormDisplaySponsorData';
 import FormChangeSponsorData from './FormChangeSponsorData';
 import NavBarSponsor from './NavBarSponsor';
+import axios from 'axios';
 
 function PageSponsorProfile() {
 

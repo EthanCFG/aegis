@@ -78,7 +78,7 @@ app.post("/update_driver_address", (req, res) => {
   Updates a driver's point balance
   Requires: pointChange, driverID, organizationID, date, reason
 */
-app.post("/update_driver_points1", (req, res) => {
+app.post("/add_driver_points1", (req, res) => {
   const pointChange = req.body.pointChange;
   const driverID = req.body.driverID;
   const organizationID = req.body.organizationID;
@@ -99,6 +99,62 @@ app.post("/update_driver_points1", (req, res) => {
     `INSERT INTO Point_Change_History (Driver_ID, Organization_ID, Point_Change_Date, Point_Change_Value, Point_Change_Reason)
       VALUES (?, ?, ?, ?, ?)`[
       (driverID, organizationID, date, pointChange, reason)
+    ],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+});
+
+app.post("/add_driver_points2", (req, res) => {
+  const pointChange = req.body.pointChange;
+  const driverID = req.body.driverID;
+  const organizationID = req.body.organizationID;
+  const date = req.body.date;
+  const reason = req.body.reason;
+
+  db.query(
+    `UPDATE Driver 
+      SET Driver_Points2 = Driver_Points2 + ?
+      WHERE Driver_ID = ?`,
+    [pointChange, driverID],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+  /* We will eventually need to add an Oranization value, or have a sponsor alue in Org so we can connect the two */
+  db.query(
+    `INSERT INTO Point_Change_History (Driver_ID, Organization_ID, Point_Change_Date, Point_Change_Value, Point_Change_Reason)
+      VALUES (?, ?, ?, ?, ?)`[
+    (driverID, organizationID, date, pointChange, reason)
+    ],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+});
+
+app.post("/add_driver_points3", (req, res) => {
+  const pointChange = req.body.pointChange;
+  const driverID = req.body.driverID;
+  const organizationID = req.body.organizationID;
+  const date = req.body.date;
+  const reason = req.body.reason;
+
+  db.query(
+    `UPDATE Driver 
+      SET Driver_Points3 = Driver_Points3 + ?
+      WHERE Driver_ID = ?`,
+    [pointChange, driverID],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+  /* We will eventually need to add an Oranization value, or have a sponsor alue in Org so we can connect the two */
+  db.query(
+    `INSERT INTO Point_Change_History (Driver_ID, Organization_ID, Point_Change_Date, Point_Change_Value, Point_Change_Reason)
+      VALUES (?, ?, ?, ?, ?)`[
+    (driverID, organizationID, date, pointChange, reason)
     ],
     (err, res) => {
       console.log(err);
@@ -254,6 +310,99 @@ app.post("/get_drivers", (req, res) => {
   );
 });
 
+app.post("/get_driver_data", (req, res) => {
+  const ID = req.body.driver_id;
+
+  db.query(
+    `SELECT * FROM Driver
+      WHERE Driver_ID = ?`,
+    [ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+app.post("/accept_driver_application", (req, res) => {
+  const ORG1 = req.body.org_id1;
+  const ORG2 = req.body.org_id2;
+  const ORGANIZATION = req.body.current_organization;
+  const ID = req.body.driver_id;
+
+  if (ORG1 == null) {
+    db.query(
+      `UPDATE Driver
+      SET Organization_ID1 = ?,
+      Driver_Points1 = 0
+      WHERE Driver_ID = ?`,
+      [ORGANIZATION, ID],
+      (err, rows) => {
+        if (err) {
+          res.send({ err: err });
+        } else if (rows) {
+          res.send(rows);
+        } else {
+          res.send({ message: "meh." });
+        }
+      }
+    );
+  } else if (ORG2 == null) {
+    db.query(
+      `UPDATE Driver
+      SET Organization_ID2 = ?,
+      Driver_Points2 = 0
+      WHERE Driver_ID = ?`,
+      [ORGANIZATION, ID],
+      (err, rows) => {
+        if (err) {
+          res.send({ err: err });
+        } else if (rows) {
+          res.send(rows);
+        } else {
+          res.send({ message: "meh." });
+        }
+      }
+    );
+  } else {
+    db.query(
+      `UPDATE Driver
+      SET Organization_ID3 = ?,
+      Driver_Points3 = 0
+      WHERE Driver_ID = ?`,
+      [ORGANIZATION, ID],
+      (err, rows) => {
+        if (err) {
+          res.send({ err: err });
+        } else if (rows) {
+          res.send(rows);
+        } else {
+          res.send({ message: "meh." });
+        }
+      }
+    );
+  }
+});
+
+app.post("/remove_driver_application", (req, res) => {
+  const ID = req.body.driver_id;
+  const ORG = req.body.org_name;
+
+  db.query(
+    `DELETE FROM Application
+      WHERE Driver_ID = ?
+      AND Organization_Name = ?`,
+    [ID, ORG],
+    (err, rows) => {
+      if(err) {
+        res.send({ err: err });
+      } else if (rows) {
+        res.send(rows);
+      }
+    }
+  )
+});
+
 app.post("/login_driver", (req, res) => {
   const Email = req.body.email;
   const Password = req.body.password;
@@ -406,11 +555,29 @@ app.get("/application/driver_id", (req, res) => {
   );
 });
 
-app.get("/list_of_orgs", (req, res) => {
-  db.query(`SELECT * FROM Organization`, (err, rows, fields) => {
-    console.log(err);
-    res.json(rows);
-  });
+app.post("/sponsor_application_list", (req, res) => {
+  const Name = req.body.org_name;
+
+  db.query(
+    `SELECT * FROM Application
+    WHERE Organization_Name = ?`,
+    [Name],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+app.get("/list_of_orgs", (req,res) => {
+
+  db.query(
+    `SELECT * FROM Organization`,
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
 });
 
 app.get("/point_history", (req, res) => {
