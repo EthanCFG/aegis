@@ -267,9 +267,21 @@ app.post("/login_driver", (req, res) => {
       if (err) {
         res.send({ err: err });
       } else if (rows) {
+        //logging login attempt
+        if (rows.length != 0) {
+          //login attempt successful
+          db.query(
+            `INSERT INTO Login_Attempt (Login_Attempt_Email, Login_Attempt_Status, Login_Attempt_Date)
+                  VALUES (?, "successful", NOW())`,
+            [Email],
+            (err, res) => {
+              console.log(err);
+            }
+          );
+        }
         res.send(rows);
       } else {
-        res.send({ message: "Incorrect email / password combination." });
+        //res.send({ message: "Incorrect email / password combination." });
       }
     }
   );
@@ -288,9 +300,32 @@ app.post("/login_sponsor", (req, res) => {
       if (err) {
         res.send({ err: err });
       } else if (rows) {
+        //logging login attempt
+        if (rows.length == 0) {
+          //login attempt unsuccessful
+          db.query(
+            `INSERT INTO Login_Attempt (Login_Attempt_Email, Login_Attempt_Status, Login_Attempt_Date)
+                  VALUES (?, "unsuccessful", NOW())`,
+            [Email],
+            (err, res) => {
+              console.log(err);
+            }
+          );
+        } else {
+          //login attempt successful
+          db.query(
+            `INSERT INTO Login_Attempt (Login_Attempt_Email, Login_Attempt_Status, Login_Attempt_Date)
+                  VALUES (?, "successful", NOW())`,
+            [Email],
+            (err, res) => {
+              console.log(err);
+            }
+          );
+        }
+
         res.send(rows);
       } else {
-        res.send({ message: "Incorrect email / password combination." });
+        //res.send({ message: "Incorrect email / password combination." });
       }
     }
   );
@@ -336,10 +371,10 @@ app.post("/create_application", (req, res) => {
     `INSERT INTO Application (Driver_ID, Organization_Name, Application_Date, 
       Application_Status, Application_Reason)
       VALUES (?, ?, ?, ?, ?)`,
-      [D_ID,Organization_Name,date,status,reason],
-      (err, res) => {
-        console.log(err);
-      }
+    [D_ID, Organization_Name, date, status, reason],
+    (err, res) => {
+      console.log(err);
+    }
   );
 });
 
@@ -357,18 +392,14 @@ app.get("/application/driver_id", (req, res) => {
   );
 });
 
-app.get("/list_of_orgs", (req,res) => {
-
-  db.query(
-    `SELECT * FROM Organization`,
-    (err, rows, fields) => {
-      console.log(err);
-      res.json(rows);
-    }
-  );
+app.get("/list_of_orgs", (req, res) => {
+  db.query(`SELECT * FROM Organization`, (err, rows, fields) => {
+    console.log(err);
+    res.json(rows);
+  });
 });
 
-app.get("/point_history", (req,res) => {
+app.get("/point_history", (req, res) => {
   const ID = req.body.id;
 
   db.query(
@@ -407,29 +438,14 @@ app.post("/get_catalog", (req, res) => {
 app.post("/remove_catalog_item", (req, res) => {
   const catalogItemID = req.body.catalogItemID;
   db.query(
-    `DELETE FROM Driver
-      WHERE Driver_ID = ?`,
+    `DELETE FROM Catalog_Item
+      WHERE Catalog_Item_ID = ?`,
     [catalogItemID],
     (err, res) => {
       console.log(err);
     }
   );
 });
-
-/*
-  Returns all Catalog_Item's with a given Organization_ID
-  Requires: organizationID
-*/
-// app.get("/get_catalog", (req, res) => {
-//   const organizationID = req.body.organizationID;
-
-//   db.query(
-//     `SELECT * FROM Catalog_Item
-//       WHERE Organization_ID = ?`,
-//     [organizationID],
-//     (err, rows, fields) => {
-//       console.log(err);
-//       res.json(rows);
 
 app.post("/add_catalog_item", (req, res) => {
   const catalogItemName = req.body.catalogItemName;
@@ -463,47 +479,47 @@ app.post("/change_item_price", (req, res) => {
   );
 });
 
-app.post("/get_org1", (req,res) => {
+app.post("/get_org1", (req, res) => {
   const org_ID = req.body.org1;
-  
+
   db.query(
     `SELECT * FROM Organization
-    WHERE Organization_ID = ?`, 
+    WHERE Organization_ID = ?`,
     [org_ID],
     (err, rows, fields) => {
       console.log(err);
       res.json(rows);
     }
   );
-})
+});
 
-app.post("/get_org2", (req,res) => {
+app.post("/get_org2", (req, res) => {
   const org_ID = req.body.org2;
-  
-  db.query(
-    `SELECT * FROM Organization
-    WHERE Organization_ID = ?`, 
-    [org_ID],
-    (err, rows, fields) => {
-      console.log(err);
-      res.json(rows);
-    }
-  );
-})
 
-app.post("/get_org3", (req,res) => {
-  const org_ID = req.body.org3;
-  
   db.query(
     `SELECT * FROM Organization
-    WHERE Organization_ID = ?`, 
+    WHERE Organization_ID = ?`,
     [org_ID],
     (err, rows, fields) => {
       console.log(err);
       res.json(rows);
     }
   );
-})
+});
+
+app.post("/get_org3", (req, res) => {
+  const org_ID = req.body.org3;
+
+  db.query(
+    `SELECT * FROM Organization
+    WHERE Organization_ID = ?`,
+    [org_ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
 
 app.listen(3001, () => {
   console.log("Listening for requests...");
