@@ -331,6 +331,20 @@ app.post("/login_sponsor", (req, res) => {
   );
 });
 
+app.post("/get_login_attempts", (req, res) => {
+  const Email = req.body.email;
+
+  db.query(
+    `SELECT * FROM Login_Attempt
+      WHERE Login_Attempt_Email = ?`,
+    [Email],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
 app.post("/update_driver", (req, res) => {
   const Email = req.body.email;
   const FirstName = req.body.first;
