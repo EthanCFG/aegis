@@ -1,8 +1,36 @@
 import React, { Component } from 'react';
 import 'bulma/css/bulma.min.css';
 import { Link } from 'react-router-dom'; 
+import TableData from './TableData';
+import axios from 'axios';
 
-function TableSponsorDrivers () {
+
+const fetch_drivers = async () => {
+	const drivers_list_response = await axios.post("http://localhost:3001/get_drivers", {
+		organizationID1: localStorage.getItem('sponsorid'),
+		organizationID2: localStorage.getItem('sponsorid'),
+		organizationID3: localStorage.getItem('sponsorid')
+	})
+	
+	console.log(drivers_list_response);
+	return drivers_list_response;
+}
+
+function TableSponsorDrivers (props) {
+	/*const displayRows = () => {
+		for (let i = 0; i < props.data.length; i++) {
+			return (<tbody>
+				<tr>
+					<th>{props.data[i].Driver_ID}</th>
+					<td>{props.data[i].Driver_First_Name} {props.data[i].Driver_Last_Name}</td>
+					<td>{props.data[i].Driver_Email}</td>
+					<td>{props.data[i].Driver_Points1}</td>
+					<td></td>
+				</tr>
+			</tbody>)
+		}
+	}*/
+
     return (
         <table class="table">
 					<thead>
@@ -14,15 +42,7 @@ function TableSponsorDrivers () {
 							<th>Add/Remove Points</th>
 							</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<th>1</th>
-							<td>John Wick</td>
-							<td>keanu@reeves.net</td>
-							<td>5,000</td>
-							<td></td>
-						</tr>
-					</tbody>
+					<TableData id={props.id} first={props.first} last={props.last} email={props.email} points={props.points}></TableData>
 				</table>
     )
 }

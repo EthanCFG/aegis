@@ -38,7 +38,6 @@ function App() {
       )
     }*/
 
-    
       return (
         <div>
           <Route exact path="/">

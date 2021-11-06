@@ -78,7 +78,7 @@ app.post("/update_driver_address", (req, res) => {
   Updates a driver's point balance
   Requires: pointChange, driverID, organizationID, date, reason
 */
-app.post("/update_driver_point_balance", (req, res) => {
+app.post("/update_driver_points1", (req, res) => {
   const pointChange = req.body.pointChange;
   const driverID = req.body.driverID;
   const organizationID = req.body.organizationID;
@@ -87,7 +87,7 @@ app.post("/update_driver_point_balance", (req, res) => {
 
   db.query(
     `UPDATE Driver 
-      SET Driver_Point_Balance = Driver_Point_Balance + ?
+      SET Driver_Points1 = Driver_Points1 + ?
       WHERE Driver_ID = ?`,
     [pointChange, driverID],
     (err, res) => {
@@ -236,7 +236,7 @@ app.post("/remove_profile", (req, res) => {
   Requires: organizationID
   How to receive data: fetch("/get_time").then(r => r.json()).then(data => { ... });
 */
-app.get("/get_drivers", (req, res) => {
+app.post("/get_drivers", (req, res) => {
   const ID1 = req.body.organizationID1;
   const ID2 = req.body.organizationID2;
   const ID3 = req.body.organizationID3;
@@ -383,14 +383,32 @@ app.get("/point_history", (req,res) => {
 });
 
 /*
+  Returns a list of all Catalog_Item with given Organization_ID
+  Requires: organizationID
+*/
+app.post("/get_catalog", (req, res) => {
+  const organizationID = req.body.organizationID;
+
+  db.query(
+    `SELECT * FROM Catalog_Item
+    WHERE Organization_ID = ?`,
+    [organizationID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+/*
   Removes an Catalog_Item from a catalog
   Requires: catalogItemID
 */
 app.post("/remove_catalog_item", (req, res) => {
   const catalogItemID = req.body.catalogItemID;
   db.query(
-    `DELETE FROM Catalog_Item
-      WHERE Catalog_Item_ID = ?`,
+    `DELETE FROM Driver
+      WHERE Driver_ID = ?`,
     [catalogItemID],
     (err, res) => {
       console.log(err);

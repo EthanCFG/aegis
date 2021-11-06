@@ -87,7 +87,7 @@ const NavBar = (props) => {
                         </a>
                       </Link>
                       <Link to="/welcome">
-                        <a class="navbar-item">
+                        <a class="navbar-item" onClick={localStorage.setItem('userType', 'none')}>
                           Log Out
                         </a>
                       </Link>

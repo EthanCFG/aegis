@@ -11,6 +11,8 @@ function PageWelcome ({ setToken }) {
 
 	let history = useHistory();
 
+	localStorage.setItem('usertype', 'none');
+
 	const [enteredEmail, setEmail] = useState();
 	const [enteredPassword, setPassword] = useState();
 	const [displayError, setDisplayError] = useState(false);
@@ -32,13 +34,13 @@ function PageWelcome ({ setToken }) {
 
 		const org_list_response = await axios.get("http://localhost:3001/list_of_orgs");
 
-		console.log(org_list_response.data[0].Organization_Name);
 		let organization_list = [];
 		for (let i = 0; i < org_list_response.data.length; i++) {
 			organization_list.push(org_list_response.data[i].Organization_Name);
 		}
 
 		if (driver_response.data[0] != null) {
+			localStorage.setItem('usertype', 'driver');
 			localStorage.setItem('id', driver_response.data[0].Driver_ID);
 			localStorage.setItem('email', driver_response.data[0].Driver_Email);
 			localStorage.setItem('first', driver_response.data[0].Driver_First_Name);
@@ -93,17 +95,39 @@ function PageWelcome ({ setToken }) {
 		}
 
 		else if (sponsor_response.data[0] != null) {
+			localStorage.setItem('usertype', 'sponsor');
 			localStorage.setItem('id', sponsor_response.data[0].Sponsor_ID);
 			localStorage.setItem('sponsorid', sponsor_response.data[0].Organization_ID);
-			console.log(localStorage.getItem('sponsorid'));
 
-			const drivers_list_response = await axios.get("http://localhost:3001/get_drivers", {
+			const drivers_list_response = await axios.post("http://localhost:3001/get_drivers", {
 				organizationID1: localStorage.getItem('sponsorid'),
 				organizationID2: localStorage.getItem('sponsorid'),
 				organizationID3: localStorage.getItem('sponsorid')
 			})
 
-			console.log(drivers_list_response);
+			let drivers_ids = [];
+			let drivers_first = [];
+			let drivers_last = [];
+			let drivers_email = [];
+			let drivers_points = [];
+			for (let i = 0; i < drivers_list_response.data.length; i++) {
+				drivers_ids.push(drivers_list_response.data[i].Driver_ID);
+				drivers_first.push(drivers_list_response.data[i].Driver_First_Name);
+				drivers_last.push(drivers_list_response.data[i].Driver_Last_Name);
+				drivers_email.push(drivers_list_response.data[i].Driver_Email);
+				drivers_points.push(drivers_list_response.data[i].Driver_Points1);
+			}
+
+			localStorage.setItem('driversid', JSON.stringify(drivers_ids));
+			localStorage.setItem('driversfirst', JSON.stringify(drivers_first));
+			localStorage.setItem('driverslast', JSON.stringify(drivers_last));
+			localStorage.setItem('driversemail', JSON.stringify(drivers_email));
+			localStorage.setItem('driverspoints', JSON.stringify(drivers_points));
+			console.log(localStorage.getItem('driversid')[2]);
+			console.log(localStorage.getItem('driversfirst')[2]);
+			console.log(localStorage.getItem('driverslast')[2]);
+			console.log(localStorage.getItem('driversemail')[2]);
+			console.log(localStorage.getItem('driverspoints')[2]);
 
 			localStorage.setItem('email', sponsor_response.data[0].Sponsor_Email);
 			localStorage.setItem('first', sponsor_response.data[0].Sponsor_First_Name);
