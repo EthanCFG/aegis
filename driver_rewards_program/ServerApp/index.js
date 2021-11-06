@@ -437,6 +437,40 @@ app.post("/delete_driver", (req,res) => {
   )
 })
 
+app.post("/dummy_driver_add", (req,res) => {
+  const email = "Dummy Driver";
+  const password = "Dummy Driver";
+  const firstName = "Dummy Driver";
+  const lastName = "Dummy Driver";
+  const address = "Dummy Driver";
+  const state = "Dummy Driver";
+  const city = "Dummy Driver";
+  const zip = "Dummy Driver";
+  const phone = "Dummy Driver";
+
+  db.query(
+    "INSERT INTO Driver (Driver_First_Name, Driver_Last_Name, Driver_Email, Driver_Address, Driver_State, Driver_City, Driver_Zip, Driver_Phone_Number, Driver_Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [firstName, lastName, email, address, state, city, zip, phone, password],
+      (err, res) => {
+        console.log(err);
+      }
+    );
+})
+
+app.post("/delete_dummy", (req,res) => {
+  const email = "Dummy Driver";
+
+  db.query(
+    `DELETE Driver
+    WHERE Driver_Email = ?`,
+    [email],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    } 
+  )
+})
+
 app.listen(3001, () => {
   console.log("Listening for requests...");
 });
