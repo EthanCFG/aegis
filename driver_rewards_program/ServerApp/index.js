@@ -1,6 +1,7 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
+const axios = require("axios");
 
 const app = express();
 
@@ -18,6 +19,60 @@ const db = mysql.createConnection({
   host: "database-4910.c6lyppadonj0.us-east-1.rds.amazonaws.com",
   password: "cpsc4910project",
   database: "sys",
+});
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
+app.post("/etsy", async (req, res) => {
+  //const organizationID = req.body.organizationID;
+  const organizationID = 1;
+  //const listingID = req.body.listingID;
+  const listingID = 884167914;
+
+  const response = await axios.get(
+    "https://openapi.etsy.com/v3/application/listings/" + listingID,
+    {
+      headers: {
+        "x-api-key": "4rskcd32mgmwvkcmibb5aqfy",
+      },
+    }
+  );
+  //console.log(response.data);
+
+  const catalogItemName = response.data.title;
+  //const catalogItemName = "testing";
+  const catalogItemListingURL = response.data.url;
+  const catalogItemPrice =
+    response.data.price.amount / response.data.price.divisor;
+  const catalogItemInventory = response.data.quantity;
+
+  console.log("Title: " + catalogItemName);
+  console.log("Url: " + catalogItemListingURL);
+  console.log("Price: " + catalogItemPrice);
+  console.log("Inventory: " + catalogItemInventory);
+
+  db.query(
+    `INSERT INTO Catalog_Item (Organization_ID, Catalog_Item_Name, Catalog_Item_Price, Catalog_Item_Inventory, Catalog_Item_Listing_URL)
+      VALUES (?, ?, ?, ?, ?)`,
+    [
+      organizationID,
+      catalogItemName,
+      catalogItemPrice,
+      catalogItemInventory,
+      catalogItemListingURL,
+    ],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
 });
 
 /*
@@ -126,7 +181,7 @@ app.post("/add_driver_points2", (req, res) => {
   db.query(
     `INSERT INTO Point_Change_History (Driver_ID, Organization_ID, Point_Change_Date, Point_Change_Value, Point_Change_Reason)
       VALUES (?, ?, ?, ?, ?)`[
-    (driverID, organizationID, date, pointChange, reason)
+      (driverID, organizationID, date, pointChange, reason)
     ],
     (err, res) => {
       console.log(err);
@@ -154,7 +209,7 @@ app.post("/add_driver_points3", (req, res) => {
   db.query(
     `INSERT INTO Point_Change_History (Driver_ID, Organization_ID, Point_Change_Date, Point_Change_Value, Point_Change_Reason)
       VALUES (?, ?, ?, ?, ?)`[
-    (driverID, organizationID, date, pointChange, reason)
+      (driverID, organizationID, date, pointChange, reason)
     ],
     (err, res) => {
       console.log(err);
@@ -394,13 +449,13 @@ app.post("/remove_driver_application", (req, res) => {
       AND Organization_Name = ?`,
     [ID, ORG],
     (err, rows) => {
-      if(err) {
+      if (err) {
         res.send({ err: err });
       } else if (rows) {
         res.send(rows);
       }
     }
-  )
+  );
 });
 
 app.post("/login_driver", (req, res) => {
@@ -569,15 +624,11 @@ app.post("/sponsor_application_list", (req, res) => {
   );
 });
 
-app.get("/list_of_orgs", (req,res) => {
-
-  db.query(
-    `SELECT * FROM Organization`,
-    (err, rows, fields) => {
-      console.log(err);
-      res.json(rows);
-    }
-  );
+app.get("/list_of_orgs", (req, res) => {
+  db.query(`SELECT * FROM Organization`, (err, rows, fields) => {
+    console.log(err);
+    res.json(rows);
+  });
 });
 
 app.get("/point_history", (req, res) => {
@@ -633,11 +684,18 @@ app.post("/add_catalog_item", (req, res) => {
   const catalogItemPrice = req.body.catalogItemPrice;
   const catalogItemInventory = req.body.catalogItemInventory;
   const organizationID = req.body.organizationID;
+  const catalogItemListingURL = req.body.catalogItemListingURL;
 
   db.query(
-    `INSERT INTO Catalog_Item (Organization_ID, Catalog_Item_Name, Catalog_Item_Price, Catalog_Item_Inventory),
+    `INSERT INTO Catalog_Item (Organization_ID, Catalog_Item_Name, Catalog_Item_Price, Catalog_Item_Inventory, Catalog_Item_Listing_URL),
       VALUES (?, ?, ?, ?)`,
-    [organizationID, catalogItemName, catalogItemPrice, catalogItemInventory],
+    [
+      organizationID,
+      catalogItemName,
+      catalogItemPrice,
+      catalogItemInventory,
+      catalogItemListingURL,
+    ],
     (err, rows, fields) => {
       console.log(err);
       res.json(rows);

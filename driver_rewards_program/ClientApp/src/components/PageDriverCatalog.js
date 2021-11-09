@@ -7,7 +7,10 @@ import axios from "axios";
 class PageDriverCatalog extends Component {
   constructor(props) {
     super(props);
-    this.state = { items: this.fetchCatalogItems(), loading: true };
+    this.state = {
+      items: this.fetchCatalogItems(),
+      loading: true,
+    };
   }
 
   async fetchCatalogItems() {
