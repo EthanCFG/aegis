@@ -310,12 +310,22 @@ app.post("/get_drivers", (req, res) => {
   );
 });
 
+app.post("/get_all_drivers", (req, res) => {
+
+  db.query(
+    `SELECT * FROM Driver`,
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
 app.post("/get_driver_data", (req, res) => {
   const ID = req.body.driver_id;
 
   db.query(
-    `SELECT * FROM Driver
-      WHERE Driver_ID = ?`,
+    `SELECT * FROM Driver`,
     [ID],
     (err, rows, fields) => {
       console.log(err);
@@ -472,6 +482,39 @@ app.post("/login_sponsor", (req, res) => {
           );
         }
 
+        res.send(rows);
+      } else {
+        //res.send({ message: "Incorrect email / password combination." });
+      }
+    }
+  );
+});
+
+app.post("/login_admin", (req, res) => {
+  const Email = req.body.email;
+  const Password = req.body.password;
+
+  db.query(
+    `SELECT * FROM Admin
+      WHERE Admin_Email = ?
+      AND Admin_Password = ?`,
+    [Email, Password],
+    (err, rows, fields) => {
+      if (err) {
+        res.send({ err: err });
+      } else if (rows) {
+        //logging login attempt
+        if (rows.length != 0) {
+          //login attempt successful
+          db.query(
+            `INSERT INTO Login_Attempt (Login_Attempt_Email, Login_Attempt_Status, Login_Attempt_Date)
+                  VALUES (?, "successful", NOW())`,
+            [Email],
+            (err, res) => {
+              console.log(err);
+            }
+          );
+        }
         res.send(rows);
       } else {
         //res.send({ message: "Incorrect email / password combination." });

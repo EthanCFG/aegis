@@ -32,6 +32,11 @@ function PageWelcome ({ setToken }) {
 			password: enteredPassword
 		})
 
+		const admin_response = await axios.post("http://localhost:3001/login_admin", {
+			email: enteredEmail,
+			password: enteredPassword
+		})
+
 		const org_list_response = await axios.get("http://localhost:3001/list_of_orgs");
 
 		let organization_list = [];
@@ -140,6 +145,16 @@ function PageWelcome ({ setToken }) {
 			localStorage.setItem('last', sponsor_response.data[0].Sponsor_Last_Name);
 			setToken(token);
 			history.push('/sponsor_home');
+		}
+
+		else if (admin_response.data[0] != null) {
+			localStorage.setItem('usertype', 'admin');
+
+			const all_drivers_response = await axios.post("http://localhost:3001/get_all_drivers");
+
+			console.log(all_drivers_response);
+			setToken(token);
+			history.push('/admin_home');
 		}
 
 		else {

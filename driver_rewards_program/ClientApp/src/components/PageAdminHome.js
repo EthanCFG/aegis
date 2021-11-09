@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TableSponsorDrivers from './TableSponsorDrivers';
-import NavBarSponsor from './NavBarSponsor';
+import NavBarAdmin from './NavBarAdmin';
 
 function PageAdminHome () {
 
@@ -12,7 +12,7 @@ function PageAdminHome () {
 
     return (
       <div>
-        <NavBarSponsor></NavBarSponsor>
+        <NavBarAdmin></NavBarAdmin>
         <div class="container">
           <div class="columns">
             <div class="column is-3">
@@ -33,7 +33,7 @@ function PageAdminHome () {
                   <div class="hero-body">
                     <div class="container">
                       <h1 class="title">
-                        Hello, Sponsor.
+                        Hello, Admin.
                       </h1>
                       <h2 class="subtitle">
                         I hope you are having a great day!

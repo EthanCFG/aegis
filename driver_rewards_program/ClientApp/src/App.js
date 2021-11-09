@@ -13,6 +13,7 @@ import PageDriverCatalog from './components/PageDriverCatalog';
 import PageSponsorCatalog from './components/PageSponsorCatalog';
 import PageApplyToSponsor from './components/PageApplyToSponsor';
 import PageDriverApplications from './components/PageDriverApplications';
+import PageAdminHome from './components/PageAdminHome';
 import './custom.css';
 import axios from 'axios';
 
@@ -76,6 +77,9 @@ function App() {
           </Route>
           <Route path="/sponsor_profile">
             <PageSponsorProfile></PageSponsorProfile>
+          </Route>
+          <Route path="/admin_home">
+            <PageAdminHome></PageAdminHome>
           </Route>
           <Route path="/driver_catalog">
             <NavBar pic={'https://cdn.britannica.com/70/211670-050-69254076/Jerry-Seinfeld-2019.jpg'} setActiveOrg={setOrgActive} setActivePoints={setPointsActive}></NavBar>
