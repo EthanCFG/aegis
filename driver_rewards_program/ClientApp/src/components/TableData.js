@@ -20,6 +20,7 @@ const [driverPoints, setDriverPoints] = useState(props.points)*/
 function TableData(props) {
 
     const [driversData, setDriversData] = useState([])
+    
 
     useEffect(() => {
         async function fetchDrivers() {
@@ -32,7 +33,7 @@ function TableData(props) {
             //console.log(drivers_response.data)
         }
         fetchDrivers();
-    }, []);
+    }, [props.dataStatus]);
 
     //console.log(driversData);
     return (<tbody>{driversData.map((driver) => {

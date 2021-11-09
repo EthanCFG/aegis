@@ -29,6 +29,8 @@ function TableSponsorDrivers (props) {
 
 	const [Organization, setOrganization] = useState()
 
+	const [dataChanged, setDataChanged] = useState(false);
+
 	const handleCloseAdd = () => setShowAddModal(false);
 
 	const addPoints = () => {
@@ -79,7 +81,7 @@ function TableSponsorDrivers (props) {
 								<Button variant="secondary" onClick={handleCloseAdd}>
 									Close
 								</Button>
-								<Button variant="primary" onClick={() => {addPoints(); handleCloseAdd()}}>
+								<Button variant="primary" onClick={() => {addPoints(); if(dataChanged == true) {setDataChanged(false);}; if (dataChanged == false) {setDataChanged(true);}; handleCloseAdd()}}>
 									Add Points
 								</Button>
 							</Modal.Footer>
@@ -94,7 +96,7 @@ function TableSponsorDrivers (props) {
 							<th>Add/Remove Points</th>
 							</tr>
 					</thead>
-					<TableData setAddModal={setShowAddModal} setSubModal={setShowSubModal} setDriver={setActiveDriverID} setOrg={setOrganization}></TableData>
+					<TableData setAddModal={setShowAddModal} setSubModal={setShowSubModal} setDriver={setActiveDriverID} setOrg={setOrganization} dataStatus={dataChanged}></TableData>
 				</table>
 		</div>
     )
