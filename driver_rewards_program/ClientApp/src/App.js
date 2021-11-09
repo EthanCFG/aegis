@@ -14,6 +14,7 @@ import PageSponsorCatalog from './components/PageSponsorCatalog';
 import PageApplyToSponsor from './components/PageApplyToSponsor';
 import PageDriverApplications from './components/PageDriverApplications';
 import PageAdminHome from './components/PageAdminHome';
+import PageUserLogs from './components/PageUserLogs';
 import './custom.css';
 import axios from 'axios';
 
@@ -94,6 +95,9 @@ function App() {
           </Route>
           <Route path="/view_driver_applications">
             <PageDriverApplications></PageDriverApplications>
+          </Route>
+          <Route path="/view_user_logs">
+            <PageUserLogs></PageUserLogs>
           </Route>
       </div>
       )

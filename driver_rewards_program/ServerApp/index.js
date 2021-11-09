@@ -592,6 +592,17 @@ app.post("/get_login_attempts", (req, res) => {
   );
 });
 
+app.post("/get_all_logins", (req, res) => {
+
+  db.query(
+    `SELECT * FROM Login_Attempt`,
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
 app.post("/update_driver", (req, res) => {
   const Email = req.body.email;
   const FirstName = req.body.first;

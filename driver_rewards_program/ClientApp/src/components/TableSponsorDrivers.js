@@ -63,7 +63,8 @@ function TableSponsorDrivers (props) {
 	}
 
     return (
-        <table class="table">
+		<div class="scroll-table">
+        	<table class="table">
 					<div>
 						<Modal show={showAddModal} onHide={handleCloseAdd}>
 							<Modal.Header closeButton>
@@ -95,6 +96,7 @@ function TableSponsorDrivers (props) {
 					</thead>
 					<TableData setAddModal={setShowAddModal} setSubModal={setShowSubModal} setDriver={setActiveDriverID} setOrg={setOrganization}></TableData>
 				</table>
+		</div>
     )
 }
 

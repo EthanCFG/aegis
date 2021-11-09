@@ -1,10 +1,8 @@
-import React, { Component, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import 'bulma/css/bulma.min.css';
 import { Link, useHistory } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import PropTypes from 'prop-types'
-import { Route, Redirect } from 'react-router-dom';
 
 
 function PageWelcome ({ setToken }) {

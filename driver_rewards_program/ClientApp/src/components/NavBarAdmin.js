@@ -30,7 +30,7 @@ const NavBarAdmin = () => {
                                 
                             </a>
                         </Link>
-                        <Link to="/view_driver_applications" class="navbar-start">
+                        <Link to="/view_user_logs" class="navbar-start">
                             <a class="navbar-item">
                                 User Logs
                             </a>

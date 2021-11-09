@@ -158,3 +158,21 @@ code {
 .modal-backdrop {
   z-index: -1;
 }
+
+.scroll-table {
+  overflow: scroll; 
+  height: 70%; 
+  width: 150%; 
+  overflow: auto;
+}
+
+.logs-scroll-table {
+  overflow: scroll; 
+  height: 23%; 
+  width: 150%; 
+  overflow: auto;
+}
+
+.logs-notification {
+  max-height: 38%;
+}
