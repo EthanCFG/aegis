@@ -481,18 +481,6 @@ app.post("/login_driver", (req, res) => {
       if (err) {
         res.send({ err: err });
       } else if (rows) {
-        //logging login attempt
-        if (rows.length != 0) {
-          //login attempt successful
-          db.query(
-            `INSERT INTO Login_Attempt (Login_Attempt_Email, Login_Attempt_Status, Login_Attempt_Date)
-                  VALUES (?, "successful", NOW())`,
-            [Email],
-            (err, res) => {
-              console.log(err);
-            }
-          );
-        }
         res.send(rows);
       } else {
         //res.send({ message: "Incorrect email / password combination." });
@@ -514,29 +502,6 @@ app.post("/login_sponsor", (req, res) => {
       if (err) {
         res.send({ err: err });
       } else if (rows) {
-        //logging login attempt
-        if (rows.length == 0) {
-          //login attempt unsuccessful
-          db.query(
-            `INSERT INTO Login_Attempt (Login_Attempt_Email, Login_Attempt_Status, Login_Attempt_Date)
-                  VALUES (?, "unsuccessful", NOW())`,
-            [Email],
-            (err, res) => {
-              console.log(err);
-            }
-          );
-        } else {
-          //login attempt successful
-          db.query(
-            `INSERT INTO Login_Attempt (Login_Attempt_Email, Login_Attempt_Status, Login_Attempt_Date)
-                  VALUES (?, "successful", NOW())`,
-            [Email],
-            (err, res) => {
-              console.log(err);
-            }
-          );
-        }
-
         res.send(rows);
       } else {
         //res.send({ message: "Incorrect email / password combination." });
@@ -558,22 +523,36 @@ app.post("/login_admin", (req, res) => {
       if (err) {
         res.send({ err: err });
       } else if (rows) {
-        //logging login attempt
-        if (rows.length != 0) {
-          //login attempt successful
-          db.query(
-            `INSERT INTO Login_Attempt (Login_Attempt_Email, Login_Attempt_Status, Login_Attempt_Date)
-                  VALUES (?, "successful", NOW())`,
-            [Email],
-            (err, res) => {
-              console.log(err);
-            }
-          );
-        }
         res.send(rows);
       } else {
         //res.send({ message: "Incorrect email / password combination." });
       }
+    }
+  );
+});
+
+app.post("/log_unsuccessful_login", (req, res) => {
+  const Email = req.body.email;
+
+  db.query(
+    `INSERT INTO Login_Attempt (Login_Attempt_Email, Login_Attempt_Status, Login_Attempt_Date)
+          VALUES (?, "unsuccessful", NOW())`,
+    [Email],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+});
+
+app.post("/log_successful_login", (req, res) => {
+  const Email = req.body.email;
+
+  db.query(
+    `INSERT INTO Login_Attempt (Login_Attempt_Email, Login_Attempt_Status, Login_Attempt_Date)
+      VALUES (?, "successful", NOW())`,
+    [Email],
+    (err, res) => {
+      console.log(err);
     }
   );
 });

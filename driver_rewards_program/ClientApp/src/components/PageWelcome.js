@@ -56,6 +56,10 @@ function PageWelcome ({ setToken }) {
 			localStorage.setItem('orgid2', driver_response.data[0].Organization_ID2);
 			localStorage.setItem('orgid3', driver_response.data[0].Organization_ID3);
 
+			axios.post("http://localhost:3001/log_successful_login", {
+				email: driver_response.data[0].Driver_Email
+			})
+
 			const org1_response = await axios.post("http://localhost:3001/get_org1", {
 			org1: localStorage.getItem('orgid1')
 			})
@@ -98,6 +102,11 @@ function PageWelcome ({ setToken }) {
 		}
 
 		else if (sponsor_response.data[0] != null) {
+
+			axios.post("http://localhost:3001/log_successful_login", {
+				email: sponsor_response.data[0].Sponsor_Email
+			})
+
 			localStorage.setItem('usertype', 'sponsor');
 			localStorage.setItem('id', sponsor_response.data[0].Sponsor_ID);
 			localStorage.setItem('sponsorid', sponsor_response.data[0].Organization_ID);
@@ -146,6 +155,11 @@ function PageWelcome ({ setToken }) {
 		}
 
 		else if (admin_response.data[0] != null) {
+
+			axios.post("http://localhost:3001/log_successful_login", {
+				email: admin_response.data[0].Admin_Email
+			})
+
 			localStorage.setItem('usertype', 'admin');
 
 			const all_drivers_response = await axios.post("http://localhost:3001/get_all_drivers");
@@ -156,6 +170,10 @@ function PageWelcome ({ setToken }) {
 		}
 
 		else {
+			axios.post("http://localhost:3001/log_unsuccessful_login", {
+				email: enteredEmail
+			})
+
 			setDisplayError(true);
 		}
 	}
