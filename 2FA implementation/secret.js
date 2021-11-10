@@ -1,4 +1,4 @@
-//code to generate the secret used in 2FA from article of 2FA
+//code to generate the secret used in 2FA using speakeasy package from article of 2FA
 
 import { generateSecret } from 'speakeasy'
 interface TwoFactorEntity {
