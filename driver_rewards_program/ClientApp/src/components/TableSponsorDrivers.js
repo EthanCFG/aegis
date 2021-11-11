@@ -75,6 +75,7 @@ function TableSponsorDrivers (props) {
 						<Modal.Body>
 							<div class="control">
 								<input class="input" type="text" placeholder="Enter how many points to add..." onChange={e => setPointsToAdd(e.target.value)}></input>
+								<input class="input" type="text" placeholder="Reasoning"></input>
 							</div>
 						</Modal.Body>
 							<Modal.Footer>
