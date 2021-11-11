@@ -152,9 +152,8 @@ app.post("/add_driver_points1", (req, res) => {
   /* We will eventually need to add an Oranization value, or have a sponsor alue in Org so we can connect the two */
   db.query(
     `INSERT INTO Point_Change_History (Driver_ID, Organization_ID, Point_Change_Date, Point_Change_Value, Point_Change_Reason)
-      VALUES (?, ?, ?, ?, ?)`[
-      (driverID, organizationID, date, pointChange, reason)
-    ],
+      VALUES (?, ?, NOW(), ?, ?)`,
+      [driverID, organizationID, pointChange, reason],
     (err, res) => {
       console.log(err);
     }
@@ -180,9 +179,8 @@ app.post("/add_driver_points2", (req, res) => {
   /* We will eventually need to add an Oranization value, or have a sponsor alue in Org so we can connect the two */
   db.query(
     `INSERT INTO Point_Change_History (Driver_ID, Organization_ID, Point_Change_Date, Point_Change_Value, Point_Change_Reason)
-      VALUES (?, ?, ?, ?, ?)`[
-      (driverID, organizationID, date, pointChange, reason)
-    ],
+      VALUES (?, ?, NOW(), ?, ?)`,
+    [driverID, organizationID, pointChange, reason],
     (err, res) => {
       console.log(err);
     }
@@ -208,9 +206,8 @@ app.post("/add_driver_points3", (req, res) => {
   /* We will eventually need to add an Oranization value, or have a sponsor alue in Org so we can connect the two */
   db.query(
     `INSERT INTO Point_Change_History (Driver_ID, Organization_ID, Point_Change_Date, Point_Change_Value, Point_Change_Reason)
-      VALUES (?, ?, ?, ?, ?)`[
-      (driverID, organizationID, date, pointChange, reason)
-    ],
+      VALUES (?, ?, NOW(), ?, ?)`,
+    [driverID, organizationID, pointChange, reason],
     (err, res) => {
       console.log(err);
     }

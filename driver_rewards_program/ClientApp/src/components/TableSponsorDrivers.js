@@ -27,6 +27,8 @@ function TableSponsorDrivers (props) {
 
 	const [pointsToAdd, setPointsToAdd] = useState()
 
+	const [reasonToAdd, setReasonToAdd] = useState()
+
 	const [Organization, setOrganization] = useState()
 
 	const [dataChanged, setDataChanged] = useState(false);
@@ -41,7 +43,7 @@ function TableSponsorDrivers (props) {
 				driverID: activeDriverID,
 				organizationID: localStorage.getItem('sponsorid'),
 				date: 'tuesday',
-				reason: 'some reason'
+				reason: reasonToAdd
 			})
 		}
 		else if (Organization == 2) {
@@ -50,7 +52,7 @@ function TableSponsorDrivers (props) {
 				driverID: activeDriverID,
 				organizationID: localStorage.getItem('sponsorid'),
 				date: 'tuesday',
-				reason: 'some reason'
+				reason: reasonToAdd
 			})
 		}
 		else if (Organization == 3) {
@@ -59,7 +61,7 @@ function TableSponsorDrivers (props) {
 				driverID: activeDriverID,
 				organizationID: localStorage.getItem('sponsorid'),
 				date: 'tuesday',
-				reason: 'some reason'
+				reason: reasonToAdd
 			})
 		}
 	}
@@ -75,6 +77,7 @@ function TableSponsorDrivers (props) {
 						<Modal.Body>
 							<div class="control">
 								<input class="input" type="text" placeholder="Enter how many points to add..." onChange={e => setPointsToAdd(e.target.value)}></input>
+								<input class="input" type="text" placeholder="Reasoning" onChange={e => setReasonToAdd(e.target.value)}></input>
 							</div>
 						</Modal.Body>
 							<Modal.Footer>

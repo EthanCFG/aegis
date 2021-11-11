@@ -100,6 +100,9 @@ class PageSponsorCatalog extends Component {
       );
     } else {
       return (
+        //div
+        //modal
+        //</div>
         <div>
         <NavBarSponsor></NavBarSponsor>
         <div class="columns">
@@ -117,8 +120,8 @@ class PageSponsorCatalog extends Component {
                   <button class="button">Refresh Items</button>
                 </a>
               </div>
-              </div>
-              </div>
+            </div>
+          </div>
               
         <div class="container">
           <div class="columns">
