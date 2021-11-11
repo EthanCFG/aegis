@@ -107,27 +107,7 @@ function PageDriverApplications (props) {
             </div>
         	</div>
           </div>
-            <div class="columns">
-              <div class="notification is-white py-6 my-6">
-                <div class="column is one-quarter">
-                  <p class="menu-label">Driver List Edit Dashboard</p>
-                  <div class="buttons">
-                    <button class="button">View Current List of Drivers</button>
-                  </div>
-                  <div class="buttons">
-                    <button class="button">Delete Drivers</button>
-                  </div>
-                  <div class="buttons">
-                    <a href="view_driver_applications">
-                      <button class="button">Refresh List of Drivers</button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-			    <div>
 			  </div>
-      </div>
     )
 }
 
