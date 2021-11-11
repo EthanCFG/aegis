@@ -118,7 +118,7 @@ function PageDriverApplications (props) {
                     <button class="button">Delete Drivers</button>
                   </div>
                   <div class="buttons">
-                    <a href="sponsor_catalog">
+                    <a href="view_driver_applications">
                       <button class="button">Refresh List of Drivers</button>
                     </a>
                   </div>
