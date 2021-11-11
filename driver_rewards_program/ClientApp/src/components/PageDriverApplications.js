@@ -81,13 +81,13 @@ function PageDriverApplications (props) {
     
 
     return (
-			<div>
-				<NavBarSponsor></NavBarSponsor>
+      <div>
+        <NavBarSponsor></NavBarSponsor>
         <div class="container">
           <div class="columns is-centered">
             <div class="columns is-half">
               <div class="notification is-white py-3 my-6">
-                <h1 class="signup-header py-2 is-size-3 has-text-weight-semibold" style={{
+                <h1 class="signup-header py-2 is-size-2 has-text-weight-semibold" style={{
                   marginBottom: 30
                 }}>Pending Driver Applications</h1>
 
@@ -106,8 +106,28 @@ function PageDriverApplications (props) {
               </div>
             </div>
         	</div>
-        </div>
-			</div>
+          </div>
+            <div class="columns">
+              <div class="notification is-white py-6 my-6">
+                <div class="column is one-quarter">
+                  <p class="menu-label">Driver List Edit Dashboard</p>
+                  <div class="buttons">
+                    <button class="button">View Current List of Drivers</button>
+                  </div>
+                  <div class="buttons">
+                    <button class="button">Delete Drivers</button>
+                  </div>
+                  <div class="buttons">
+                    <a href="view_driver_applications">
+                      <button class="button">Refresh List of Drivers</button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+			    <div>
+			  </div>
+      </div>
     )
 }
 

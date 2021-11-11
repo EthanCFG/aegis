@@ -23,6 +23,8 @@ function PageAdminHome () {
                 <ul class="menu-list">
                   <li><a>Dashboard</a></li>
                   <li><a>Customers</a></li>
+                  <li><a>View Page As Driver</a></li>
+                  <li><a>View Page As Sponsor</a></li>
                   <li><a>Other</a></li>
                   <li><a>View Page As Driver</a></li>
                   <li><a>View Page As Sponsor</a></li>
