@@ -793,6 +793,54 @@ app.post("/get_org3", (req, res) => {
   );
 });
 
+app.post("/remove_sponsor1_from_driver", (req, res) => {
+  const ID = req.body.org3;
+
+  db.query(
+    `UPDATE Driver 
+    SET Organization_ID1 = null,
+    Driver_Points1 = null
+    WHERE Driver_ID = ?`,
+    [ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+app.post("/remove_sponsor2_from_driver", (req, res) => {
+  const ID = req.body.org3;
+
+  db.query(
+    `UPDATE Driver 
+    SET Organization_ID2 = null,
+    Driver_Points2 = null
+    WHERE Driver_ID = ?`,
+    [ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+app.post("/remove_sponsor3_from_driver", (req, res) => {
+  const ID = req.body.org3;
+
+  db.query(
+    `UPDATE Driver 
+    SET Organization_ID3 = null,
+    Driver_Points3 = null
+    WHERE Driver_ID = ?`,
+    [ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
 app.listen(3001, () => {
   console.log("Listening for requests...");
 });

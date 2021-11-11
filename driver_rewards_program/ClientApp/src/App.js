@@ -23,6 +23,9 @@ import axios from 'axios';
 function App() {
 
     const [orgactive, setOrgActive] = useState(localStorage.getItem('orgactive'));
+    const [org1, setOrg1] = useState(localStorage.getItem('orgname1'));
+    const [org2, setOrg2] = useState(localStorage.getItem('orgname2'));
+    const [org3, setOrg3] = useState(localStorage.getItem('orgname3'));
     const [pointsactive, setPointsActive] = useState(localStorage.getItem('activepoints'));
 
     const createDriverAccountHandler = (userData) => {
