@@ -23,6 +23,8 @@ function PageAdminHome () {
                 <ul class="menu-list">
                   <li><a>Dashboard</a></li>
                   <li><a>Customers</a></li>
+                  <li><a>View Page As Driver</a></li>
+                  <li><a>View Page As Sponsor</a></li>
                   <li><a>Other</a></li>
                   <li><a>View Page As Driver</a></li>
                   <li><a>View Page As Sponsor</a></li>
@@ -43,6 +45,14 @@ function PageAdminHome () {
                     </div>
                   </div>
                 </section>
+               
+                <form>
+                  <select name = "view lists">
+                      <option value = "Computer Architecture" selected>View driver list</option>
+                      <option value = "Discrete Mathematics">View sponsor list</option>
+                  </select>
+                </form>
+
                 <div class="columns">
                   <div class="column is-6 py-6">
                     <TableSponsorDrivers 
