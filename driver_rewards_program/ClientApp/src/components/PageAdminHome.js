@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TableSponsorDrivers from './TableSponsorDrivers';
 import NavBarAdmin from './NavBarAdmin';
 
@@ -9,6 +9,13 @@ function PageAdminHome () {
   const [driver_lasts] = useState(JSON.parse(localStorage.getItem('driverslast')));
   const [driver_emails] = useState(JSON.parse(localStorage.getItem('driversemail')));
   const [driver_points] = useState(JSON.parse(localStorage.getItem('driverspoints')));
+
+  const [listDrivers, setListDrivers] = useState(true);
+  const [listSponsors, setListSponsors] = useState(false);
+
+  const [activeDriverID, setActiveDriverID] = useState()
+
+  //useEffect(() => {} ,[listDrivers, listSponsors])
 
     return (
       <div>
@@ -26,8 +33,6 @@ function PageAdminHome () {
                   <li><a>View Page As Driver</a></li>
                   <li><a>View Page As Sponsor</a></li>
                   <li><a>Other</a></li>
-                  <li><a>View Page As Driver</a></li>
-                  <li><a>View Page As Sponsor</a></li>
                 </ul>
               </div>
             </div>
@@ -46,23 +51,33 @@ function PageAdminHome () {
                   </div>
                 </section>
                
-                <form>
-                  <select name = "view lists">
-                      <option value = "Computer Architecture" selected>View driver list</option>
-                      <option value = "Discrete Mathematics">View sponsor list</option>
-                  </select>
-                </form>
-
+                <div class="tabs is-centered is-boxed is-medium" style={{marginTop: 30}}>
+                  <ul>
+                    <li class={listDrivers ? "is-active" : ""} onClick={() => setListDrivers(true)}>
+                      <a>
+                        <span><i class="fas fa-image" aria-hidden="true"></i></span>
+                        <span>List Drivers</span>
+                      </a>
+                    </li>
+                    <li class={listDrivers ? "" : "is-active"} onClick={() => setListDrivers(false)}>
+                      <a>
+                        <span><i class="fas fa-music" aria-hidden="true"></i></span>
+                        <span>List Sponsors</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                
                 <div class="columns">
-                  <div class="column is-6 py-6">
-                    <TableSponsorDrivers 
-                    id={driver_ids}
-                    first={driver_firsts}
-                    last={driver_lasts}
-                    email={driver_emails}
-                    points={driver_points}>
-                    </TableSponsorDrivers>
-                  </div>
+                  {listDrivers ? <div class="column is-6 py-6" style={{marginLeft: 110}}>
+                  <TableSponsorDrivers 
+                  id={driver_ids}
+                  first={driver_firsts}
+                  last={driver_lasts}
+                  email={driver_emails}
+                  points={driver_points}>
+                  </TableSponsorDrivers>
+                  </div> : null}
                 </div>
               </div>
             </div>

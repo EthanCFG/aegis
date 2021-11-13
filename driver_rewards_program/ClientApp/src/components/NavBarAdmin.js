@@ -25,9 +25,9 @@ const NavBarAdmin = () => {
                                 Home
                             </a>
                         </Link>
-                        <Link to="/sponsor_catalog" class="navbar-start">
+                        <Link to="/admin_view_reports" class="navbar-start">
                             <a class="navbar-item">
-                                
+                                Reports
                             </a>
                         </Link>
                         <Link to="/view_user_logs" class="navbar-start">
