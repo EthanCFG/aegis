@@ -32,19 +32,19 @@ app.use(function (req, res, next) {
 
 app.post("/etsy", async (req, res) => {
   //const organizationID = req.body.organizationID;
-  const organizationID = 1;
+  const organizationID = req.body.id;
   //const listingID = req.body.listingID;
-  const listingID = 884167914;
+  const listingID = req.body.listing;
 
   const response = await axios.get(
-    "https://openapi.etsy.com/v3/application/listings/" + listingID,
+    "https://openapi.etsy.com/v3/application/listings/" + listingID + '/images',
     {
       headers: {
         "x-api-key": "4rskcd32mgmwvkcmibb5aqfy",
       },
     }
   );
-  //console.log(response.data);
+  console.log(response.data);
 
   const catalogItemName = response.data.title;
   //const catalogItemName = "testing";
@@ -52,11 +52,13 @@ app.post("/etsy", async (req, res) => {
   const catalogItemPrice =
     response.data.price.amount / response.data.price.divisor;
   const catalogItemInventory = response.data.quantity;
+  //const catalogItemImage = response.data.image;
 
   console.log("Title: " + catalogItemName);
   console.log("Url: " + catalogItemListingURL);
   console.log("Price: " + catalogItemPrice);
   console.log("Inventory: " + catalogItemInventory);
+  //console.log("Image: " + catalogItemImage); 
 
   db.query(
     `INSERT INTO Catalog_Item (Organization_ID, Catalog_Item_Name, Catalog_Item_Price, Catalog_Item_Inventory, Catalog_Item_Listing_URL)
