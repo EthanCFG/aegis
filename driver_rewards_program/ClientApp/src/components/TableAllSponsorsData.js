@@ -4,17 +4,17 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
 
-function TableData(props) {
+function TableAllSponsorsData(props) {
 
     const [driversData, setDriversData] = useState([])
-    
+
 
     useEffect(() => {
         async function fetchDrivers() {
             const drivers_response = await axios.post("http://localhost:3001/get_drivers", {
-                organizationID1: localStorage.getItem('orgid'),
-                organizationID2: localStorage.getItem('orgid'),
-                organizationID3: localStorage.getItem('orgid')
+                organizationID1: localStorage.getItem('sponsorid'),
+                organizationID2: localStorage.getItem('sponsorid'),
+                organizationID3: localStorage.getItem('sponsorid')
             })
             setDriversData(drivers_response.data);
             //console.log(drivers_response.data)
@@ -30,9 +30,9 @@ function TableData(props) {
         const email = driver.Driver_Email
         let points = 0;
         let org = 0;
-        if (driver.Organization_ID1 == localStorage.getItem('orgid')) { org = 1; points = driver.Driver_Points1; }
-        else if (driver.Organization_ID2 == localStorage.getItem('orgid')) { org = 2; points = driver.Driver_Points2; }
-        else if (driver.Organization_ID3 == localStorage.getItem('orgid')) { org = 3; points = driver.Driver_Points3; }
+        if (driver.Organization_ID1 == localStorage.getItem('sponsorid')) { org = 1; points = driver.Driver_Points1; }
+        else if (driver.Organization_ID2 == localStorage.getItem('sponsorid')) { org = 2; points = driver.Driver_Points2; }
+        else if (driver.Organization_ID3 == localStorage.getItem('sponsorid')) { org = 3; points = driver.Driver_Points3; }
         //const { Driver_ID, Driver_First_Name, Driver_Last_Name, Driver_Email, Driver_Points1 } = driver
         //console.log(id);
         return (
@@ -47,4 +47,4 @@ function TableData(props) {
     })}</tbody>)
 }
 
-export default TableData;
+export default TableAllSponsorsData;
