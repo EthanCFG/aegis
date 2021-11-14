@@ -5,9 +5,9 @@ import axios from "axios";
 
 function FormChangeSponsorData(props) {
 
-  const [enteredEmail, setEmail] = useState(localStorage.getItem('email'));
-  const [enteredFirstName, setFirstName] = useState(localStorage.getItem('first'));
-  const [enteredLastName, setLastName] = useState(localStorage.getItem('last'));
+  const [enteredEmail, setEmail] = useState(localStorage.getItem('sponsoremail'));
+  const [enteredFirstName, setFirstName] = useState(localStorage.getItem('sponsorfirst'));
+  const [enteredLastName, setLastName] = useState(localStorage.getItem('sponsorlast'));
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -19,9 +19,9 @@ function FormChangeSponsorData(props) {
       id: localStorage.getItem('id')
     })
 
-    localStorage.setItem('email', enteredEmail);
-    localStorage.setItem('first', enteredFirstName);
-    localStorage.setItem('last', enteredLastName);
+    localStorage.setItem('sponsoremail', enteredEmail);
+    localStorage.setItem('sponsorfirst', enteredFirstName);
+    localStorage.setItem('sponsorlast', enteredLastName);
 
 
     props.onSubmitPressed();
@@ -35,7 +35,7 @@ function FormChangeSponsorData(props) {
           <Form.Group>
               <Form.Label>Email Address:</Form.Label>
               <Form.Control
-                defaultValue={localStorage.getItem('email')}
+                defaultValue={localStorage.getItem('sponsoremail')}
                 name="email"
                 type="text"
                 placeholder="Enter e-mail address..."
@@ -47,7 +47,7 @@ function FormChangeSponsorData(props) {
               <Form.Label>First Name:</Form.Label>
               <Form.Control
                 name="firstname"
-                defaultValue={localStorage.getItem('first')}
+                defaultValue={localStorage.getItem('sponsorfirst')}
                 type="text"
                 placeholder="Enter first name..."
                 onChange={e => setFirstName(e.target.value)}
@@ -57,7 +57,7 @@ function FormChangeSponsorData(props) {
               <Form.Label>Last Name:</Form.Label>
               <Form.Control
                 name="secondname"
-                defaultValue={localStorage.getItem('last')}
+                defaultValue={localStorage.getItem('sponsorlast')}
                 type="text"
                 placeholder="Enter last name..."
                 onChange={e => setLastName(e.target.value)}

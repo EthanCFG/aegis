@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 
 
-const fetch_drivers = async () => {
+/*const fetch_drivers = async () => {
 	const drivers_list_response = await axios.post("http://localhost:3001/get_drivers", {
 		organizationID1: localStorage.getItem('sponsorid'),
 		organizationID2: localStorage.getItem('sponsorid'),
@@ -15,7 +15,7 @@ const fetch_drivers = async () => {
 	
 	console.log(drivers_list_response);
 	return drivers_list_response;
-}
+}*/
 
 function TableSponsorDrivers (props) {
 
@@ -41,7 +41,7 @@ function TableSponsorDrivers (props) {
 			axios.post("http://localhost:3001/add_driver_points1", {
 				pointChange: pointsToAdd,
 				driverID: activeDriverID,
-				organizationID: localStorage.getItem('sponsorid'),
+				organizationID: localStorage.getItem('orgid'),
 				date: 'tuesday',
 				reason: reasonToAdd
 			})
@@ -50,7 +50,7 @@ function TableSponsorDrivers (props) {
 			axios.post("http://localhost:3001/add_driver_points2", {
 				pointChange: pointsToAdd,
 				driverID: activeDriverID,
-				organizationID: localStorage.getItem('sponsorid'),
+				organizationID: localStorage.getItem('orgid'),
 				date: 'tuesday',
 				reason: reasonToAdd
 			})
@@ -59,7 +59,7 @@ function TableSponsorDrivers (props) {
 			axios.post("http://localhost:3001/add_driver_points3", {
 				pointChange: pointsToAdd,
 				driverID: activeDriverID,
-				organizationID: localStorage.getItem('sponsorid'),
+				organizationID: localStorage.getItem('orgid'),
 				date: 'tuesday',
 				reason: reasonToAdd
 			})
@@ -100,7 +100,7 @@ function TableSponsorDrivers (props) {
 							</tr>
 					</thead>
 					<TableData setAddModal={setShowAddModal} setSubModal={setShowSubModal} setDriver={setActiveDriverID} setOrg={setOrganization} dataStatus={dataChanged}></TableData>
-				</table>
+			</table>
 		</div>
     )
 }

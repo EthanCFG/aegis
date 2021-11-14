@@ -137,7 +137,6 @@ app.post("/add_driver_points1", (req, res) => {
   const pointChange = req.body.pointChange;
   const driverID = req.body.driverID;
   const organizationID = req.body.organizationID;
-  const date = req.body.date;
   const reason = req.body.reason;
 
   db.query(
@@ -164,7 +163,6 @@ app.post("/add_driver_points2", (req, res) => {
   const pointChange = req.body.pointChange;
   const driverID = req.body.driverID;
   const organizationID = req.body.organizationID;
-  const date = req.body.date;
   const reason = req.body.reason;
 
   db.query(
@@ -191,7 +189,6 @@ app.post("/add_driver_points3", (req, res) => {
   const pointChange = req.body.pointChange;
   const driverID = req.body.driverID;
   const organizationID = req.body.organizationID;
-  const date = req.body.date;
   const reason = req.body.reason;
 
   db.query(
@@ -366,6 +363,17 @@ app.post("/get_all_drivers", (req, res) => {
 
   db.query(
     `SELECT * FROM Driver`,
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+app.post("/get_all_sponsors", (req, res) => {
+
+  db.query(
+    `SELECT * FROM Sponsor`,
     (err, rows, fields) => {
       console.log(err);
       res.json(rows);
