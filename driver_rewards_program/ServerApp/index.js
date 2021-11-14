@@ -370,6 +370,17 @@ app.post("/get_all_drivers", (req, res) => {
   );
 });
 
+app.post("/get_all_sponsors", (req, res) => {
+
+  db.query(
+    `SELECT * FROM Sponsor`,
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
 app.post("/get_driver_data", (req, res) => {
   const ID = req.body.driver_id;
 

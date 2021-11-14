@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TableSponsorDrivers from './TableSponsorDrivers';
 import TableAllDrivers from './TableAllDrivers';
 import NavBarAdmin from './NavBarAdmin';
+import TableAllSponsors from './TableAllSponsors';
 
 function PageAdminHome () {
 
@@ -12,7 +13,6 @@ function PageAdminHome () {
   const [driver_points] = useState(JSON.parse(localStorage.getItem('driverspoints')));
 
   const [listDrivers, setListDrivers] = useState(true);
-  const [listSponsors, setListSponsors] = useState(false);
 
   const [activeDriverID, setActiveDriverID] = useState()
 
@@ -80,7 +80,14 @@ function PageAdminHome () {
                     points={driver_points}>
                     </TableAllDrivers>
                   </div> : 
-                  null}
+                    <div class="column is-6 py-6" style={{ marginLeft: 110 }}>
+                      <TableAllSponsors
+                        id={driver_ids}
+                        first={driver_firsts}
+                        last={driver_lasts}
+                        email={driver_emails}>
+                      </TableAllSponsors>
+                    </div>}
                 </div>
               </div>
             </div>

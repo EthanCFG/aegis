@@ -6,42 +6,34 @@ import axios from 'axios';
 
 function TableAllSponsorsData(props) {
 
-    const [driversData, setDriversData] = useState([])
+    const [sponsorsData, setSponsorsData] = useState([])
 
 
     useEffect(() => {
-        async function fetchDrivers() {
-            const drivers_response = await axios.post("http://localhost:3001/get_drivers", {
-                organizationID1: localStorage.getItem('sponsorid'),
-                organizationID2: localStorage.getItem('sponsorid'),
-                organizationID3: localStorage.getItem('sponsorid')
-            })
-            setDriversData(drivers_response.data);
-            //console.log(drivers_response.data)
+        async function fetchSponsors() {
+            console.log('fetchinggggg')
+            const sponsors_response = await axios.post("http://localhost:3001/get_all_sponsors")
+            setSponsorsData(sponsors_response.data);
+            console.log(sponsors_response.data)
         }
-        fetchDrivers();
+        fetchSponsors();
     }, [props.dataStatus]);
 
     //console.log(driversData);
-    return (<tbody>{driversData.map((driver) => {
-        const id = driver.Driver_ID;
-        const first = driver.Driver_First_Name;
-        const last = driver.Driver_Last_Name;
-        const email = driver.Driver_Email
-        let points = 0;
-        let org = 0;
-        if (driver.Organization_ID1 == localStorage.getItem('sponsorid')) { org = 1; points = driver.Driver_Points1; }
-        else if (driver.Organization_ID2 == localStorage.getItem('sponsorid')) { org = 2; points = driver.Driver_Points2; }
-        else if (driver.Organization_ID3 == localStorage.getItem('sponsorid')) { org = 3; points = driver.Driver_Points3; }
+    return (<tbody>{sponsorsData.map((sponsor) => {
+        const id = sponsor.Sponsor_ID;
+        const orgid = sponsor.Organization_ID
+        const first = sponsor.Sponsor_First_Name;
+        const last = sponsor.Sponsor_Last_Name;
+        const email = sponsor.Sponsor_Email;
         //const { Driver_ID, Driver_First_Name, Driver_Last_Name, Driver_Email, Driver_Points1 } = driver
         //console.log(id);
         return (
             <tr key={id}>
                 <td>{id}</td>
+                <td>{orgid}</td>
                 <td>{first} {last}</td>
                 <td>{email}</td>
-                <td>{points}</td>
-                <td><Button onClick={() => { props.setAddModal(true); props.setDriver(id); props.setOrg(org) }}>+</Button> <Button onClick={() => { props.setSubModal(true); props.setDriver(id); props.setOrg(org) }}>-</Button></td>
             </tr>
         )
     })}</tbody>)

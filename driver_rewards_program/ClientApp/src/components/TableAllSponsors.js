@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import 'bulma/css/bulma.min.css';
 import { Link } from 'react-router-dom';
-import TableData from './TableData';
+import TableAllSponsorsData from './TableAllSponsorsData';
 import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 
@@ -35,37 +35,6 @@ function TableAllSponsors(props) {
 
     const handleCloseAdd = () => setShowAddModal(false);
 
-    const addPoints = () => {
-        console.log(Organization);
-        if (Organization == 1) {
-            axios.post("http://localhost:3001/add_driver_points1", {
-                pointChange: pointsToAdd,
-                driverID: activeDriverID,
-                organizationID: localStorage.getItem('orgid'),
-                date: 'tuesday',
-                reason: reasonToAdd
-            })
-        }
-        else if (Organization == 2) {
-            axios.post("http://localhost:3001/add_driver_points2", {
-                pointChange: pointsToAdd,
-                driverID: activeDriverID,
-                organizationID: localStorage.getItem('orgid'),
-                date: 'tuesday',
-                reason: reasonToAdd
-            })
-        }
-        else if (Organization == 3) {
-            axios.post("http://localhost:3001/add_driver_points3", {
-                pointChange: pointsToAdd,
-                driverID: activeDriverID,
-                organizationID: localStorage.getItem('orgid'),
-                date: 'tuesday',
-                reason: reasonToAdd
-            })
-        }
-    }
-
     return (
         <div class="scroll-table">
             <table class="table">
@@ -84,22 +53,18 @@ function TableAllSponsors(props) {
                             <Button variant="secondary" onClick={handleCloseAdd}>
                                 Close
                             </Button>
-                            <Button variant="primary" onClick={() => { addPoints(); if (dataChanged == true) { setDataChanged(false); }; if (dataChanged == false) { setDataChanged(true); }; handleCloseAdd() }}>
-                                Add Points
-                            </Button>
                         </Modal.Footer>
                     </Modal>
                 </div>
                 <thead>
                     <tr>
-                        <th>Driver No.</th>
+                        <th>Sponsor #</th>
+                        <th>Organization #</th>
                         <th>Full Name</th>
                         <th>Email</th>
-                        <th>Points</th>
-                        <th>Add/Remove Points</th>
                     </tr>
                 </thead>
-                <TableData setAddModal={setShowAddModal} setSubModal={setShowSubModal} setDriver={setActiveDriverID} setOrg={setOrganization} dataStatus={dataChanged}></TableData>
+                <TableAllSponsorsData setAddModal={setShowAddModal} setSubModal={setShowSubModal} setDriver={setActiveDriverID} setOrg={setOrganization} dataStatus={dataChanged}></TableAllSponsorsData>
             </table>
         </div>
     )
