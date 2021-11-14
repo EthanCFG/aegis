@@ -11,10 +11,8 @@ function TableAllSponsorsData(props) {
 
     useEffect(() => {
         async function fetchSponsors() {
-            console.log('fetchinggggg')
             const sponsors_response = await axios.post("http://localhost:3001/get_all_sponsors")
             setSponsorsData(sponsors_response.data);
-            console.log(sponsors_response.data)
         }
         fetchSponsors();
     }, [props.dataStatus]);
@@ -34,6 +32,7 @@ function TableAllSponsorsData(props) {
                 <td>{orgid}</td>
                 <td>{first} {last}</td>
                 <td>{email}</td>
+                <td><Button onClick={() => {props.setModal(true); props.setSponsor(id);}}>Manage</Button></td>
             </tr>
         )
     })}</tbody>)

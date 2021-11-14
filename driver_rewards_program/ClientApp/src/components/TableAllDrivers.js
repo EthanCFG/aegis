@@ -87,7 +87,7 @@ function TableAllDrivers(props) {
                 </div>
                 <thead>
                     <tr>
-                        <th>Driver No.</th>
+                        <th>Driver #</th>
                         <th>Full Name</th>
                         <th>Email</th>
                         <th>Sponsor 1</th>

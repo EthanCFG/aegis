@@ -19,11 +19,9 @@ import { Modal, Button } from 'react-bootstrap';
 
 function TableAllSponsors(props) {
 
-    const [showAddModal, setShowAddModal] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
-    const [showSubModal, setShowSubModal] = useState(false)
-
-    const [activeDriverID, setActiveDriverID] = useState()
+    const [activeSponsorID, setActiveSponsorID] = useState()
 
     const [pointsToAdd, setPointsToAdd] = useState()
 
@@ -33,15 +31,15 @@ function TableAllSponsors(props) {
 
     const [dataChanged, setDataChanged] = useState(false);
 
-    const handleCloseAdd = () => setShowAddModal(false);
+    const handleCloseModal = () => setShowModal(false);
 
     return (
         <div class="scroll-table">
             <table class="table">
                 <div>
-                    <Modal show={showAddModal} onHide={handleCloseAdd}>
+                    <Modal show={showModal} onHide={handleCloseModal}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Add Points to Driver #{activeDriverID}</Modal.Title>
+                            <Modal.Title>Manage Sponsor #{activeSponsorID}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <div class="control">
@@ -50,7 +48,7 @@ function TableAllSponsors(props) {
                             </div>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button variant="secondary" onClick={handleCloseAdd}>
+                            <Button variant="secondary" onClick={handleCloseModal}>
                                 Close
                             </Button>
                         </Modal.Footer>
@@ -62,9 +60,10 @@ function TableAllSponsors(props) {
                         <th>Organization #</th>
                         <th>Full Name</th>
                         <th>Email</th>
+                        <th>Manage Sponsor</th>
                     </tr>
                 </thead>
-                <TableAllSponsorsData setAddModal={setShowAddModal} setSubModal={setShowSubModal} setDriver={setActiveDriverID} setOrg={setOrganization} dataStatus={dataChanged}></TableAllSponsorsData>
+                <TableAllSponsorsData setModal={setShowModal} setSponsor={setActiveSponsorID} setOrg={setOrganization} dataStatus={dataChanged}></TableAllSponsorsData>
             </table>
         </div>
     )
