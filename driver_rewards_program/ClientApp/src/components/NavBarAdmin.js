@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import ProfilePictureSponsor from './ProfilePictureSponsor';
 
 const NavBarAdmin = () => {
+
+    console.log(localStorage.getItem('usertype'));
+
     return (
         <div>
             <nav class="navbar" role="navigation" aria-label="main navigation">

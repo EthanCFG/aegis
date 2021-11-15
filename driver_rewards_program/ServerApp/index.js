@@ -387,7 +387,8 @@ app.post("/get_driver_data", (req, res) => {
   const ID = req.body.driver_id;
 
   db.query(
-    `SELECT * FROM Driver`,
+    `SELECT * FROM Driver
+    WHERE Driver_ID = ?`,
     [ID],
     (err, rows, fields) => {
       console.log(err);
@@ -593,6 +594,10 @@ app.post("/update_driver", (req, res) => {
   const Email = req.body.email;
   const FirstName = req.body.first;
   const LastName = req.body.last;
+  const City = req.body.city;
+  const Address = req.body.address;
+  const State = req.body.state;
+  const Zip = req.body.zip;
   const ID = req.body.id;
 
   db.query(
@@ -603,9 +608,9 @@ app.post("/update_driver", (req, res) => {
       Driver_City = ?,
       Driver_Address = ?,
       Driver_State = ?,
-      Driver_Zip = ?,
+      Driver_Zip = ?
       WHERE Driver_ID = ?`,
-    [Email, FirstName, LastName, ID],
+    [Email, FirstName, LastName, City, Address, State, Zip, ID],
     (err, rows, fields) => {
       if (err) {
         res.send({ err: err });

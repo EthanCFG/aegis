@@ -6,6 +6,10 @@ import axios from 'axios';
 
 const NavBar = (props) => {
 
+  const [userType, setUserType] = (localStorage.getItem('usertype'));
+
+  console.log(localStorage.getItem('usertype'));
+
   let history = useHistory();
 
   const setActiveSponsor1 = () => {
@@ -89,6 +93,11 @@ const NavBar = (props) => {
                       </a>
                     </div>
                   </div>
+                  {(localStorage.getItem('usertype') == 'admin') ? <Link to="/admin_home" class="navbar-start">
+                    <a class="navbar-item" style={{color: "red"}}>
+                      Leave Driver View
+                    </a>
+                  </Link> : null}
                 </div>
             
                 <div class="navbar-end">
@@ -105,7 +114,7 @@ const NavBar = (props) => {
                         </a>
                       </Link>
                       <Link to="/welcome">
-                        <a class="navbar-item" onClick={localStorage.setItem('userType', 'none')}>
+                        <a class="navbar-item" onClick={() => localStorage.setItem('userType', 'none')}>
                           Log Out
                         </a>
                       </Link>

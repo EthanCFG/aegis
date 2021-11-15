@@ -157,6 +157,8 @@ function PageWelcome ({ setToken }) {
 
 			localStorage.setItem('usertype', 'admin');
 
+			console.log(localStorage.getItem('usertype'));
+
 			const all_drivers_response = await axios.post("http://localhost:3001/get_all_drivers");
 
 			console.log(all_drivers_response);
