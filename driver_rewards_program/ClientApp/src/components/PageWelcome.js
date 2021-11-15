@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bulma/css/bulma.min.css';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -7,9 +7,13 @@ import PropTypes from 'prop-types'
 
 function PageWelcome ({ setToken }) {
 
+	useEffect(() => {
+		localStorage.setItem('usertype', 'none')
+	}, [])
+
 	let history = useHistory();
 
-	localStorage.setItem('usertype', 'none');
+	//localStorage.setItem('usertype', 'boogiewoogiewoogie');
 
 	const [enteredEmail, setEmail] = useState();
 	const [enteredPassword, setPassword] = useState();

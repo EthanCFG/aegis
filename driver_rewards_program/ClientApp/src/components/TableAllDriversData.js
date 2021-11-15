@@ -5,6 +5,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 
 function TableAllDriversData(props) {
@@ -54,10 +55,6 @@ function TableAllDriversData(props) {
             localStorage.setItem('orgid1', driver_response.data[0].Organization_ID1);
             localStorage.setItem('orgid2', driver_response.data[0].Organization_ID2);
             localStorage.setItem('orgid3', driver_response.data[0].Organization_ID3);
-
-            axios.post("http://localhost:3001/log_successful_login", {
-                email: driver_response.data[0].Driver_Email
-            })
 
             const org1_response = await axios.post("http://localhost:3001/get_org1", {
                 org1: localStorage.getItem('orgid1')
@@ -132,8 +129,10 @@ function TableAllDriversData(props) {
                 <td>
                     <DropdownButton id="dropdown-basic-button" title="Manage">
                         <Dropdown.Item onClick={() => { props.setAddModal(true); props.setDriver(id); props.setOrg1(org1); props.setOrg2(org2); props.setOrg3(org3); }}>Add Points</Dropdown.Item>
-                        <Dropdown.Item onClick={() => { props.setSubModal(true); props.setDriver(id); props.setOrg1(org1) }}>Subtract Points</Dropdown.Item>
-                        <Dropdown.Item onClick={() => {setSelectedDriverID(id); setControllingDriver(true);}}>Enter Driver View</Dropdown.Item>
+                        <Dropdown.Item onClick={() => { props.setSubModal(true); props.setDriver(id); props.setOrg1(org1); props.setOrg2(org2); props.setOrg3(org3); }}>Subtract Points</Dropdown.Item>
+                        <Dropdown.Item onClick={() => { setSelectedDriverID(id); setControllingDriver(true);}}>Enter Driver View</Dropdown.Item>
+                        <Dropdown.Divider></Dropdown.Divider>
+                        <Dropdown.Item onClick={() => { props.setDeleteModal(true); props.setDriver(id); }} style={{color: 'red'}}>Delete Driver</Dropdown.Item>
                     </DropdownButton>
                 </td>
             </tr>

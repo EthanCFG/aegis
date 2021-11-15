@@ -14,9 +14,9 @@ function FormDisplaySponsorData(props) {
     return (
         <div>
             <form onSubmit={submitHandler}>
-                <p>Email Address: {localStorage.getItem('email')}</p>
-                <p>First Name: {localStorage.getItem('first')}</p>
-                <p>Last Name: {localStorage.getItem('last')}</p>
+                <p>Email Address: {localStorage.getItem('sponsoremail')}</p>
+                <p>First Name: {localStorage.getItem('sponsorfirst')}</p>
+                <p>Last Name: {localStorage.getItem('sponsorlast')}</p>
                 <Button type='submit'>Edit</Button>
             </form>
         </div>

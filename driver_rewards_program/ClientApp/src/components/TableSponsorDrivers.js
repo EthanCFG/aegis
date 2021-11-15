@@ -6,22 +6,15 @@ import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 
 
-/*const fetch_drivers = async () => {
-	const drivers_list_response = await axios.post("http://localhost:3001/get_drivers", {
-		organizationID1: localStorage.getItem('sponsorid'),
-		organizationID2: localStorage.getItem('sponsorid'),
-		organizationID3: localStorage.getItem('sponsorid')
-	})
-	
-	console.log(drivers_list_response);
-	return drivers_list_response;
-}*/
-
 function TableSponsorDrivers (props) {
 
 	const [showAddModal, setShowAddModal] = useState(false)
 
+	const [showRemoveModal, setShowRemoveModal] = useState(false)
+
 	const [showSubModal, setShowSubModal] = useState(false)
+
+	const [sponsorToRemove, setSponsorToRemove] = useState()
 
 	const [activeDriverID, setActiveDriverID] = useState()
 
@@ -33,7 +26,25 @@ function TableSponsorDrivers (props) {
 
 	const [dataChanged, setDataChanged] = useState(false);
 
-	const handleCloseAdd = () => setShowAddModal(false);
+
+	const removeDriver = () => {
+		console.log(sponsorToRemove);
+		if(sponsorToRemove == 1) {
+			axios.post("http://localhost:3001/remove_sponsor1_from_driver", {
+				driver_id: activeDriverID
+			})
+		}
+		else if (sponsorToRemove == 2) {
+			axios.post("http://localhost:3001/remove_sponsor2_from_driver", {
+				driver_id: activeDriverID
+			})
+		}
+		else if (sponsorToRemove == 3) {
+			axios.post("http://localhost:3001/remove_sponsor3_from_driver", {
+				driver_id: activeDriverID
+			})
+		}
+	}
 
 	const addPoints = () => {
 		console.log(Organization);
@@ -70,7 +81,7 @@ function TableSponsorDrivers (props) {
 		<div class="scroll-table">
         	<table class="table">
 					<div>
-						<Modal show={showAddModal} onHide={handleCloseAdd}>
+						<Modal show={showAddModal}>
 							<Modal.Header closeButton>
 								<Modal.Title>Add Points to Driver #{activeDriverID}</Modal.Title>
 							</Modal.Header>
@@ -81,11 +92,24 @@ function TableSponsorDrivers (props) {
 							</div>
 						</Modal.Body>
 							<Modal.Footer>
-								<Button variant="secondary" onClick={handleCloseAdd}>
+								<Button variant="secondary" onClick={() => setShowAddModal(false)}>
 									Close
 								</Button>
-								<Button variant="primary" onClick={() => {addPoints(); if(dataChanged == true) {setDataChanged(false);}; if (dataChanged == false) {setDataChanged(true);}; handleCloseAdd()}}>
+								<Button variant="primary" onClick={() => {addPoints(); if(dataChanged == true) {setDataChanged(false);}; if (dataChanged == false) {setDataChanged(true);}; setShowAddModal(false)}}>
 									Add Points
+								</Button>
+							</Modal.Footer>
+						</Modal>
+						<Modal show={showRemoveModal}>
+							<Modal.Header closeButton>
+								<Modal.Title>Remove Driver #{activeDriverID} from Sponsorship?</Modal.Title>
+							</Modal.Header>
+							<Modal.Footer>
+								<Button variant="secondary" onClick={() => setShowRemoveModal(false)}>
+									No
+								</Button>
+								<Button variant="primary" onClick={() => {removeDriver(); if(dataChanged == true) {setDataChanged(false);}; if (dataChanged == false) {setDataChanged(true);}; setShowRemoveModal(false)}}>
+									Yes
 								</Button>
 							</Modal.Footer>
 						</Modal>
@@ -99,7 +123,7 @@ function TableSponsorDrivers (props) {
 							<th>Add/Remove Points</th>
 							</tr>
 					</thead>
-					<TableData setAddModal={setShowAddModal} setSubModal={setShowSubModal} setDriver={setActiveDriverID} setOrg={setOrganization} dataStatus={dataChanged}></TableData>
+					<TableData setAddModal={setShowAddModal} setSubModal={setShowSubModal} setRemoveModal={setShowRemoveModal} setRemovedSponsor={setSponsorToRemove} setDriver={setActiveDriverID} setOrg={setOrganization} dataStatus={dataChanged}></TableData>
 			</table>
 		</div>
     )

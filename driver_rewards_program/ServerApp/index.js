@@ -313,11 +313,9 @@ app.post("/update_profile_last_name", (req, res) => {
   Removes a driver/sponsor from the db
   Requires: isDriver, ID
 */
-app.post("/remove_profile", (req, res) => {
-  const isDriver = req.body.isDriver;
-  const ID = req.body.ID;
+app.post("/delete_driver", (req, res) => {
+  const ID = req.body.id;
 
-  if (isDriver) {
     db.query(
       `DELETE FROM Driver
       WHERE Driver_ID = ?`,
@@ -326,16 +324,19 @@ app.post("/remove_profile", (req, res) => {
         console.log(err);
       }
     );
-  } else {
+});
+
+app.post("/delete_sponsor_user", (req, res) => {
+  const ID = req.body.id;
+  
     db.query(
       `DELETE FROM Sponsor
       WHERE Sponsor_ID = ?`,
-      [newLastName, ID],
+      [ID],
       (err, res) => {
         console.log(err);
       }
     );
-  }
 });
 
 /*
@@ -389,6 +390,20 @@ app.post("/get_driver_data", (req, res) => {
   db.query(
     `SELECT * FROM Driver
     WHERE Driver_ID = ?`,
+    [ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+app.post("/get_sponsor_data", (req, res) => {
+  const ID = req.body.sponsor_id;
+
+  db.query(
+    `SELECT * FROM Sponsor
+    WHERE Sponsor_ID = ?`,
     [ID],
     (err, rows, fields) => {
       console.log(err);
@@ -623,6 +638,31 @@ app.post("/update_driver", (req, res) => {
   );
 });
 
+app.post("/update_sponsor", (req, res) => {
+  const Email = req.body.email;
+  const FirstName = req.body.first;
+  const LastName = req.body.last;
+  const ID = req.body.id;
+
+  db.query(
+    `UPDATE Sponsor
+      SET Sponsor_Email = ?,
+      Sponsor_First_Name = ?,
+      Sponsor_Last_Name = ?
+      WHERE Sponsor_ID = ?`,
+    [Email, FirstName, LastName, ID],
+    (err, rows, fields) => {
+      if (err) {
+        res.send({ err: err });
+      } else if (rows) {
+        res.send(rows);
+      } else {
+        res.send({ message: "meh." });
+      }
+    }
+  );
+});
+
 app.post("/create_application", (req, res) => {
   const D_ID = req.body.driver_id;
   const Organization_Name = req.body.org_name;
@@ -806,7 +846,7 @@ app.post("/get_org3", (req, res) => {
 });
 
 app.post("/remove_sponsor1_from_driver", (req, res) => {
-  const ID = req.body.org3;
+  const ID = req.body.driver_id;
 
   db.query(
     `UPDATE Driver 
@@ -822,7 +862,7 @@ app.post("/remove_sponsor1_from_driver", (req, res) => {
 });
 
 app.post("/remove_sponsor2_from_driver", (req, res) => {
-  const ID = req.body.org3;
+  const ID = req.body.driver_id;
 
   db.query(
     `UPDATE Driver 
@@ -838,7 +878,7 @@ app.post("/remove_sponsor2_from_driver", (req, res) => {
 });
 
 app.post("/remove_sponsor3_from_driver", (req, res) => {
-  const ID = req.body.org3;
+  const ID = req.body.driver_id;
 
   db.query(
     `UPDATE Driver 

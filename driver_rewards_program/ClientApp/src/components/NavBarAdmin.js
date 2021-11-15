@@ -46,7 +46,7 @@ const NavBarAdmin = () => {
                                 <ProfilePictureSponsor></ProfilePictureSponsor>
                             </a>
                             <div class="navbar-dropdown" style={{ minWidth: 150, left: -41 }}>
-                                <Link to="/sponsor_profile">
+                                <Link to="/admin_profile">
                                     <a class="navbar-item">
                                         View Profile
                                     </a>

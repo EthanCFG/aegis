@@ -16,8 +16,10 @@ function FormChangeSponsorData(props) {
       email: enteredEmail,
       first: enteredFirstName,
       last: enteredLastName,
-      id: localStorage.getItem('id')
+      id: localStorage.getItem('sponsorid')
     })
+
+    console.log(response);
 
     localStorage.setItem('sponsoremail', enteredEmail);
     localStorage.setItem('sponsorfirst', enteredFirstName);

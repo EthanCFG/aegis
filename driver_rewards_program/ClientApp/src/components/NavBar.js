@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import ProfilePicture from './ProfilePicture';
 import 'bulma/css/bulma.min.css';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const NavBar = (props) => {
-
-  const [userType, setUserType] = (localStorage.getItem('usertype'));
-
-  console.log(localStorage.getItem('usertype'));
 
   let history = useHistory();
 
@@ -94,6 +90,11 @@ const NavBar = (props) => {
                     </div>
                   </div>
                   {(localStorage.getItem('usertype') == 'admin') ? <Link to="/admin_home" class="navbar-start">
+                    <a class="navbar-item" style={{color: "red"}}>
+                      Leave Driver View
+                    </a>
+                  </Link> : null}
+                  {(localStorage.getItem('usertype') == 'sponsor') ? <Link to="/sponsor_home" class="navbar-start">
                     <a class="navbar-item" style={{color: "red"}}>
                       Leave Driver View
                     </a>

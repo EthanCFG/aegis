@@ -12,6 +12,8 @@ function TableAllDrivers(props) {
 
     const [showSubModal, setShowSubModal] = useState(false)
 
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+
     const [activeDriverID, setActiveDriverID] = useState()
 
     const [pointsToAdd, setPointsToAdd] = useState()
@@ -27,6 +29,12 @@ function TableAllDrivers(props) {
     const [dataChanged, setDataChanged] = useState(false);
 
     const handleCloseAdd = () => setShowAddModal(false);
+
+    const deleteDriver = () => {
+        axios.post("http://localhost:3001/delete_driver", {
+            id: activeDriverID
+        })
+    }
 
     const addPoints = (chosenOrg) => {
         if (chosenOrg == 1) {
@@ -61,7 +69,7 @@ function TableAllDrivers(props) {
                 <div>
                     <Modal show={showAddModal} onHide={handleCloseAdd}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Manage Driver #{activeDriverID}</Modal.Title>
+                            <Modal.Title>Add Points to Driver #{activeDriverID}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <div class="control">
@@ -84,6 +92,19 @@ function TableAllDrivers(props) {
                             </Button> : null}
                         </Modal.Footer>
                     </Modal>
+                    <Modal show={showDeleteModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Remove Driver #{activeDriverID} from Sponsorship?</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+                                No
+                            </Button>
+                            <Button variant="primary" onClick={() => {deleteDriver(); if(dataChanged == true) {setDataChanged(false);}; if (dataChanged == false) {setDataChanged(true);}; setShowDeleteModal(false)}}>
+                                Yes
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
                 <thead>
                     <tr>
@@ -99,7 +120,7 @@ function TableAllDrivers(props) {
                         <th>Add/Remove Points</th>
                     </tr>
                 </thead>
-                <TableAllDriversData setAddModal={setShowAddModal} setSubModal={setShowSubModal} setDriver={setActiveDriverID} setOrg1={setOrganization1} setOrg2={setOrganization2} setOrg3={setOrganization3} dataStatus={dataChanged}></TableAllDriversData>
+                <TableAllDriversData setAddModal={setShowAddModal} setSubModal={setShowSubModal} setDeleteModal={setShowDeleteModal} setDriver={setActiveDriverID} setOrg1={setOrganization1} setOrg2={setOrganization2} setOrg3={setOrganization3} dataStatus={dataChanged}></TableAllDriversData>
             </table>
         </div>
     )
