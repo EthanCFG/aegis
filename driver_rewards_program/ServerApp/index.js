@@ -471,6 +471,36 @@ app.post("/delete_dummy", (req,res) => {
   )
 })
 
+app.post("/dummy_driver_add", (req,res) => {
+  const email = "Dummy Sponsor";
+  const password = "Dummy Sponsor";
+  const firstName = "Dummy Sponsor";
+  const lastName = "Dummy Sponsor";
+  const phone = "Dummy Sponsor";
+
+  db.query(
+    "INSERT INTO Sponsor (Sponsor_First_Name, Sponsor_Last_Name, Sponsor_Email, Sponsor_Phone_Number, Sponsor_Password) VALUES (?, ?, ?, ?, ?)",
+      [firstName, lastName, email, phone, password],
+      (err, res) => {
+        console.log(err);
+      }
+    );
+})
+
+app.post("/delete_dummy_sponsor", (req,res) => {
+  const email = "Dummy Sponsor";
+
+  db.query(
+    `DELETE Sponsor
+    WHERE Sponsor_Email = ?`,
+    [email],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    } 
+  )
+})
+
 app.listen(3001, () => {
   console.log("Listening for requests...");
 });
