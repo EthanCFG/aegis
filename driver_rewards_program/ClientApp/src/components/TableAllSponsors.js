@@ -21,19 +21,17 @@ function TableAllSponsors(props) {
 
     const [showModal, setShowModal] = useState(false)
 
-    const [showDeleteModal, setShowDeleteModal] = useState(false)
-
     const [activeSponsorID, setActiveSponsorID] = useState()
+
+    const [pointsToAdd, setPointsToAdd] = useState()
+
+    const [reasonToAdd, setReasonToAdd] = useState()
+
+    const [Organization, setOrganization] = useState()
 
     const [dataChanged, setDataChanged] = useState(false);
 
     const handleCloseModal = () => setShowModal(false);
-
-    const deleteSponsor = () => {
-        axios.post("http://localhost:3001/delete_sponsor_user", {
-            id: activeSponsorID
-        })
-    }
 
     return (
         <div class="scroll-table">
@@ -55,19 +53,6 @@ function TableAllSponsors(props) {
                             </Button>
                         </Modal.Footer>
                     </Modal>
-                    <Modal show={showDeleteModal}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Delete Sponsor #{activeSponsorID}?</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
-                                No
-                            </Button>
-                            <Button variant="primary" onClick={() => {deleteSponsor(); if(dataChanged == true) {setDataChanged(false);}; if (dataChanged == false) {setDataChanged(true);}; setShowDeleteModal(false)}}>
-                                Yes
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
                 </div>
                 <thead>
                     <tr>
@@ -78,7 +63,7 @@ function TableAllSponsors(props) {
                         <th>Manage Sponsor</th>
                     </tr>
                 </thead>
-                <TableAllSponsorsData setModal={setShowModal} setDeleteModal={setShowDeleteModal} setSponsor={setActiveSponsorID} setOrg={setOrganization} dataStatus={dataChanged}></TableAllSponsorsData>
+                <TableAllSponsorsData setModal={setShowModal} setSponsor={setActiveSponsorID} setOrg={setOrganization} dataStatus={dataChanged}></TableAllSponsorsData>
             </table>
         </div>
     )
