@@ -9,8 +9,6 @@ function PageDriverHome (props) {
     useEffect(() => {
     
     window.addEventListener('storage', () => {
-      // When local storage changes, dump the list to
-      // the console.
        setActiveSponsor(localStorage.getItem('orgactive'))   
     });
     

@@ -41,19 +41,28 @@ function CardCurrentSponsor (props) {
                 </span>
                 </button>
             </header>
+            {props.sponsor == 'null' ? 
             <div class="card-content">
                 <div class="content">
-                    <img src={props.sponsor_image_url}></img>
+                    <p>No sponsor selected. </p><a href="/sponsor_application">Apply to one!</a>
                     <br></br>
                 </div>
-            </div>
-            <div class="card-content has-text-centered">
-              <h1><strong>{props.sponsor}</strong></h1>
-            </div>
-            <footer class="card-footer">
-              <a class="card-footer-item" onClick={() => setDisplayModal(true)}>Remove</a>
-              <a href="#" class="card-footer-item">Visit Sponsor</a>
-            </footer>
+            </div> :
+            <div>
+                <div class="card-content">
+                    <div class="content">
+                        <img src={props.sponsor_image_url}></img>
+                        <br></br>
+                    </div>
+                </div>
+                <div class="card-content has-text-centered">
+                <h1><strong>{props.sponsor}</strong></h1>
+                </div>
+                <footer class="card-footer">
+                <a class="card-footer-item" onClick={() => setDisplayModal(true)}>Remove</a>
+                <a href="#" class="card-footer-item">Visit Sponsor</a>
+                </footer>
+            </div> }
         </div>
     )
 }
