@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import ProfilePicture from './ProfilePicture';
 import 'bulma/css/bulma.min.css';
 import { Link, useHistory } from 'react-router-dom';
@@ -9,22 +9,30 @@ const NavBar = (props) => {
   let history = useHistory();
 
   const setActiveSponsor1 = () => {
-    localStorage.setItem('orgactive', localStorage.getItem('orgname1')); 
+    localStorage.setItem('orgactive', localStorage.getItem('orgname1'));
+    localStorage.setItem('activepoints', localStorage.getItem('points1'));
     props.setActiveOrg(localStorage.getItem('orgname1')); 
     props.setActivePoints(localStorage.getItem('points1'));
   }
 
   const setActiveSponsor2 = () => {
-    localStorage.setItem('orgactive', localStorage.getItem('orgname2')); 
+    localStorage.setItem('orgactive', localStorage.getItem('orgname2'));
+    localStorage.setItem('activepoints', localStorage.getItem('points2'));
     props.setActiveOrg(localStorage.getItem('orgname2')); 
     props.setActivePoints(localStorage.getItem('points2'));
   }
 
   const setActiveSponsor3 = () => {
-    localStorage.setItem('orgactive', localStorage.getItem('orgname3')); 
+    localStorage.setItem('orgactive', localStorage.getItem('orgname3'));
+    localStorage.setItem('activepoints', localStorage.getItem('points3'));
     props.setActiveOrg(localStorage.getItem('orgname3')); 
     props.setActivePoints(localStorage.getItem('points3'));
   }
+
+  useEffect(() => {
+    props.setActivePoints(localStorage.getItem('activepoints'))
+    props.setActiveOrg(localStorage.getItem('orgactive'))
+  }, [])
 
       return (
         <div>

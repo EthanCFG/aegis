@@ -35,7 +35,7 @@ function PageDriverApplications (props) {
       const add_driver_response = await axios.post("http://localhost:3001/accept_driver_application", {
         org_id1: driver_response.data[0].Organization_ID1,
         org_id2: driver_response.data[0].Organization_ID2,
-        current_organization: localStorage.getItem('sponsorid'),
+        current_organization: localStorage.getItem('orgid'),
         driver_id: selectedDriver,
       })
 

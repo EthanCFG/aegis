@@ -6,7 +6,7 @@ function PageDriverHome (props) {
 
   const [activeSponsor, setActiveSponsor] = React.useState('')
 
-  React.useEffect(() => {
+    useEffect(() => {
     
     window.addEventListener('storage', () => {
       // When local storage changes, dump the list to

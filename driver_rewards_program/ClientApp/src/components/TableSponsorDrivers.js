@@ -78,8 +78,8 @@ function TableSponsorDrivers (props) {
 	}
 
     return (
-		<div class="scroll-table">
-        	<table class="table">
+		<div class="scroll-table" >
+        	<table class="table" style={{minHeight: 400}}>
 					<div>
 						<Modal show={showAddModal}>
 							<Modal.Header closeButton>
