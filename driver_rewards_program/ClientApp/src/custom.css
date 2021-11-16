@@ -173,7 +173,11 @@ code {
 }
 
 .scroll-table {
+<<<<<<< HEAD
   overflow: scroll;
+=======
+  overflow: scroll; 
+>>>>>>> 3f7e4f87c212e452633edc55c5515fc12e3726b7
   height: 70%;
   width: 150%;
   overflow: auto;

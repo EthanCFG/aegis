@@ -41,7 +41,7 @@ class PageDriverCatalog extends Component {
       return (
         <div class="container">
           <div class="columns">
-            <div class="column is-centered">
+            <div class="column is-one-half">
               <div class="notification is-white py-6 my-6">
                 <CardTotalPoints
                   points={localStorage.getItem("activepoints")}

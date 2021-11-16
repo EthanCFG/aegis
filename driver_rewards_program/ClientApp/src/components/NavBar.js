@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import ProfilePicture from "./ProfilePicture";
 import "bulma/css/bulma.min.css";
 import { Link, useHistory } from "react-router-dom";
@@ -13,7 +13,6 @@ const NavBar = (props) => {
     localStorage.setItem("activepoints", localStorage.getItem("points1"));
     props.setActiveOrg(localStorage.getItem("orgname1"));
     props.setActivePoints(localStorage.getItem("points1"));
-    window.location.reload(false);
   };
 
   const setActiveSponsor2 = () => {
@@ -22,7 +21,6 @@ const NavBar = (props) => {
     localStorage.setItem("activepoints", localStorage.getItem("points2"));
     props.setActiveOrg(localStorage.getItem("orgname2"));
     props.setActivePoints(localStorage.getItem("points2"));
-    window.location.reload(false);
   };
 
   const setActiveSponsor3 = () => {
@@ -31,8 +29,12 @@ const NavBar = (props) => {
     localStorage.setItem("activepoints", localStorage.getItem("points3"));
     props.setActiveOrg(localStorage.getItem("orgname3"));
     props.setActivePoints(localStorage.getItem("points3"));
-    window.location.reload(false);
   };
+
+  useEffect(() => {
+    props.setActivePoints(localStorage.getItem("activepoints"));
+    props.setActiveOrg(localStorage.getItem("orgactive"));
+  }, []);
 
   return (
     <div>
@@ -120,6 +122,20 @@ const NavBar = (props) => {
                 <a class="navbar-item">Report an issue</a>
               </div>
             </div>
+            {localStorage.getItem("usertype") == "admin" ? (
+              <Link to="/admin_home" class="navbar-start">
+                <a class="navbar-item" style={{ color: "red" }}>
+                  Leave Driver View
+                </a>
+              </Link>
+            ) : null}
+            {localStorage.getItem("usertype") == "sponsor" ? (
+              <Link to="/sponsor_home" class="navbar-start">
+                <a class="navbar-item" style={{ color: "red" }}>
+                  Leave Driver View
+                </a>
+              </Link>
+            ) : null}
           </div>
 
           <div class="navbar-end">
@@ -134,7 +150,7 @@ const NavBar = (props) => {
                 <Link to="/welcome">
                   <a
                     class="navbar-item"
-                    onClick={localStorage.setItem("userType", "none")}
+                    onClick={() => localStorage.setItem("userType", "none")}
                   >
                     Log Out
                   </a>

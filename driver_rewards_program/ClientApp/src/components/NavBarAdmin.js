@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import ProfilePictureSponsor from './ProfilePictureSponsor';
 
 const NavBarAdmin = () => {
+
+    console.log(localStorage.getItem('usertype'));
+
     return (
         <div>
             <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -25,9 +28,9 @@ const NavBarAdmin = () => {
                                 Home
                             </a>
                         </Link>
-                        <Link to="/sponsor_catalog" class="navbar-start">
+                        <Link to="/admin_view_reports" class="navbar-start">
                             <a class="navbar-item">
-                                
+                                Reports
                             </a>
                         </Link>
                         <Link to="/view_user_logs" class="navbar-start">
@@ -43,7 +46,7 @@ const NavBarAdmin = () => {
                                 <ProfilePictureSponsor></ProfilePictureSponsor>
                             </a>
                             <div class="navbar-dropdown" style={{ minWidth: 150, left: -41 }}>
-                                <Link to="/sponsor_profile">
+                                <Link to="/admin_profile">
                                     <a class="navbar-item">
                                         View Profile
                                     </a>

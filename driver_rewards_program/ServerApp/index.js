@@ -41,6 +41,20 @@ app.post("/etsy", async (req, res) => {
     },
   });
   //console.log(response.data);
+  //const organizationID = req.body.organizationID;
+  const organizationID = req.body.id;
+  //const listingID = req.body.listingID;
+  const listingID = req.body.listing;
+
+  const response = await axios.get(
+    "https://openapi.etsy.com/v3/application/listings/" + listingID + "/images",
+    {
+      headers: {
+        "x-api-key": "4rskcd32mgmwvkcmibb5aqfy",
+      },
+    }
+  );
+  console.log(response.data);
 
   const shopID = response.data.shop_id;
   console.log(listingID);
@@ -62,12 +76,14 @@ app.post("/etsy", async (req, res) => {
   const catalogItemImageURL = imageResponse.data.results[0].url_fullxfull;
   const catalogItemPrice = response.data.price.amount;
   const catalogItemInventory = response.data.quantity;
+  //const catalogItemImage = response.data.image;
 
   console.log("Title: " + catalogItemName);
   console.log("Url: " + catalogItemListingURL);
   console.log("Image_Url: " + catalogItemImageURL);
   console.log("Price: " + catalogItemPrice);
   console.log("Inventory: " + catalogItemInventory);
+  //console.log("Image: " + catalogItemImage);
 
   db.query(
     `INSERT INTO Catalog_Item (Organization_ID, Catalog_Item_Name, Catalog_Item_Price, Catalog_Item_Inventory, Catalog_Item_Listing_URL, Catalog_Item_Image_URL)
@@ -363,29 +379,30 @@ app.post("/update_profile_last_name", (req, res) => {
   Removes a driver/sponsor from the db
   Requires: isDriver, ID
 */
-app.post("/remove_profile", (req, res) => {
-  const isDriver = req.body.isDriver;
-  const ID = req.body.ID;
+app.post("/delete_driver", (req, res) => {
+  const ID = req.body.id;
 
-  if (isDriver) {
-    db.query(
-      `DELETE FROM Driver
+  db.query(
+    `DELETE FROM Driver
       WHERE Driver_ID = ?`,
-      [ID],
-      (err, res) => {
-        console.log(err);
-      }
-    );
-  } else {
-    db.query(
-      `DELETE FROM Sponsor
+    [ID],
+    (err, res) => {
+      console.log(err);
+    }
+  );
+});
+
+app.post("/delete_sponsor_user", (req, res) => {
+  const ID = req.body.id;
+
+  db.query(
+    `DELETE FROM Sponsor
       WHERE Sponsor_ID = ?`,
-      [newLastName, ID],
-      (err, res) => {
-        console.log(err);
-      }
-    );
-  }
+    [ID],
+    (err, res) => {
+      console.log(err);
+    }
+  );
 });
 
 /*
@@ -418,13 +435,39 @@ app.post("/get_all_drivers", (req, res) => {
   });
 });
 
-app.post("/get_driver_data", (req, res) => {
-  const ID = req.body.driver_id;
-
-  db.query(`SELECT * FROM Driver`, [ID], (err, rows, fields) => {
+app.post("/get_all_sponsors", (req, res) => {
+  db.query(`SELECT * FROM Sponsor`, (err, rows, fields) => {
     console.log(err);
     res.json(rows);
   });
+});
+
+app.post("/get_driver_data", (req, res) => {
+  const ID = req.body.driver_id;
+
+  db.query(
+    `SELECT * FROM Driver
+    WHERE Driver_ID = ?`,
+    [ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+app.post("/get_sponsor_data", (req, res) => {
+  const ID = req.body.sponsor_id;
+
+  db.query(
+    `SELECT * FROM Sponsor
+    WHERE Sponsor_ID = ?`,
+    [ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
 });
 
 app.post("/accept_driver_application", (req, res) => {
@@ -620,6 +663,10 @@ app.post("/update_driver", (req, res) => {
   const Email = req.body.email;
   const FirstName = req.body.first;
   const LastName = req.body.last;
+  const City = req.body.city;
+  const Address = req.body.address;
+  const State = req.body.state;
+  const Zip = req.body.zip;
   const ID = req.body.id;
 
   db.query(
@@ -630,8 +677,33 @@ app.post("/update_driver", (req, res) => {
       Driver_City = ?,
       Driver_Address = ?,
       Driver_State = ?,
-      Driver_Zip = ?,
+      Driver_Zip = ?
       WHERE Driver_ID = ?`,
+    [Email, FirstName, LastName, City, Address, State, Zip, ID],
+    (err, rows, fields) => {
+      if (err) {
+        res.send({ err: err });
+      } else if (rows) {
+        res.send(rows);
+      } else {
+        res.send({ message: "meh." });
+      }
+    }
+  );
+});
+
+app.post("/update_sponsor", (req, res) => {
+  const Email = req.body.email;
+  const FirstName = req.body.first;
+  const LastName = req.body.last;
+  const ID = req.body.id;
+
+  db.query(
+    `UPDATE Sponsor
+      SET Sponsor_Email = ?,
+      Sponsor_First_Name = ?,
+      Sponsor_Last_Name = ?
+      WHERE Sponsor_ID = ?`,
     [Email, FirstName, LastName, ID],
     (err, rows, fields) => {
       if (err) {
@@ -845,6 +917,22 @@ app.post("/get_cart", (req, res) => {
   );
 });
 
+app.post("/remove_sponsor1_from_driver", (req, res) => {
+  const ID = req.body.driver_id;
+
+  db.query(
+    `UPDATE Driver 
+    SET Organization_ID1 = null,
+    Driver_Points1 = null
+    WHERE Driver_ID = ?`,
+    [ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
 app.post("/add_to_cart", (req, res) => {
   const catalogItemID = req.body.catalogItemID;
   const driverID = req.body.driverID;
@@ -867,6 +955,38 @@ app.post("/add_to_cart", (req, res) => {
     [itemInventory - 1, catalogItemID],
     (err, res) => {
       console.log(err);
+    }
+  );
+});
+
+app.post("/remove_sponsor2_from_driver", (req, res) => {
+  const ID = req.body.driver_id;
+
+  db.query(
+    `UPDATE Driver 
+    SET Organization_ID2 = null,
+    Driver_Points2 = null
+    WHERE Driver_ID = ?`,
+    [ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+app.post("/remove_sponsor3_from_driver", (req, res) => {
+  const ID = req.body.driver_id;
+
+  db.query(
+    `UPDATE Driver 
+    SET Organization_ID3 = null,
+    Driver_Points3 = null
+    WHERE Driver_ID = ?`,
+    [ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
     }
   );
 });

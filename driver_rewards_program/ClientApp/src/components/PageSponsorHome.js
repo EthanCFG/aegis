@@ -28,6 +28,7 @@ function PageSponsorHome () {
                   <li><a>Dashboard</a></li>
                   <li><a>Customers</a></li>
                   <li><a>Other</a></li>
+                  <li><a>View Page As Driver</a></li>
                 </ul>
               </div>
             </div>
@@ -46,14 +47,14 @@ function PageSponsorHome () {
                   </div>
                 </section>
                 <div class="columns">
-                  <div class="column is-6 py-6">
-                    <TableSponsorDrivers 
-                    id={driver_ids}
-                    first={driver_firsts}
-                    last={driver_lasts}
-                    email={driver_emails}
-                    points={driver_points}>
-                    </TableSponsorDrivers>
+                  <div class="column is-6 py-6" style={{marginLeft: 110}}>
+                      <TableSponsorDrivers 
+                      id={driver_ids}
+                      first={driver_firsts}
+                      last={driver_lasts}
+                      email={driver_emails}
+                      points={driver_points}>
+                      </TableSponsorDrivers>
                   </div>
                 </div>
               </div>

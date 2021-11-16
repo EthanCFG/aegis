@@ -35,6 +35,11 @@ const NavBarSponsor = () => {
                       Driver Applications
                     </a>
                   </Link>
+                  {(localStorage.getItem('usertype') == 'admin') ? <Link to="/admin_home" class="navbar-start">
+                    <a class="navbar-item" style={{color: "red"}}>
+                      Leave Sponsor View
+                    </a>
+                  </Link> : null}
                 </div>
             
                 <div class="navbar-end">

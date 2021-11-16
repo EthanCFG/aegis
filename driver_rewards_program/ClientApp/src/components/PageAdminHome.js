@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TableSponsorDrivers from './TableSponsorDrivers';
+import TableAllDrivers from './TableAllDrivers';
 import NavBarAdmin from './NavBarAdmin';
+import TableAllSponsors from './TableAllSponsors';
 
 function PageAdminHome () {
 
@@ -9,6 +11,12 @@ function PageAdminHome () {
   const [driver_lasts] = useState(JSON.parse(localStorage.getItem('driverslast')));
   const [driver_emails] = useState(JSON.parse(localStorage.getItem('driversemail')));
   const [driver_points] = useState(JSON.parse(localStorage.getItem('driverspoints')));
+
+  const [listDrivers, setListDrivers] = useState(true);
+
+  const [activeDriverID, setActiveDriverID] = useState()
+
+  //useEffect(() => {} ,[listDrivers, listSponsors])
 
     return (
       <div>
@@ -41,16 +49,43 @@ function PageAdminHome () {
                     </div>
                   </div>
                 </section>
+               
+                <div class="tabs is-centered is-boxed is-medium" style={{marginTop: 30}}>
+                  <ul>
+                    <li class={listDrivers ? "is-active" : ""} onClick={() => setListDrivers(true)}>
+                      <a>
+                        <span><i class="fas fa-image" aria-hidden="true"></i></span>
+                        <span>List Drivers</span>
+                      </a>
+                    </li>
+                    <li class={listDrivers ? "" : "is-active"} onClick={() => setListDrivers(false)}>
+                      <a>
+                        <span><i class="fas fa-music" aria-hidden="true"></i></span>
+                        <span>List Sponsors</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                
                 <div class="columns">
-                  <div class="column is-6 py-6">
-                    <TableSponsorDrivers 
+                  {listDrivers ? 
+                  <div class="column is-6 py-6" style={{marginLeft: 110}}>
+                    <TableAllDrivers 
                     id={driver_ids}
                     first={driver_firsts}
                     last={driver_lasts}
                     email={driver_emails}
                     points={driver_points}>
-                    </TableSponsorDrivers>
-                  </div>
+                    </TableAllDrivers>
+                  </div> : 
+                    <div class="column is-6 py-6" style={{ marginLeft: 110 }}>
+                      <TableAllSponsors
+                        id={driver_ids}
+                        first={driver_firsts}
+                        last={driver_lasts}
+                        email={driver_emails}>
+                      </TableAllSponsors>
+                    </div>}
                 </div>
               </div>
             </div>

@@ -35,7 +35,7 @@ function PageDriverApplications (props) {
       const add_driver_response = await axios.post("http://localhost:3001/accept_driver_application", {
         org_id1: driver_response.data[0].Organization_ID1,
         org_id2: driver_response.data[0].Organization_ID2,
-        current_organization: localStorage.getItem('sponsorid'),
+        current_organization: localStorage.getItem('orgid'),
         driver_id: selectedDriver,
       })
 
@@ -81,13 +81,13 @@ function PageDriverApplications (props) {
     
 
     return (
-			<div>
-				<NavBarSponsor></NavBarSponsor>
+      <div>
+        <NavBarSponsor></NavBarSponsor>
         <div class="container">
           <div class="columns is-centered">
             <div class="columns is-half">
               <div class="notification is-white py-3 my-6">
-                <h1 class="signup-header py-2 is-size-3 has-text-weight-semibold" style={{
+                <h1 class="signup-header py-2 is-size-2 has-text-weight-semibold" style={{
                   marginBottom: 30
                 }}>Pending Driver Applications</h1>
 
@@ -106,8 +106,8 @@ function PageDriverApplications (props) {
               </div>
             </div>
         	</div>
-        </div>
-			</div>
+          </div>
+			  </div>
     )
 }
 
