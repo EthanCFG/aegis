@@ -40,31 +40,15 @@ app.post("/etsy", async (req, res) => {
       "x-api-key": "4rskcd32mgmwvkcmibb5aqfy",
     },
   });
-  //console.log(response.data);
-  //const organizationID = req.body.organizationID;
-  const organizationID = req.body.id;
-  //const listingID = req.body.listingID;
-  const listingID = req.body.listing;
-
-  const response = await axios.get(
-    "https://openapi.etsy.com/v3/application/listings/" + listingID + "/images",
-    {
-      headers: {
-        "x-api-key": "4rskcd32mgmwvkcmibb5aqfy",
-      },
-    }
-  );
-  console.log(response.data);
 
   const shopID = response.data.shop_id;
-  console.log(listingID);
   var url2 =
     "https://openapi.etsy.com/v3/application/shops/" +
     shopID +
     "/listings/" +
     listingID +
     "/images";
-  console.log(url2);
+
   const imageResponse = await axios.get(url2, {
     headers: {
       "x-api-key": "4rskcd32mgmwvkcmibb5aqfy",
