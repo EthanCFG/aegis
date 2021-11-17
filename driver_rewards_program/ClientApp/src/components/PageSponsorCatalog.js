@@ -19,9 +19,11 @@ class PageSponsorCatalog extends Component {
   async addItem() {
     const response = await axios.post("http://localhost:3001/etsy", {
       listingID: this.state.ID,
-      organizationID: localStorage.getItem("sponsorid"),
+      organizationID: localStorage.getItem("orgid"),
     });
     console.log(response);
+    this.fetchCatalogItems();
+    window.location.reload(false);
   }
 
   async fetchCatalogItems() {

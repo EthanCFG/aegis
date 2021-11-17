@@ -22,6 +22,7 @@ export default class CatalogItem extends Component {
   }
 
   async removeItem() {
+    window.location.reload(false);
     const response = await axios.post(
       "http://localhost:3001/remove_catalog_item",
       {
@@ -32,6 +33,7 @@ export default class CatalogItem extends Component {
   }
 
   async changeItemPrice() {
+    window.location.reload(false);
     const response = await axios.post(
       "http://localhost:3001/change_item_price",
       {

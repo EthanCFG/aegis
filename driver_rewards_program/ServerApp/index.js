@@ -60,14 +60,12 @@ app.post("/etsy", async (req, res) => {
   const catalogItemImageURL = imageResponse.data.results[0].url_fullxfull;
   const catalogItemPrice = response.data.price.amount;
   const catalogItemInventory = response.data.quantity;
-  //const catalogItemImage = response.data.image;
 
   console.log("Title: " + catalogItemName);
   console.log("Url: " + catalogItemListingURL);
   console.log("Image_Url: " + catalogItemImageURL);
   console.log("Price: " + catalogItemPrice);
   console.log("Inventory: " + catalogItemInventory);
-  //console.log("Image: " + catalogItemImage);
 
   db.query(
     `INSERT INTO Catalog_Item (Organization_ID, Catalog_Item_Name, Catalog_Item_Price, Catalog_Item_Inventory, Catalog_Item_Listing_URL, Catalog_Item_Image_URL)
@@ -792,10 +790,9 @@ app.post("/get_catalog", (req, res) => {
 */
 app.post("/remove_catalog_item", (req, res) => {
   const catalogItemID = req.body.catalogItemID;
+  db.query("SET FOREIGN_KEY_CHECKS = 0");
   db.query(
-    `SET FOREIGN_KEY_CHECKS = 0;
-    DELETE FROM Catalog_Item
-      WHERE Catalog_Item_ID = ?`,
+    `DELETE FROM Catalog_Item WHERE Catalog_Item_ID = ?`,
     [catalogItemID],
     (err, res) => {
       console.log(err);
