@@ -6,7 +6,7 @@ function TableUserLogs() {
   const [ascendingOrder, setAscendingOrder] = useState(false);
 
   return (
-    <div class="logs-scroll-table">
+    <div class="logs-scroll-table2">
       <table class="table">
         <thead>
           <tr>

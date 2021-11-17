@@ -171,6 +171,20 @@ app.post("/add_driver_points1", (req, res) => {
       console.log(err);
     }
   );
+
+  const messageText =
+    pointChange +
+    " has been added/removed from your point balance for the following reason: " +
+    reason;
+  const messageType = "Point Change";
+  db.query(
+    `INSERT INTO Message (Driver_ID, Message_Text, Message_Type, Message_Time)
+      VALUES (?, ?, ?, NOW())`,
+    [driverID, messageText, messageType],
+    (err, rows, fields) => {
+      console.log(err);
+    }
+  );
 });
 
 app.post("/add_driver_points2", (req, res) => {
@@ -201,6 +215,20 @@ app.post("/add_driver_points2", (req, res) => {
       console.log(err);
     }
   );
+
+  const messageText =
+    pointChange +
+    " has been added/removed from your point balance for the following reason: " +
+    reason;
+  const messageType = "Point Change";
+  db.query(
+    `INSERT INTO Message (Driver_ID, Message_Text, Message_Type, Message_Time)
+      VALUES (?, ?, ?, NOW())`,
+    [driverID, messageText, messageType],
+    (err, rows, fields) => {
+      console.log(err);
+    }
+  );
 });
 
 app.post("/add_driver_points3", (req, res) => {
@@ -228,6 +256,20 @@ app.post("/add_driver_points3", (req, res) => {
       VALUES (?, ?, NOW(), ?, ?)`,
     [driverID, organizationID, pointChange, reason],
     (err, res) => {
+      console.log(err);
+    }
+  );
+
+  const messageText =
+    pointChange +
+    " has been added/removed from your point balance for the following reason: " +
+    reason;
+  const messageType = "Point Change";
+  db.query(
+    `INSERT INTO Message (Driver_ID, Message_Text, Message_Type, Message_Time)
+      VALUES (?, ?, ?, NOW())`,
+    [driverID, messageText, messageType],
+    (err, rows, fields) => {
       console.log(err);
     }
   );
@@ -996,6 +1038,35 @@ app.post("/remove_sponsor3_from_driver", (req, res) => {
     (err, rows, fields) => {
       console.log(err);
       res.json(rows);
+    }
+  );
+});
+
+app.post("/get_messages", (req, res) => {
+  const driver_ID = req.body.driverID;
+
+  db.query(
+    `SELECT * FROM Message
+    WHERE Driver_ID = ?`,
+    [driver_ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+app.post("/send_message", (req, res) => {
+  const driver_ID = req.body.driverID;
+  const messageText = req.body.messageText;
+  const messageType = req.body.messageType;
+
+  db.query(
+    `INSERT INTO Message (Driver_ID, Message_Text, Message_Type, Message_Time)
+      VALUES (?, ?, ?, NOW())`,
+    [driver_ID, messageText, messageType],
+    (err, rows, fields) => {
+      console.log(err);
     }
   );
 });
