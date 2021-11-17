@@ -150,6 +150,10 @@ app.post("/add_driver_points1", (req, res) => {
   const reason = req.body.reason;
   const date = req.body.date;
 
+  console.log(
+    "Adding " + pointChange + " to Driver: " + driverID + "'s Driver_Points1"
+  );
+
   db.query(
     `UPDATE Driver 
       SET Driver_Points1 = Driver_Points1 + ?
@@ -176,6 +180,10 @@ app.post("/add_driver_points2", (req, res) => {
   const reason = req.body.reason;
   const date = req.body.date;
 
+  console.log(
+    "Adding " + pointChange + " to Driver: " + driverID + "'s Driver_Points1"
+  );
+
   db.query(
     `UPDATE Driver 
       SET Driver_Points2 = Driver_Points2 + ?
@@ -201,6 +209,10 @@ app.post("/add_driver_points3", (req, res) => {
   const organizationID = req.body.organizationID;
   const reason = req.body.reason;
   const date = req.body.date;
+
+  console.log(
+    "Adding " + pointChange + " to Driver: " + driverID + "'s Driver_Points1"
+  );
 
   db.query(
     `UPDATE Driver 
@@ -918,12 +930,14 @@ app.post("/add_to_cart", (req, res) => {
   const catalogItemID = req.body.catalogItemID;
   const driverID = req.body.driverID;
   const itemInventory = req.body.itemInventory;
-  const purchaseStatus = "in cart";
+  const purchasePrice = req.body.purchasePrice;
+  const purchaseName = req.body.purchaseName;
+  const purchaseStatus = "In cart";
 
   db.query(
-    `INSERT INTO Purchase (Driver_ID, Catalog_Item_ID, Purchase_Status)
-      VALUES (?, ?, ?)`,
-    [driverID, catalogItemID, purchaseStatus],
+    `INSERT INTO Purchase (Driver_ID, Catalog_Item_ID, Purchase_Status, Purchase_Time, Purchase_Price, Purchase_Name)
+      VALUES (?, ?, ?, NOW(), ?, ?)`,
+    [driverID, catalogItemID, purchaseStatus, purchasePrice, purchaseName],
     (err, rows, fields) => {
       console.log(err);
     }
@@ -935,6 +949,20 @@ app.post("/add_to_cart", (req, res) => {
     WHERE Catalog_Item_ID = ?`,
     [itemInventory - 1, catalogItemID],
     (err, res) => {
+      console.log(err);
+    }
+  );
+});
+
+app.post("/cancel_purchase", (req, res) => {
+  const purchaseID = req.body.purchaseID;
+  const driverID = req.body.driverID;
+  const purchasePrice = req.body.purchasePrice;
+
+  db.query(
+    `UPDATE Purchase SET Purchase_Status = "Cancelled" WHERE Purchase_ID = ?`,
+    [purchaseID],
+    (err, rows, fields) => {
       console.log(err);
     }
   );
