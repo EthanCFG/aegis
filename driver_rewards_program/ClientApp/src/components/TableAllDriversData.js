@@ -71,10 +71,12 @@ function TableAllDriversData(props) {
             if (org1_response.data[0] != null) {
                 localStorage.setItem('orgname1', org1_response.data[0].Organization_Name);
                 localStorage.setItem('orgactive', org1_response.data[0].Organization_Name);
+                localStorage.setItem('orgactive_ID', org1_response.data[0].Organization_ID);
             }
             else {
                 localStorage.setItem('orgname1', null);
                 localStorage.setItem('orgactive', null);
+                localStorage.setItem('orgactive_ID', null)
             }
             if (org2_response.data[0] != null) {
                 localStorage.setItem('orgname2', org2_response.data[0].Organization_Name);
