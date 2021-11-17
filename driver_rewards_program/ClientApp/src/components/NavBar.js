@@ -147,6 +147,9 @@ const NavBar = (props) => {
                 <Link to="/driver_profile">
                   <a class="navbar-item">View Profile</a>
                 </Link>
+                <Link to="/view_messages">
+                  <a class="navbar-item">View Messages</a>
+                </Link>
                 <Link to="/welcome">
                   <a
                     class="navbar-item"

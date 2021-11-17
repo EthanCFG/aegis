@@ -186,6 +186,17 @@ code {
   overflow: auto;
 }
 
+.logs-scroll-table2 {
+  overflow: scroll;
+  height: 90%;
+  width: 150%;
+  overflow: auto;
+}
+
 .logs-notification {
   max-height: 38%;
+}
+
+.logs-table {
+  max-height: 100%;
 }

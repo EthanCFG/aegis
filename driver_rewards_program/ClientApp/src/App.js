@@ -16,6 +16,7 @@ import PageDriverApplications from "./components/PageDriverApplications";
 import PageAdminHome from "./components/PageAdminHome";
 import PageUserLogs from "./components/PageUserLogs";
 import PagePurchaseHistory from "./components/PagePurchaseHistory";
+import PageMessages from "./components/PageMessages";
 import "./custom.css";
 import axios from "axios";
 
@@ -138,6 +139,9 @@ function App() {
       </Route>
       <Route path="/view_purchase_history">
         <PagePurchaseHistory></PagePurchaseHistory>
+      </Route>
+      <Route path="/view_messages">
+        <PageMessages></PageMessages>
       </Route>
     </div>
   );

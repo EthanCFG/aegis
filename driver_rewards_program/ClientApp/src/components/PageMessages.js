@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import TablePurchaseHistory from "./TablePurchaseHistory";
+import TableMessages from "./TableMessages";
 
-export default class PageUserLogs extends Component {
+export default class PageMessages extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -17,13 +17,13 @@ export default class PageUserLogs extends Component {
                 <section>
                   <div>
                     <div class="container">
-                      <h1 class="title">Purchase History</h1>
+                      <h1 class="title">Messages</h1>
                     </div>
                   </div>
                 </section>
                 <div class="columns">
                   <div class="column is-6 py-6">
-                    <TablePurchaseHistory></TablePurchaseHistory>
+                    <TableMessages></TableMessages>
                   </div>
                 </div>
               </div>
