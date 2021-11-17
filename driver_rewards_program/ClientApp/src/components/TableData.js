@@ -7,7 +7,6 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 
 function TableData(props) {
-  const [driversData, setDriversData] = useState([]);
 
   let history = useHistory();
 
