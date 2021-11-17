@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 function CardTotalPoints(props) {
   return (
@@ -20,9 +21,9 @@ function CardTotalPoints(props) {
         <a href="#" class="card-footer-item">
           View Points History
         </a>
-        <a href="#" class="card-footer-item">
+        <Link to="/view_purchase_history" class="card-footer-item">
           View Purchase History
-        </a>
+        </Link>
       </footer>
     </div>
   );

@@ -29,7 +29,8 @@ export default class CatalogItem extends Component {
     console.log("updating activepoints");
     localStorage.setItem(
       "activepoints",
-      localStorage.getItem("activepoints") - this.state.Catalog_Item_Price
+      Number(localStorage.getItem("activepoints")) -
+        this.state.Catalog_Item_Price
     );
 
     window.location.reload(false);
@@ -49,6 +50,8 @@ export default class CatalogItem extends Component {
         catalogItemID: this.state.Catalog_Item_ID,
         driverID: localStorage.getItem("id"),
         itemInventory: this.state.Catalog_Item_Inventory,
+        purchasePrice: this.state.Catalog_Item_Price,
+        purchaseName: this.state.Catalog_Item_Name,
       }
     );
   }
