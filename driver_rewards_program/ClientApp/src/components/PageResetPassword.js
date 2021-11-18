@@ -91,6 +91,16 @@ export default class PageUserType extends Component {
           }
         );
         console.log(response);
+
+        //send message that driver has changed their password
+        const message_response = axios.post(
+          "http://localhost:3001/send_message",
+          {
+            driverID: this.state.driverID,
+            messageText: "Your password has been reset",
+            messageType: "Password Reset",
+          }
+        );
       }
     } else {
       if (!this.state.waitingForID) {
