@@ -18,6 +18,8 @@ import PageUserLogs from "./components/PageUserLogs";
 import PagePurchaseHistory from "./components/PagePurchaseHistory";
 import PageMessages from "./components/PageMessages";
 import PageResetPassword from "./components/PageResetPassword";
+import PageSponsorReports from "./components/PageSponsorReports";
+import PageSponsorReportsDetailed from "./components/PageSponsorReportsDetailed";
 import "./custom.css";
 import axios from "axios";
 
@@ -146,6 +148,12 @@ function App() {
       </Route>
       <Route path="/reset_password">
         <PageResetPassword></PageResetPassword>
+      </Route>
+      <Route path="/sponsor_reports">
+        <PageSponsorReports></PageSponsorReports>
+      </Route>
+      <Route path="/sponsor_reports_detailed">
+        <PageSponsorReportsDetailed></PageSponsorReportsDetailed>
       </Route>
     </div>
   );

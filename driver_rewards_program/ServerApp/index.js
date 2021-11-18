@@ -445,7 +445,6 @@ app.post("/delete_sponsor_user", (req, res) => {
 /*
   Returns all drivers with given organizationID
   Requires: organizationID
-  How to receive data: fetch("/get_time").then(r => r.json()).then(data => { ... });
 */
 app.post("/get_drivers", (req, res) => {
   const ID1 = req.body.organizationID1;
@@ -458,6 +457,26 @@ app.post("/get_drivers", (req, res) => {
       OR Organization_ID2 = ?
       OR Organization_ID3 = ?`,
     [ID1, ID2, ID3],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+/*
+  Returns all drivers with given organizationID
+  Requires: organizationID
+*/
+app.post("/get_drivers_one_ID", (req, res) => {
+  const ID = req.body.organizationID;
+
+  db.query(
+    `SELECT * FROM Driver
+      WHERE Organization_ID1 = ?
+      OR Organization_ID2 = ?
+      OR Organization_ID3 = ?`,
+    [ID, ID, ID],
     (err, rows, fields) => {
       console.log(err);
       res.json(rows);
@@ -807,7 +826,7 @@ app.get("/list_of_orgs", (req, res) => {
   });
 });
 
-app.get("/point_history", (req, res) => {
+app.post("/point_history", (req, res) => {
   const ID = req.body.id;
 
   db.query(
