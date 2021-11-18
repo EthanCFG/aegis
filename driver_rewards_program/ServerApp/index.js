@@ -19,6 +19,7 @@ const db = mysql.createConnection({
   host: "database-4910.c6lyppadonj0.us-east-1.rds.amazonaws.com",
   password: "cpsc4910project",
   database: "sys",
+  multipleStatements: true,
 });
 
 app.use(function (req, res, next) {
@@ -276,7 +277,7 @@ app.post("/add_driver_points3", (req, res) => {
 });
 
 app.post("/add_driver_points_recurring", (req, res) => {
-  const pointChange = req.body.pointChange;
+  const pointChange = Number(req.body.pointChange);
   const driverID = req.body.driverID;
   const organizationID = req.body.organizationID;
   const org123 = req.body.org123;
@@ -284,14 +285,14 @@ app.post("/add_driver_points_recurring", (req, res) => {
   const reason = req.body.reason;
 
   db.query(
-    `DELIMITER $$
-    CREATE EVENT recurring_?
-    ON SCHEDULE EVERY '1' ?
-    STARTS NOW()
+    `DELIMITER $$ 
+    CREATE EVENT recurring_? 
+    ON SCHEDULE EVERY 1 ? 
+    STARTS NOW() 
     DO 
-    BEGIN
-    UPDATE Driver SET Driver_Points? = Driver_Points? + ? WHERE Driver_ID = ?;
-    END$$    
+    BEGIN 
+      UPDATE Driver SET Driver_Points? = Driver_Points? + ? WHERE Driver_ID = ?; 
+    END$$ 
     DELIMITER ;`,
     [driverID, schedule, org123, org123, pointChange, driverID],
     (err, res) => {
@@ -1067,6 +1068,86 @@ app.post("/send_message", (req, res) => {
     [driver_ID, messageText, messageType],
     (err, rows, fields) => {
       console.log(err);
+    }
+  );
+});
+
+app.post("/get_sponsorID", (req, res) => {
+  const email = req.body.email;
+  db.query(
+    `SELECT * FROM Sponsor
+    WHERE Sponsor_Email = ?`,
+    [email],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+app.post("/get_driverID", (req, res) => {
+  const email = req.body.email;
+  db.query(
+    `SELECT * FROM Driver
+    WHERE Driver_Email = ?`,
+    [email],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+app.post("/reset_password_driver", (req, res) => {
+  const driver_ID = req.body.driverID;
+  const email = req.body.email;
+  const type = req.body.type;
+  const newPassword = req.body.newPassword;
+
+  db.query(
+    `INSERT INTO Password_Change (Driver_ID, Password_Change_Date, Password_Change_Email, Password_Change_Type, Password_New)
+      VALUES (?, NOW(), ?, ?, ?)`,
+    [driver_ID, email, type, newPassword],
+    (err, rows, fields) => {
+      console.log(err);
+    }
+  );
+
+  db.query(
+    `UPDATE Driver 
+    SET Driver_Password = ?
+    WHERE Driver_ID = ?`,
+    [newPassword, driver_ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
+    }
+  );
+});
+
+app.post("/reset_password_sponsor", (req, res) => {
+  const sponsor_ID = req.body.sponsorID;
+  const email = req.body.email;
+  const type = req.body.type;
+  const newPassword = req.body.newPassword;
+
+  db.query(
+    `INSERT INTO Password_Change (Sponsor_ID, Password_Change_Date, Password_Change_Email, Password_Change_Type, Password_New)
+      VALUES (?, NOW(), ?, ?, ?)`,
+    [sponsor_ID, email, type, newPassword],
+    (err, rows, fields) => {
+      console.log(err);
+    }
+  );
+
+  db.query(
+    `UPDATE Sponsor 
+    SET Sponsor_Password = ?
+    WHERE Sponsor_ID = ?`,
+    [newPassword, sponsor_ID],
+    (err, rows, fields) => {
+      console.log(err);
+      res.json(rows);
     }
   );
 });

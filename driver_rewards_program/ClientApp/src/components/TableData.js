@@ -7,7 +7,6 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 
 function TableData(props) {
-
   let history = useHistory();
 
   const [driversData, setDriversData] = useState([]);
@@ -160,6 +159,15 @@ function TableData(props) {
                   }}
                 >
                   Add Points
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => {
+                    props.setAddRecurringModal(true);
+                    props.setDriver(id);
+                    props.setOrg(org);
+                  }}
+                >
+                  Set Recurring Points
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={() => {

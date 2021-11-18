@@ -85,7 +85,6 @@ function TableSponsorDrivers(props) {
     }
   };
 
-  //doesn't update activepoints
   const addPointsRecurring = async () => {
     console.log("Active Org: " + localStorage.getItem("orgactive_ID"));
     const catalog_response = await axios.post(
@@ -213,7 +212,6 @@ function TableSponsorDrivers(props) {
             <th>Email</th>
             <th>Points</th>
             <th>Add/Remove Points</th>
-            <th>Add Recurring Points</th>
           </tr>
         </thead>
         <TableData
