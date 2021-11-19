@@ -63,7 +63,7 @@ function PageWelcome({ setToken }) {
     }
 
     if (driver_response.data[0] != null) {
-      verify();
+      //verify();
       localStorage.setItem("usertype", "driver");
       localStorage.setItem("id", driver_response.data[0].Driver_ID);
       localStorage.setItem("email", driver_response.data[0].Driver_Email);
@@ -136,8 +136,8 @@ function PageWelcome({ setToken }) {
         driver_response.data[0].Driver_Points1
       );
       setToken(token);
-      history.push("/verify");
-      //history.push("/driver_home");
+      //history.push("/verify");
+      history.push("/driver_home");
     } else if (sponsor_response.data[0] != null) {
       axios.post("http://localhost:3001/log_successful_login", {
         email: sponsor_response.data[0].Sponsor_Email,
