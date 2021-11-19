@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.3",
+    "@vonage/server-sdk": "^2.10.10",
     "axios": "^0.21.4",
     "bootstrap": "^5.1.0",
     "etsy-js": "0.0.6",

@@ -86,6 +86,51 @@ app.post("/etsy", async (req, res) => {
   );
 });
 
+app.post("/verify", async (req, res) => {
+  const Vonage = require('@vonage/server-sdk');
+  const vonage = new Vonage({
+  apiKey: "6dea879b",
+  apiSecret: "xINUr3ClSxDqVJ6a"
+  });
+
+  vonage.verify.request({
+    number: "18645086347",
+    brand: "Vonage"
+  }, (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      const verifyRequestId = result.request_id;
+      res.json(verifyRequestId);
+      console.log('request_id', verifyRequestId);
+    }
+  });
+});
+
+app.post("/verifycode", async (req, res) => {
+  const Vonage = require('@vonage/server-sdk');
+  const vonage = new Vonage({
+  apiKey: "6dea879b",
+  apiSecret: "xINUr3ClSxDqVJ6a"
+  });
+
+  const CODE = req.body.code;
+  const verifyRequestId = req.body.verifyRequestId;
+  console.log("verify " + verifyRequestId);
+  console.log("code " + CODE);
+      vonage.verify.check({
+      request_id: verifyRequestId,
+      code: CODE
+    }, (err, result) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(result);
+        res.json(result.status);
+      }
+  });
+});
+
 /*
   Creates a new driver or sponsor
   Requires: email, password, isDriver, firstName, lastName, address, state, city, zip, phone

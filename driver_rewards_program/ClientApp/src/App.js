@@ -20,6 +20,7 @@ import PageMessages from "./components/PageMessages";
 import PageResetPassword from "./components/PageResetPassword";
 import PageSponsorReports from "./components/PageSponsorReports";
 import PageSponsorReportsDetailed from "./components/PageSponsorReportsDetailed";
+import PageVerify from "./components/PageVerify";
 import "./custom.css";
 import axios from "axios";
 
@@ -70,6 +71,9 @@ function App() {
         <PageCreateSponsorAccount
           onCreateSponsorAccount={createSponsorAccountHandler}
         ></PageCreateSponsorAccount>
+      </Route>
+      <Route path="/verify">
+        <PageVerify></PageVerify>
       </Route>
       <Route path="/driver_home">
         <NavBar
