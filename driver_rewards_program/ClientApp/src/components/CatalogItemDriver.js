@@ -87,7 +87,7 @@ export default class CatalogItem extends Component {
         </p>
         <button
           class="catalog-item-button"
-          disabled={!this.state.canPurchase}
+          disabled={!this.state.canPurchase || localStorage.getItem("usertype") == "admin"}
           onClick={this.handlePurchaseClick}
         >
           Purchase
